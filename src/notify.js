@@ -20,12 +20,12 @@ var prayerReminder = schedule.scheduleJob(prayerSchedule, sendNotifications);
 //setInterval(checkSend, 60*60*1000);
 // const vapidKeys = webpush.generateVAPIDKeys();
 
-webpush.setGCMAPIKey('AIzaSyBSAMKzziSNK4BN6hkPvrFUWiO4f3Ol0rw');
+webpush.setGCMAPIKey(process.env.GCMAPIKEY);
 
 webpush.setVapidDetails(
   'mailto:root@infopanel.org',
-  'BDGjlxI-5G_q0k910Oez3eCAKlk9CV0t3yY1y4ypeh041Rv4Wgi-EwSpsVvUc4b4m7-dv6tfj6ClyGNTSAxQ3xQ',//public
-  'W9V2uWw-60N_pr0vU8MmDZLO2jbzd692z_Ec4jMenRQ' //private
+  process.env.VAPIDPUBLIC,//public
+  process.env.VAPIDPRIVATE //private
 );
 
 findNow = function(){
