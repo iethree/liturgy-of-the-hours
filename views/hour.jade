@@ -1,0 +1,48 @@
+
+extends daily-head
+
+mixin writePart(part)
+	div.officetext.has-text-left(dataID='#{part.id}' class="#{extraClass}")
+		if(part.title && part.subtitle)
+			h3(class = "has-text-left #{season} tooltip" data-tooltip="#{part.subtitle}")
+				=part.title
+		else if(part.title)
+			h3(class = "has-text-left #{season}")
+				=part.title
+		!=part.text
+	hr
+		
+
+block content
+	div.modal
+		div.modal-background
+		div.modal-content
+			div.box#explanation
+		button.modal-close
+		
+	div.container.padded
+		
+		div(class="circles #{season}")
+		
+		div.columns.is-centered
+		
+			div.column.is-narrow
+				
+				div.has-text-centered
+					div#heading(office="#{title}")
+						a(href="/")
+							h2(class="#{season}") #{title} | #{date}
+						h3=seasonTitle
+						br
+					div#content
+						for part in parts
+							+writePart(part)
+				
+					a(href="/" class="#{season}") home
+							
+block scripts
+	script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+	script(src='/js/date-fns.min.js')
+	script(src='/js/hour-client.js')
+	
+	

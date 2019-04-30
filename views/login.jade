@@ -1,0 +1,24 @@
+
+extends daily-head
+
+block content
+
+	div.container.padded
+		br
+		br
+		br
+		div.columns.is-centered
+			div.column.is-narrow.box
+
+				form(action="/login/check" method="POST")
+					div.field
+						input.input(name="password" type="password" placeholder="password")
+					div.field
+						button.button.pull-right.is-small.is-dark(type="submit") Login
+		div.columns.is-centered
+			div.column.is-narrow
+				if(status=='fail')
+					div.notification.is-danger
+						p invalid password
+						
+block scripts

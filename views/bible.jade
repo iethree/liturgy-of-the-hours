@@ -1,0 +1,36 @@
+
+extends daily-head
+
+block content
+
+	div.container.wrap.padded
+	
+		a(href=prev).lastCH
+		a(href=next).nextCH
+		
+		div.columns.is-centered
+
+			div#loader
+			div.column.is-4.has-text-centered
+				div
+					a(href='/bible').title.is-5 Bible
+				div.field.has-addons
+					div.control.is-expanded
+						input(placeholder="Search", type="text")#get.input.is-small
+					div.control
+						button#search.button.is-small
+							i.fa.fa-search
+						
+		div.columns.is-centered
+			div.column.is-narrow
+				div
+					if text == "" || text == "no results"
+						!=text
+						br
+						br
+						div#recent.field.is-grouped.is-grouped-multiline.is-grouped-centered
+					else
+						!=text
+block scripts
+	script(src='/js/jquery.min.js')
+	script(src='/js/bible-client.js')

@@ -1,0 +1,75 @@
+
+extends daily-head
+
+mixin taglist(part, tags)
+	div.tags.column.is-one-third
+		input.input.is-small.taginput(class='#{tags}' placeholder='#{tags}') 
+		span(class="tagbox #{tags}")
+			if(part[tags])
+				-for tag in part[tags]
+					span.tag.is-info #{tag}
+						button.is-small.delete
+
+mixin labeled_input(labeltext, valuetext)
+	div.field.is-horizontal
+		div.field-label
+			label.label #{labeltext}
+		div.field-body
+			div.field
+				div.control
+					input.input(type='text' class='#{labeltext}' value='#{valuetext}')
+
+block content
+	div.modal
+		div.modal-background
+		div.modal-content
+			div.box#explanation
+		button.modal-close
+		
+	div.container.padded
+		div.columns.is-centered
+			div.column.is-8
+				div.has-text-centered
+					a(href="/list")
+						h2 #{title}
+					br
+
+					div.has-text-left.notification(dataID='#{part.id}')
+												
+						+labeled_input('Part', part.part)
+						+labeled_input('Title', part.title|| '')
+						+labeled_input('Subtitle', part.subtitle|| '')
+						+labeled_input('Source', part.source)
+						
+						div.field.is-horizontal
+							div.field-label
+								label.label Tags
+							div.field-body
+								div.columns
+									+taglist(part, 'season')
+									+taglist(part, 'times')
+									+taglist(part, 'themes')
+								
+						div.field.is-horizontal
+							div.field-label
+								label.label Text
+							div.field-body
+								textarea.textarea(rows="10")
+									!=part.text
+
+						div.buttons.pull-right
+							a.saver.button.is-info
+								span.icon.is-small
+									i.fa.fa-save
+							a.trasher.button.is-danger
+								span.icon.is-small
+									i.fa.fa-trash
+							a.format-help.button
+								span.icon.is-small
+									i.fa.fa-font
+						br
+						br
+							
+block scripts
+	script(src='/js/jquery.min.js')
+	script(src='/js/full-editor.js')

@@ -1,0 +1,14 @@
+{
+  "short_name": "Liturgy of the Hours",
+  "name": "Liturgy of the Hours",
+  "icons": [
+    {
+      "src": "/images/favicon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -1,0 +1,38 @@
+
+extends daily-head
+
+mixin linkbutton(name)
+	if (time == name)
+		a(href='./hour/#{name}' class='button is-block #{season}') #{name}
+	else
+		a(href='./hour/#{name}').button.is-block #{name}
+	br
+
+block content
+
+	div.modal
+		div.modal-background
+		div.modal-content
+			div.box#explanation
+		button.modal-close
+		
+	div.container
+		div.columns.is-centered.is-mobile
+			div.column.is-narrow.has-text-centered
+				a.button.is-small.left-button(title="download for offline access")#cache
+					i.fa.fa-download
+				a.button.is-small.right-button#about
+					i.fa.fa-question
+				
+				h1(class="#{season}") Liturgy of the Hours
+				h3#date
+		div.columns.is-centered.is-mobile
+			div.column.is-10-mobile.is-4-tablet.is-4-desktop(season = '#{season}')#buttonList
+		div.columns.is-centered.is-mobile
+			a.button.is-small(title="enable notifications")#subscribe
+				i.fa.fa-envelope
+				
+block scripts
+	script(src='/js/jquery.min.js')
+	script(src='/js/date-fns.min.js')
+	script(src='/js/home-client-test.js')

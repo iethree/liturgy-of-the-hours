@@ -1,0 +1,88 @@
+/*seasons*/
+.advent {
+  color: #800080;
+}
+.advent.button, .circles.advent .circle {
+  background-color: #800080;
+  color: #fff;
+}
+.circles.advent .ringring {
+  border-color: #800080;
+}
+
+.christmas {
+  color: #DAA520;
+}
+.christmas.button, .circles.christmas .circle {
+  background-color: #DAA520;
+  color: #606060;
+}
+.christmas.ringring {
+  border-color: #DAA520;
+}
+
+.easter {
+  color: #DAA520;
+}
+.easter.button, .circles.easter .circle {
+  background-color: #DAA520;
+  color: #fff;
+}
+.circles.easter .ringring {
+  border-color: #DAA520;
+}
+
+.pentecost {
+  color: #b30000;
+}
+.pentecost.button, .circles.pentecost .circle {
+  background-color: #b30000;
+  color: #fff;
+}
+.circles.pentecost .ringring {
+  border-color: #b30000;
+}
+
+.ordinary {
+  color: #008000;
+}
+.ordinary.button, .circles.ordinary .circle {
+  background-color: #008000;
+  color: #fff;
+}
+.circles.ordinary .ringring {
+  border-color: #008000;
+}
+
+.lent {
+  color: #800080;
+}
+.lent.button, .circles.lent .circle {
+  background-color: #800080;
+  color: #fff;
+}
+.circles.lent .ringring {
+  border-color: #800080;
+}
+
+.holyweek {
+  color: #b30000;
+}
+.holyweek.button, .circles.holyweek .circle {
+  background-color: #b30000;
+  color: #fff;
+}
+.circles.holyweek .ringring {
+  border-color: #b30000;
+}
+
+.epiphany, .ascension {
+  color: #bfbfbf;
+}
+.epiphany.button, .circles.epiphany .circle, .ascension.button, .circles.ascension .circle {
+  background-color: #bfbfbf;
+  color: #000;
+}
+.circles.epiphany .ringring, .circles.ascension .ringring {
+  border-color: #bfbfbf;
+}

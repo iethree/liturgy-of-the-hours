@@ -1,0 +1,61 @@
+
+extends daily-head
+
+mixin tabPart()
+
+	
+	
+mixin writePart(part, extraClass)
+	-extraClass = extraClass || ''
+	div.officetext.has-text-left(dataID='#{part.id}' class="#{extraClass}")
+		if(part.title && part.subtitle)
+			h3(class = "has-text-left #{season} tooltip" data-tooltip="#{part.subtitle}")
+				=part.title
+		else if(part.title)
+			h3(class = "has-text-left #{season}")
+				=part.title
+		!=part.text
+		
+
+block content
+	div.modal
+		div.modal-background
+		div.modal-content
+			div.box#explanation
+		button.modal-close
+		
+	div.container.padded
+		
+		div(class="circles #{season}")
+		
+		div.columns.is-centered
+		
+			div.column.is-narrow
+				
+				div.has-text-centered
+					div#heading
+						a(href="/")
+							h2(class="#{season}") #{title} | #{date}
+						h3=seasonTitle
+						br
+					div#content
+						div.tabs.is-centered
+							ul
+								li
+									a#lesson1 #{parts[0].title}
+								li.is-active
+									a#lesson2(class="#{season}") #{parts[1].title}
+								li
+									a#lesson3 #{parts[2].title}
+						+writePart(parts[0], 'hidden')
+						+writePart(parts[1])
+						+writePart(parts[2], 'hidden')
+							
+block scripts
+	script(src='/js/jquery.min.js')
+	script(src='/js/hammer.js')
+	script(src='/js/date-fns.min.js')
+	script(src='/js/jquery.hammer.js')
+	script(src='/js/hour-client.js')
+	
+	

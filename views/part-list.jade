@@ -1,0 +1,24 @@
+
+extends daily-head
+
+mixin linkbutton(name)
+	if (time == name)
+		a(href='./list/#{name}').button.is-medium.is-block.is-dark #{name}
+	else
+		a(href='./list/#{name}').button.is-medium.is-block #{name}
+	br
+
+block content
+	div.container
+		div.columns.is-centered.is-mobile
+			div.column.is-narrow
+				h1 Liturgy of the Hours
+		div.columns.is-centered.is-mobile
+			div.column.is-10-mobile.is-4-tablet.is-4-desktop
+				
+				a(href='./edit/new').button.is-medium.is-block.is-info New
+				br
+				each  i in parts
+					+linkbutton(i)
+
+block scripts

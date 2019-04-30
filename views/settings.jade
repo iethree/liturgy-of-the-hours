@@ -1,0 +1,47 @@
+
+extends daily-head
+
+mixin slider(name)
+	div
+		div.level.is-mobile
+			div.level-left
+				div.level-item
+					span #{name} 
+			div.level-right
+				div.level-item
+					span.time-label(hour="#{name.toLowerCase()}")
+		input.slider.is-large.is-fullwidth(step="1" min="0" max="4" value="2" type="range" hour="#{name.toLowerCase()}")
+		
+
+block content
+	div.container 
+		div.columns.is-centered.is-mobile 
+			div.column.is-narrow.is-10-mobile.has-text-centered 
+				a(href='/') 
+					h1.title.is-4(class="#{season}") Liturgy of the Hours
+				h1.subtitle.is-5 Settings
+				
+				a.button.is-fullwidth(title="enable notifications")#sync 
+					i.fa.fa-download 
+					span  &nbsp; Download Offline
+				br
+	
+				a.button.is-fullwidth.is-loading(title="enable notifications")#subscribe
+					i.fa.fa-envelope
+				br
+				div#sliders.hidden
+					strong Notification Times
+					+slider("Lauds")
+					+slider("Terce")
+					+slider("Sext")
+					+slider("None")
+					+slider("Vespers")
+					+slider("Compline")
+					a.button#save.hidden
+						i.fa.fa-save
+						span &nbsp; Save
+block scripts
+	script(src='/js/jquery.min.js')
+	script(src='/js/date-fns.min.js')
+	script(src='/js/settings.js')
+	

@@ -1,0 +1,16 @@
+
+extends layout
+
+block content
+	section.section
+		div.container
+			div.columns.is-centered
+				div.column.is-half.is-narrow
+					div.has-text-centered
+						h5.title.is-5= title
+						div.has-text-left
+							!= text
+						div.has-text-centered
+							a(href=prev).pull-left Prev
+							a(href=next).pull-right Next
+							
