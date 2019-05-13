@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 
 var http = require('http');
 var app = express();
-var index = require('./routes/bot-index');
+var index = require('./bot-index.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

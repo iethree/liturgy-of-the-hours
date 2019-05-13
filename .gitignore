@@ -1,4 +1,3 @@
-*.nedb
 *.pdf
 .env
 *.log

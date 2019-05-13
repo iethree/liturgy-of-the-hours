@@ -18,7 +18,7 @@ var prayerSchedule = new schedule.RecurrenceRule();
 var prayerReminder = schedule.scheduleJob(prayerSchedule, sendNotifications);
 
 //setInterval(checkSend, 60*60*1000);
-// const vapidKeys = webpush.generateVAPIDKeys();
+const vapidKeys = webpush.generateVAPIDKeys();
 
 webpush.setGCMAPIKey(process.env.GCMAPIKEY);
 
@@ -49,14 +49,14 @@ findNow = function(){
 
 function sendNotifications(){
 	time = moment().format('H');
-	
+
 	db.find( {} , function(err, docs){
 		console.log("sending "+docs.length+ " notifications");
-		
+
 		for(doc of docs){
-			
+
 			webpush.sendNotification(doc.subscription, 'Call to Prayer: '+findNow())
-			.catch(()=>{ unsubscribe(doc); });	
+			.catch(()=>{ unsubscribe(doc); });
 		}
 	});
 }
@@ -64,7 +64,7 @@ function sendNotifications(){
 
 exports.updateSubscription = function(data, callback){
 	data.subscription = JSON.parse(data.subscription);
-	
+
 	//console.log(data.subscription.keys.auth);
 
 	if(data.type == 'sub')
@@ -73,7 +73,7 @@ exports.updateSubscription = function(data, callback){
 		snooze(data)
 	else
 		unsubscribe(data);
-	
+
 	callback('ok');
 }
 
@@ -87,11 +87,11 @@ function subscribe(data){
 
 function unsubscribe(data){
 	console.log( 'trying to unsub ' + data.subscription.keys.auth);
-	
+
 	db.remove({ "subscription.keys.auth": data.subscription.keys.auth } , {multi:true}, function(err, numRemoved){
 		if(err)
 			console.log("error ", err);
-		
+
 		console.log("removed "+numRemoved+" from notification db");
 	});
 }
