@@ -1,55 +1,32 @@
 //count.js
 //logger
 
-var moment = require('moment');
+var datefns = require('date-fns');
 
 var nedb = require('nedb');
 var logger = new nedb({filename: '../data/users.log', autoload: true});
 
 
-exports.getCount = function(data, callback){
+exports.getCount = async function(id, page){
 		
 		//log this visit
-		if(data.id!==undefined)
-			logger.insert({user: data.id, page: data.page, date: new Date().valueOf()});
+		if(id!==undefined)
+			logger.update({user: id} , {$set: {page: page, date: new Date()} }, {upsert: true} );
 		
-		getRecent(5, function(result){ //past 5 minutes is here now
-			
-			var hereNow = countUnique(result);
-			
-			getRecent(360, function(result){ //past 6 hours is here recent
-				
-				var hereRecent = countUnique(result);
 
-				callback({
-					now: hereNow, 
-					recent: hereRecent-hereNow
-				});
-			});
+		Promise.resolve({
+			now: await getRecent(5), //past 5 mins is here now
+			recent: await getRecent(180) // past 3 hours is recent
 		});
 }
 
-//test code
-// exports.getCount({id: '999999', page: "Test"}, function(val){
-	// console.log(val);
-// });
-
-function getRecent(mins, callback){
-	
-	logger.find( {date: {$gt:(new Date - mins*60*1000) } },
-	
-	function(err, results){
-		if(err)
-			console.log(err);
-		else
-			callback(results);
+async function getRecent(mins){
+	return new Promise((resolve, reject)=>{
+		logger.count( {date: {$gt:datefns.subMinutes(mins).toISOString()} }, (err, count)=>{
+			if(err)
+				reject(err);
+			else
+				resolve(count);
+		});
 	});
-}
-
-function countUnique(list) {
-	//count unique user values
-	list = list.map(val=>val.user);
-	list = new Set(list);
-
-	return list.size;
 }

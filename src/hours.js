@@ -1,11 +1,16 @@
 //hours.js
 
-var office = require('./office.js');
-var lectionary = require('./dailyOfficeLectionary.js');
-var moment = require('moment');
-var md = require('markdown-it')({html: true});
+const office = require('./office.js');
+const loadJsonFile = require('load-json-file');
+const moment = require('moment');
+const md = require('markdown-it')({html: true});
 
-var partQueries = {
+(async () => {
+    const lectionary = await loadJsonFile('./data/readings/dol-year-1.min.json');
+    //=> {foo: true}
+})();
+
+const partQueries = {
 
 	lauds: function(date){ //praise
 		return [
@@ -88,7 +93,28 @@ var partQueries = {
 			{part: 'bible', passage: getLectionary(date)[1]},
 			{part: 'bible', passage: getLectionary(date)[2]},
 		];
-	}
+	},
+
+	morning: function(date){ 
+		return [
+			{part: 'bible', passage: getPsalm('praise', date)},
+			{part: 'prayer', times: 'morning'},
+		];
+	},
+
+	midday: function(date){ 
+		return [
+			{part: 'bible', passage: getPsalm('ascent', date)},
+			{part: 'collect', title: office.getWeek(date)},
+		];
+	},
+
+	evening: function(date){
+		return [
+			{part: 'bible', passage: getPsalm('thanks', date)},
+			{part: 'prayer', times: 'evening'},
+		];
+	},
 };
 
 //index

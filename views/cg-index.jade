@@ -1,0 +1,21 @@
+
+extends daily-head
+
+mixin linkbutton(name)
+	a(href='/cg/#{name}').button.is-block #{name}
+	br
+
+block content
+	div.container
+		div.columns.is-centered.is-mobile
+			div.column.is-narrow.has-text-centered
+				h1(class='#{season}')= title
+				h3#date
+		div.columns.is-centered.is-mobile
+			div.column.is-10-mobile.is-4-tablet.is-4-desktop#buttonList
+				+linkbutton('Morning')
+				+linkbutton('Midday')
+				+linkbutton('Evening')
+				
+block scripts
+	script(src='/js/cg-client.js')
