@@ -1,28 +1,26 @@
-//count.js
-//logger
+//count.js - logger
 
 var datefns = require('date-fns');
-
 var nedb = require('nedb');
-var logger = new nedb({filename: '../data/users.log', autoload: true});
-
+var logger = new nedb({filename: 'data/users.log', autoload: true});
 
 exports.getCount = async function(id, page){
-		
-		//log this visit
-		if(id!==undefined)
-			logger.update({user: id} , {$set: {page: page, date: new Date()} }, {upsert: true} );
-		
-
-		Promise.resolve({
-			now: await getRecent(5), //past 5 mins is here now
-			recent: await getRecent(180) // past 3 hours is recent
+	console.log(id, page);
+	return new Promise((resolve, reject)=>{
+		logger.update({user: id} , {$set: {user: id, page: page, date: new Date().toISOString()}, $inc: {visits: 1}}, {upsert: true}, async (err, result)=>{
+			let now = await getRecent(5);
+			let recent = await getRecent(180) - now;
+			resolve({
+				now: now, //past 5 mins is here now
+				recent: recent // past 3 hours is recent
+			});
 		});
+	});
 }
 
 async function getRecent(mins){
 	return new Promise((resolve, reject)=>{
-		logger.count( {date: {$gt:datefns.subMinutes(mins).toISOString()} }, (err, count)=>{
+		logger.count( {date: {$gt:datefns.subMinutes(new Date(), mins).toISOString()} }, (err, count)=>{
 			if(err)
 				reject(err);
 			else

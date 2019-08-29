@@ -7,7 +7,7 @@ var md = require('markdown-it')({html: true});
 var random = require('random-seed');
 
 var nedb = require('nedb');
-var db = new nedb({filename: './data/parts.json', autoload: true});
+var db = new nedb({filename: 'data/parts.json', autoload: true});
 
 //get an array of parts and return a promise
 exports.getParts = function (queries, seed){

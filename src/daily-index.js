@@ -20,7 +20,7 @@ router.get('/cg', function(req, res, next) {
 	 });
  });
 
- router.get('/cg/:hour', function(req, res, next) {
+ router.get('/cg/:hour/:date?', function(req, res, next) {
 	if(moment(req.params.date).isValid()) //if a date is provided
 		date = moment(req.params.date).format("YYYYMMDD");
 	else //otherwise, use today's date
@@ -134,10 +134,9 @@ router.get('/bible/:query?', function(req, res, next) {
 
 
 router.post('/count', async function(req, res, next) {
-
-	let count = await count.getCount(req.body.id, req.body.page);
-	res.status(200).send(count);
-
+	var cnt = await count.getCount(req.body.id, req.body.page);
+	console.log('count', cnt);
+	res.status(200).send(cnt);
 });
 
 //random proverb

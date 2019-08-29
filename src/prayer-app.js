@@ -16,6 +16,7 @@ dailyapp.use(logger('dev'));
 
 dailyapp.set('views', path.join(__dirname, '../views'));
 dailyapp.set('view engine', 'jade');
+dailyapp.use(bodyParser.json());
 dailyapp.use(bodyParser.urlencoded({ extended: true }));
 dailyapp.use(favicon(path.join(__dirname, '../public/images', 'favicon.png')));
 dailyapp.use(express.static(path.join(__dirname, '../public')));

@@ -2,8 +2,8 @@
 require('dotenv').config();
 var request = require('request');
 var nedb = require('nedb');
-var db = new nedb({filename: '../data/passages.nedb', autoload: true});
-var provDB = new nedb({filename: '../data/proverbs.nedb', autoload: true});
+var db = new nedb({filename: 'data/passages.nedb', autoload: true});
+var provDB = new nedb({filename: 'data/proverbs.nedb', autoload: true});
 
 exports.get = function(query){
 
