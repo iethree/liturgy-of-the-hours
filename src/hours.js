@@ -92,7 +92,7 @@ const partQueries = {
 	morning: function(date){ 
 		return [
 			{part: 'bible', passage: getPsalm('morning', date)},
-			{part: 'prayer', times: {$nin:['evening', 'night']} },
+			{part: 'prayer', times: {$in:['morning']} },
 		];
 	},
 
@@ -106,7 +106,12 @@ const partQueries = {
 	evening: function(date){
 		return [
 			{part: 'bible', passage: getPsalm('evening', date)},
-			{part: 'prayer', times: {$nin:['morning']} },
+			{part: 'prayer', times: {$in:['evening', 'night']} },
+		];
+	},
+	random: function(date){
+		return [
+			{part: 'prayer' }
 		];
 	},
 };

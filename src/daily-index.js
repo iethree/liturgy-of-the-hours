@@ -54,19 +54,6 @@ router.get('/test', function(req, res, next) {
 	});
 });
 
-//notification settings
-router.get('/settings', function(req, res, next) {
-
-  res.render('settings', {title: 'Liturgy of the Hours | Settings' });
-});
-//notification subscription handler
-router.post('/subscribe', function(req, res, next) {
-  console.log(req.body);
-  notify.updateSubscription(req.body, function(result){
-
-	 res.status(200).send(result);
-  });
-});
 
 router.get('/hour/:hour/:date?', function(req, res, next) {
 

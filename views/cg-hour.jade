@@ -8,16 +8,8 @@ mixin writePart(part)
 		!=part.text
 	hr
 		
-
 block content
-	div.modal
-		div.modal-background
-		div.modal-content
-			div.box#explanation
-		button.modal-close
-		
 	div.container.padded
-		
 		div(class="circles #{season}")
 		
 		div.columns.is-centered
@@ -26,7 +18,7 @@ block content
 				
 				div.has-text-centered
 					div#heading(office="#{title}")
-						a(href="/cg/")
+						a(href="/cg")
 							h2(class="#{season}") #{title} | #{date}
 						h3=seasonTitle
 						br
@@ -34,7 +26,7 @@ block content
 						for part in parts
 							+writePart(part)
 				
-					a(href="/cg/" class="#{season}") home
+					a(href="/cg" class="#{season}") home
 							
 block scripts
 	script(src='/js/date-fns.min.js')
