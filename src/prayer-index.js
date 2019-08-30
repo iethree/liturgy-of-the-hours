@@ -32,7 +32,6 @@ router.get('/', function(req, res, next) {
   res.render('daily-index', {
 	title: 'Liturgy of the Hours',
 	date: time.format.short(),
-	time: time.findNow(),
 	season: time.findSeason()
 	});
 });
