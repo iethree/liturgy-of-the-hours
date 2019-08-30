@@ -1,8 +1,10 @@
 //hours.js
 
-const office = require('./office.js');
-const moment = require('moment');
-const md = require('markdown-it')({html: true});
+const parts = require('./parts.js');
+const time = require('./time');
+const log = require('./log.js');
+
+module.exports = {getHour, getPsalm};
 
 const partQueries = {
 
@@ -11,14 +13,14 @@ const partQueries = {
 			{part: 'intro', times: 'morning' },
 			{part: 'bible', passage: getPsalm('praise', date)},
 			{part: 'prayer', themes: {$nin:['end', 'petition']}, times: {$nin:['evening', 'night']}},
-			{part: 'acclamation', season: { $in: [office.findSeason(date), 'any'] }},
+			{part: 'acclamation', season: { $in: [time.getSeason(date), 'any'] }},
 			{part: 'prayer', themes: 'end', times: {$nin:['evening', 'night']}},
 		];
 	},
 
 	terce: function(date){ //intercession/petition
 		return [
-			{part: 'preface', season: { $in: [office.findSeason(date), 'any'] } },
+			{part: 'preface', season: { $in: [time.getSeason(date), 'any'] } },
 			{part: 'canticle'},
 			{part:'prayer', themes: 'petition'},
 			{title: /lord's prayer/i},
@@ -28,9 +30,9 @@ const partQueries = {
 
 	sext: function(date){ //wisdom
 		return [
-			{part: 'preface', season: { $in: [office.findSeason(date), 'any'] } },
+			{part: 'preface', season: { $in: [time.getSeason(date), 'any'] } },
 			{part: 'bible', passage: getPsalm('ascent', date)},
-			{part: 'collect', title: office.getWeek(date)},
+			{part: 'collect', title: time.getWeek(date)},
 			{part: 'creed'},
 			{themes: 'end', times: {$nin:['evening', 'night']}}
 		];
@@ -38,7 +40,7 @@ const partQueries = {
 
 	none: function(date){ //lesson?
 		return [
-			{part: 'preface', season: { $in: [office.findSeason(date), 'any'] } },
+			{part: 'preface', season: { $in: [time.getSeason(date), 'any'] } },
 			{part: 'bible', passage: getLectionary(date)[1]},
 			{themes: 'end', times: {$nin:['evening', 'night', 'morning']}},
 		];
@@ -56,7 +58,7 @@ const partQueries = {
 
 	compline: function(date){ //penitence
 
-		if(moment(date).format("dd")=="Th") //great litany on thursdays
+		if(time.format.dow(date)==="Thursday") //great litany on thursdays
 			return [
 				{part: 'intro', times: 'evening' },
 				{part: 'great litany'},
@@ -99,7 +101,7 @@ const partQueries = {
 	midday: function(date){ 
 		return [
 			{part: 'bible', passage: getPsalm('ascent', date)},
-			{part: 'collect', title: office.getWeek(date)},
+			{part: 'collect', title: time.getWeek(date)},
 		];
 	},
 
@@ -117,59 +119,26 @@ const partQueries = {
 };
 
 //index
-exports.getHour = function(hour, date, callback){
+async function getHour(hour, date){
 
 	hour = hour.toLowerCase();
-	queries = partQueries[hour](date);
-
-	office.getParts(queries, date+hour).then(function(results){
-
-		var validResults=[];
-
-		for (i=0; i<results.length; i++){
-
-			if(results[i])
-				validResults.push(results[i]);
-		}
-
-		callback({
-			title: hour.charAt(0).toUpperCase() + hour.substr(1),
-			seasonTitle: office.getWeek(date),
-			season: office.findSeason(date),
-			date: moment(date).format("MMMM D"),
-			parts: validResults
-		});
-
-	}).catch(function(err){
-		console.log("get parts error:"+err);
+	if(!partQueries[hour])
+		return Promise.reject("hour not found");
+	
+	let queries = partQueries[hour](date);
+	let hourParts = await parts.getRandomParts(queries, date+hour).catch(log.err);
+	
+	return Promise.resolve({
+		title: hour.charAt(0).toUpperCase() + hour.substr(1),
+		seasonTitle: time.getWeek(date),
+		season: time.getSeason(date),
+		date: time.format.short(date),
+		parts: hourParts
 	});
 }
 
-//testcode
-//exports.getHour('terce', '20181016', function(result){ console.log(result); } );
-
-
-exports.findNow = function(){
-	var hour = moment().format('k');
-
-	if(hour >= 4 && hour < 8)
-		return "Lauds";
-	if(hour >= 8 && hour < 11)
-		return "Terce";
-	if(hour >= 11 && hour < 14)
-		return "Sext";
-	if(hour >= 14 && hour < 16)
-		return "None";
-	if(hour >= 16 && hour < 20)
-		return "Vespers";
-	if(hour >= 20 && hour < 24)
-		return "Compline";
-	else
-		return "Matins";
-}
-
 function getPsalm(type, date){
-	console.log('getpsalm', type, date);
+	log.info('getpsalm', type, date);
 	var psalms = {
 
 		thanks:
@@ -198,10 +167,10 @@ function getPsalm(type, date){
 		["63", "64", "65", "67", "70", "75", "76", "82", "85", "87",
 		"92", "93", "95", "96", "97", "98", "99", "100", "101", "105", "106",
 		"108", "110", "111", "112", "113", "114", "117", "120", "121", "122", "123", "124"]
-	}
+	};
 
+	index = Number(time.format.dom(date))-1;
 
-	index = moment(date).format("D")-1;
 	if(psalms[type] && psalms[type][index])
 		return "psalm"+psalms[type][index];
 	else
@@ -213,7 +182,7 @@ function getLectionary(date){
 	year = "one"; //need to implement logic for figuring out the year
 
 	try{
-		var today= lectionary.dailyOfficeLectionary[office.getWeek(date).toLowerCase()][moment(date).format('dddd').toLowerCase()][year];
+		var today= lectionary.dailyOfficeLectionary[time.getWeek(date).toLowerCase()][time.format.dow(date).toLowerCase()][year];
 	}
 	catch(e){
 		return ['psalm 1', 'psalm 1', 'psalm 1'];

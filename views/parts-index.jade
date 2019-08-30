@@ -1,0 +1,18 @@
+
+extends daily-head
+
+mixin linkbutton(name)
+	a(href='./list/#{name}').button #{name}
+
+block content
+	div.container.padded
+		div.columns.is-centered.is-mobile
+			div.column.is-narrow
+				h1 Liturgy of the Hours Parts
+		div.columns.is-centered.is-mobile
+			div.column.is-10-mobile.is-6-tablet.is-6-desktop
+				div.buttons.is-centered
+					each i in parts
+						+linkbutton(i)
+
+block scripts

@@ -1,0 +1,32 @@
+extends daily-head
+
+mixin partDisplay(part)
+	div.has-text-left.box(dataID='#{part._id}')
+		h3 #{part.title}
+		div #{part.subtitle}
+		div.officetext
+			!=part.text
+		span.has-text-grey.is-size-7 (#{part.source} #{part.season})
+		br
+		br
+		div
+			+taglist(part.times, taglist.times)
+			+taglist(part.themes, taglist.themes)
+
+mixin taglist(tags, taglist)
+	div.buttons.tag-buttons
+		-for option in taglist
+			button.button.is-small=option
+
+block content
+	div.container.padded
+		div.columns.is-centered
+			div.column.is-narrow
+				div.has-text-centered
+					a(href="/list")
+						h2 #{title} (#{parts.length})
+
+					for part in parts
+						+partDisplay(part)
+block scripts
+	script(src='/js/tagging.js')

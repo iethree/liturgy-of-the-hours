@@ -156,7 +156,6 @@ h4{
 }
 
 .tags{ 
-	
  padding-top: 10px; 
 }
 .tag{
@@ -165,7 +164,9 @@ h4{
 }
 .delete{
 	margin-left: 3px !important;
-	
+}
+.tag-buttons{
+	max-width: 500px
 }
 
 /* presence indicator */

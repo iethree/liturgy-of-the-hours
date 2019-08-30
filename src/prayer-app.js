@@ -1,29 +1,28 @@
 //daily-app.js
 require('dotenv').config();
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var cache = require('./cache.js');
-var lowerURLs = require('./lowerURLs.js');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const lowerURLs = require('./lowerURLs.js');
 
-var http = require('http');
-var dailyapp = express();
-var dailyindex = require('./daily-index.js');
+const dailyapp = express();
+const dailyindex = require('./prayer-index.js');
+
+const PORT = 3001;
 
 dailyapp.use(logger('dev'));
 
 dailyapp.set('views', path.join(__dirname, '../views'));
 dailyapp.set('view engine', 'jade');
+
 dailyapp.use(bodyParser.json());
 dailyapp.use(bodyParser.urlencoded({ extended: true }));
 dailyapp.use(favicon(path.join(__dirname, '../public/images', 'favicon.png')));
-dailyapp.use(express.static(path.join(__dirname, '../public')));
-//dailyapp.use(['/edit/', '/list/'], password.checkToken);
-dailyapp.use(lowerURLs);
-dailyapp.use('/hour',cache(60*60)); //cache hours for 1 hour
 
+dailyapp.use(express.static(path.join(__dirname, '../public')));
+dailyapp.use(lowerURLs);
 dailyapp.use('/', dailyindex);
 
 dailyapp.use(function(req, res, next) {
@@ -42,6 +41,6 @@ dailyapp.use(function(err, req, res, next) {
   res.render('error');
 });
 
-dailyapp.listen(3001, function(){console.log("prayer app on port 3001");});
+dailyapp.listen(PORT, ()=>console.log("prayer app on port "+PORT));
 
 module.exports = dailyapp;
