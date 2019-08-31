@@ -133,7 +133,7 @@ async function getHour(hour, date){
 		return Promise.reject("hour not found");
 	
 	let queries = partQueries[hour](date);
-	if(hour="random")
+	if(hour==="random")
 		var hourParts = await parts.getRandomParts(queries, "random"+getRandomInt(1,999))
 		.catch(log.err);
 	else
