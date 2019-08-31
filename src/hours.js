@@ -119,7 +119,7 @@ const partQueries = {
 	},
 	random: function(date){
 		return [
-			{part: 'prayer' }
+			{ }
 		];
 	},
 };
@@ -133,7 +133,12 @@ async function getHour(hour, date){
 		return Promise.reject("hour not found");
 	
 	let queries = partQueries[hour](date);
-	let hourParts = await parts.getRandomParts(queries, date+hour).catch(log.err);
+	if(hour="random")
+		var hourParts = await parts.getRandomParts(queries, "random"+getRandomInt(1,999))
+		.catch(log.err);
+	else
+		var hourParts = await parts.getRandomParts(queries, date+hour)
+		.catch(log.err);
 	
 	return Promise.resolve({
 		title: hour.charAt(0).toUpperCase() + hour.substr(1),
@@ -195,3 +200,7 @@ function getLectionary(date){
 	}
 	return today;
 }
+
+function getRandomInt(min, max) { //max is inclusive
+	return Math.random() * (max - min) + min;
+ }
