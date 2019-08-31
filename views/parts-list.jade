@@ -1,7 +1,7 @@
 extends daily-head
 
 mixin partDisplay(part)
-	div.has-text-left.box(dataID='#{part._id}')
+	div.has-text-left.box
 		h3 #{part.title}
 		div #{part.subtitle}
 		div.officetext
@@ -10,13 +10,16 @@ mixin partDisplay(part)
 		br
 		br
 		div
-			+taglist(part.times, taglist.times)
-			+taglist(part.themes, taglist.themes)
+			+taglist(part._id, part.times, taglist.times, 'times')
+			+taglist(part._id, part.themes, taglist.themes, 'themes')
 
-mixin taglist(tags, taglist)
+mixin taglist(id, tags, taglist, category)
 	div.buttons.tag-buttons
 		-for option in taglist
-			button.button.is-small=option
+			-if(tags && tags.length && tags.indexOf(option)!=-1)
+				button.button.is-small.is-dark(data-id='#{id}' data-category="#{category}" onclick="updateTag(event)")=option
+			-else
+				button.button.is-small(data-id='#{id}' data-category="#{category}" onclick="updateTag(event)")=option
 
 block content
 	div.container.padded

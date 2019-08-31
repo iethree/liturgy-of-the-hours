@@ -9,7 +9,6 @@ const log = require('./log');
 module.exports = {get, randomProverb};
 
 async function get(query){
-	log.debug('bible get');
 
 	return new Promise(async(resolve, reject)=>{
 
@@ -171,7 +170,7 @@ async function randomProverb(){ //get a random proverb
 //exports.randomProverb(function(result){ console.log(result); }); //test
 
 async function getESV(query, options){
-	log.debug('getting ESV', query)
+
 	return new Promise((resolve, reject)=>{
 		log.info("getting data from ESV for: "+query)
 
@@ -186,7 +185,7 @@ async function getESV(query, options){
 		request(options, (error, response, body)=>{
 			body = JSON.parse(body);
 	
-			if(body.canonical=="")//if no result
+			if(body.canonical=="" || !body.passages)//if no result
 				reject(false);
 			else{
 				resolve({

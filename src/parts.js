@@ -21,7 +21,7 @@ async function find(query){
 	});
 }
 
-module.exports = {getRandomPart, getRandomParts, getAllParts, showAllParts, getPartList, update};
+module.exports = {getRandomPart, getRandomParts, getAllParts, showAllParts, getPartList, addTag, removeTag};
 
 //get an array of parts and return a promise
 async function getRandomParts(queries, seed){
@@ -134,14 +134,10 @@ async function getPartList(){
 	return Promise.resolve(uniqueTypes);
 }
 
- async function update(id, update){
-	 let tags = {};
-	 if(update.season) tags.season = update.season;
-	 if(update.times) tags.times = update.times;
-	 if(update.themes) tags.themes = update.themes;
+ async function update(id, operation){
 
 	 return new Promise((resolve, reject)=>{
-		db.updateOne({_id: id}, {$set: tags}, (err, result)=>{
+		db.update({_id: id}, operation, (err, result)=>{
 			if(result)   
 				resolve(true);
 			else if(err) 
@@ -150,6 +146,27 @@ async function getPartList(){
 				reject(false);
 		});
 	 });
+}
+
+async function addTag(body){
+	log.info ('add', body.field, body.tag);
+	
+	if(body.field === 'times' || body.field === 'themes'){
+		let r = await update(body.id, {$addToSet: {[body.field]: body.tag }}).catch(log.err);
+		if(r) return Promise.resolve(true);
+	}
+	
+	return Promise.reject(false);
+}
+async function removeTag(body){
+	log.info ('remove', body.field, body.tag);
+
+	if(body.field === 'times' || body.field === 'themes'){
+		let r = await update(body.id, {$pull: {[body.field]: body.tag }}).catch(log.err);
+		if(r) return Promise.resolve(true);
+	}
+	
+	return Promise.reject(false);
 }
 
 //seeded random integer generator so that everyone gets the same thing at the same time

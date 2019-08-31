@@ -98,9 +98,18 @@ router.get('/list/:part', async(req, res, next)=>{
 	res.render('parts-list', {title: req.params.part, parts: results, taglist: taglist});
 });
 
-router.post('/update', async(req, res, next)=>{
+router.post('/addTag', async(req, res, next)=>{
 
-	let result = await parts.update(req.body.id, req.body.updates).catch(log.err);
+	let result = await parts.addTag(req.body).catch(log.err);
+	if(result)
+		res.sendStatus(200);
+	else
+		res.sendStatus(400);
+});
+
+router.post('/removeTag', async(req, res, next)=>{
+
+	let result = await parts.removeTag(req.body).catch(log.err);
 	if(result)
 		res.sendStatus(200);
 	else

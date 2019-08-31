@@ -94,7 +94,10 @@ const partQueries = {
 	morning: function(date){ 
 		return [
 			{part: 'bible', passage: getPsalm('morning', date)},
-			{part: 'prayer', times: {$in:['morning']} },
+			{part: 'prayer',  $or: [
+				{times: {$in:['morning', 'any']} },
+				{themes:{$in:['petition'] }}
+			] } ,
 		];
 	},
 
@@ -108,7 +111,10 @@ const partQueries = {
 	evening: function(date){
 		return [
 			{part: 'bible', passage: getPsalm('evening', date)},
-			{part: 'prayer', times: {$in:['evening', 'night']} },
+			{part: 'prayer',  $or: [
+				{times: {$in:['evening', 'night']} },
+				{themes:{$in:['thanks', 'praise', 'hope', 'rest'] }}
+			] } ,
 		];
 	},
 	random: function(date){
@@ -120,6 +126,7 @@ const partQueries = {
 
 //index
 async function getHour(hour, date){
+	log.debug(hour, date);
 
 	hour = hour.toLowerCase();
 	if(!partQueries[hour])
@@ -138,7 +145,6 @@ async function getHour(hour, date){
 }
 
 function getPsalm(type, date){
-	log.info('getpsalm', type, date);
 	var psalms = {
 
 		thanks:

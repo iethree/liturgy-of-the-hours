@@ -9,6 +9,7 @@
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "jade": "^1.11.0",
+    "jest": "^24.9.0",
     "load-json-file": "^6.0.0",
     "lodash": "^4.17.15",
     "markdown-it": "^8.4.2",

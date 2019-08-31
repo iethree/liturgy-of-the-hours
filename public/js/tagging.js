@@ -1,79 +1,27 @@
 //tagging.js
 
+function updateTag(event){
+	let btn = event.target;
+	let id = btn.getAttribute('data-id');
+	let field = btn.getAttribute('data-category');
+	let tag = btn.innerText;
+	let operation = btn.classList.contains('is-dark') ? '/removeTag' : '/addTag';
+	btn.classList.toggle('is-loading');
 
-$('.input').on('keydown', function(e){
-	
-	
-	if(e.which == 9 || e.which == 13 || e.which==188 || e.which == 186 || e.which==32){//tab
-		//save tag
-		e.preventDefault();
-		var newtag = $(this).val();
-		
-		if (newtag.length>0){
-			
-		
-			newtag = "<span class='tag is-warning'>"+newtag+"<button class='delete is-small'></button></span>";
-			
-			$(this).siblings('.tagbox').append(newtag);
-			
-			$(this).val('');
-		}
-		
-	}		
-});
+	console.log(id, field, tag, operation);
 
-$(document).on('click', '.delete', function(e){
-	console.log('delete');
-	$(this).parent().remove();
-	
-});
-
-$(document).on('click', '.saver', function(e){
-	
-	//get the docID
-	dataID = $(this).parent().parent().attr('dataid');
-	
-	//get the boxes of tags
-	tagboxes = $(this).parent().parent().find('.tagbox');
-	alltags = $(this).parent().parent().find('.tag');
-	
-	//separate out the 3 sets of tags
-	var taglist={
-		themes: extractTagText($(tagboxes).filter('.themes').children('.tag')), 
-		season: extractTagText($(tagboxes).filter('.season').children('.tag')), 
-		times: extractTagText($(tagboxes).filter('.times').children('.tag'))
-	};
-	
-	
-	console.log(dataID+": "+JSON.stringify(taglist));
-	
-	$.ajax({
-		url: '/db/saveTags',
-		type: 'POST',
-		data: {id: dataID, themes: taglist.themes, season: taglist.season, times: taglist.times}
-		success: function(results){
-			$(alltags).removeClass('is-warning').addClass('is-success');
-		},
-		error: function(){
-			console.log("failed to save tags");
-			$(alltags).removeClass('is-warning').addClass('is-danger');
-		}
+	fetch(operation,{
+		method: "POST",
+		headers: {"Content-Type": "application/json"},
+		body: JSON.stringify({
+			id: id,
+			field, field,
+			tag: tag
+		})
+	}).then(r=>{
+		if(r.ok)
+			btn.classList.toggle('is-dark');
+	}).finally(e=>{
+		btn.classList.toggle('is-loading');
 	});
-	
-	
-});
-
-//extract tag text from an arrray of jquery tag objects
-function  extractTagText(tagObjects){
-	
-	var taglist=[];
-	
-	for(cnt = 0; cnt<tagObjects.length; cnt++){
-		
-		taglist.push($(tagObjects[cnt]).text());
-	}
-
-	return taglist;
 }
-
-// }
