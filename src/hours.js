@@ -1,8 +1,9 @@
 //hours.js
 
 const parts = require('./parts.js');
+const lectionary = require('./lectionary.js');
 const time = require('./time');
-const log = require('./log.js');
+const log = require('logchalk');
 
 module.exports = {getHour, getPsalm};
 
@@ -13,7 +14,6 @@ const partQueries = {
 			{part: 'intro', times: 'morning' },
 			{part: 'bible', passage: getPsalm('praise', date)},
 			{part: 'prayer', themes: {$nin:['end', 'petition']}, times: {$nin:['evening', 'night']}},
-			{part: 'acclamation', season: { $in: [time.getSeason(date), 'any'] }},
 			{part: 'prayer', themes: 'end', times: {$nin:['evening', 'night']}},
 		];
 	},
@@ -38,10 +38,10 @@ const partQueries = {
 		];
 	},
 
-	none: function(date){ //lesson?
+	none: async function(date){ //lesson?
 		return [
 			{part: 'preface', season: { $in: [time.getSeason(date), 'any'] } },
-			{part: 'bible', passage: getLectionary(date)[1]},
+			{part: 'bible', passage: await lectionary.lessons(date)[1]},
 			{themes: 'end', times: {$nin:['evening', 'night', 'morning']}},
 		];
 	},
@@ -83,12 +83,15 @@ const partQueries = {
 		];
 	},
 
-	lectionary: function(date){
-		return [
-			{part: 'bible', passage: getLectionary(date)[0]},
-			{part: 'bible', passage: getLectionary(date)[1]},
-			{part: 'bible', passage: getLectionary(date)[2]},
-		];
+	lectionary: async function(date){
+		lessons = await lectionary.lessons(date);
+		psalms  = await lectionary.psalms(date);
+
+		let all = [];
+		for(let i of [...lessons, ...psalms])
+			all.push({part: 'bible', passage: i});
+
+		return all;
 	},
 
 	morning: function(date){ 
@@ -188,18 +191,6 @@ function getPsalm(type, date){
 		return "psalm1";
 }
 
-function getLectionary(date){
-
-	year = "one"; //need to implement logic for figuring out the year
-
-	try{
-		var today= lectionary.dailyOfficeLectionary[time.getWeek(date).toLowerCase()][time.format.dow(date).toLowerCase()][year];
-	}
-	catch(e){
-		return ['psalm 1', 'psalm 1', 'psalm 1'];
-	}
-	return today;
-}
 
 function getRandomInt(min, max) { //max is inclusive
 	return Math.random() * (max - min) + min;

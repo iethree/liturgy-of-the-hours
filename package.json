@@ -12,6 +12,7 @@
     "jest": "^24.9.0",
     "load-json-file": "^6.0.0",
     "lodash": "^4.17.15",
+    "logchalk": "^1.0.1",
     "markdown-it": "^8.4.2",
     "morgan": "^1.9.1",
     "nedb": "^1.8.0",

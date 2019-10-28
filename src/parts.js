@@ -3,13 +3,19 @@
 const bible = require('./bible.js');
 const md = require('markdown-it')({html: true});
 const random = require('random-seed');
-const log = require('./log.js');
+const log = require('logchalk');
 const _ = require('lodash');
-const {promisify} = require('util');
 
 var nedb = require('nedb');
-var db = new nedb({filename: 'data/parts.db', autoload: true});
+var db = new nedb({filename: '../data/parts.db', autoload: true});
 
+module.exports = {getRandomPart, getRandomParts, getAllParts, showAllParts, getPartList, addTag, removeTag};
+
+/**
+ * promise wrapper for database queries
+ * @param {Object} query mongoDB style query 
+ * @returns {Promise} resolves to array of results
+ */
 async function find(query){
 	return new Promise((resolve, reject)=>{
 		db.find(query, (err, results)=>{
@@ -21,9 +27,13 @@ async function find(query){
 	});
 }
 
-module.exports = {getRandomPart, getRandomParts, getAllParts, showAllParts, getPartList, addTag, removeTag};
 
-//get an array of parts and return a promise
+/**
+ * get an array of random parts and return a promise
+ * @param {Array} queries array of queries 
+ * @param {String} seed random seed
+ * @returns {Promise} that resolves to an array of parts
+ */
 async function getRandomParts(queries, seed){
 
 	var promises = queries.map(q=>{
@@ -40,7 +50,6 @@ async function getRandomParts(queries, seed){
 async function getRandomPart(query, seed){
 
 	var results = await getAllParts(query).catch(log.err);
-
 	var theone = getOneFrom(results, seed);
 
 	if(theone && theone.text){
@@ -54,7 +63,7 @@ async function getRandomPart(query, seed){
 		});
 	}
 	else
-		return Promise.reject(false);
+		return Promise.reject('part not found for ',query);
 }
 
 async function getAllParts(query){
@@ -62,13 +71,16 @@ async function getAllParts(query){
 	let results = await find(query).catch(log.err);
 
 	if(!results.length)
-		return Promise.reject(false);
+		return Promise.reject('no parts found for ',query);
 	else
 		return Promise.resolve(results);
 }
 
 async function showAllParts(query){
-	let results = await getAllParts(query);
+	let results = await getAllParts(query).catch(log.err);
+
+	if (!results)
+		return Prommise.reject('no parts found for ',query);
 
 	results = results.map(p=>{
 		p.text = processText(p.text);
@@ -76,10 +88,11 @@ async function showAllParts(query){
 	});
 	return Promise.resolve(results);
 }
+
 //process custom indents and markdown
 function processText(text){
 
-	output = text;
+	let output = text;
 
 	//bold indent lines
 	output = output.replace(/>\*\*(.*\S)/gi, '>**$1**');
@@ -99,7 +112,7 @@ function processText(text){
 //get a random part from multiple matching parts
 function getOneFrom(several, seed){
 		if(Array.isArray(several))
-			return several[getRandomInt(0, several.length-1, seed)];
+			return several[getRandomInt(several.length, seed)];
 		else if(several)
 			return several;
 		else
@@ -124,7 +137,7 @@ Object.assign(String.prototype, {
 	}
 });
 
-//list of parts
+//list of unique part types
 async function getPartList(){
 	let results = await find({}).catch(log.err);
 	let types = results.map(i=>i.part);
@@ -134,7 +147,7 @@ async function getPartList(){
 	return Promise.resolve(uniqueTypes);
 }
 
- async function update(id, operation){
+async function update(id, operation){
 
 	 return new Promise((resolve, reject)=>{
 		db.update({_id: id}, operation, (err, result)=>{
@@ -143,7 +156,7 @@ async function getPartList(){
 			else if(err) 
 				reject(err);
 			else	
-				reject(false);
+				reject("part not updated: "+id);
 		});
 	 });
 }
@@ -156,8 +169,9 @@ async function addTag(body){
 		if(r) return Promise.resolve(true);
 	}
 	
-	return Promise.reject(false);
+	return Promise.reject("tag not added");
 }
+
 async function removeTag(body){
 	log.info ('remove', body.field, body.tag);
 
@@ -166,14 +180,13 @@ async function removeTag(body){
 		if(r) return Promise.resolve(true);
 	}
 	
-	return Promise.reject(false);
+	return Promise.reject("tag not added");
 }
 
 //seeded random integer generator so that everyone gets the same thing at the same time
-function getRandomInt(min, max, seedImport) { //max is inclusive
+function getRandomInt(max, seedImport) { //max is exclusive
 
   seed = seedImport.toLowerCase();
   gen = random(seed);
-
-  return gen(max+1);
+  return gen(max);
 }
