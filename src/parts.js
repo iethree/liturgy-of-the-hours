@@ -7,7 +7,7 @@ const log = require('logchalk');
 const _ = require('lodash');
 
 var nedb = require('nedb');
-var db = new nedb({filename: '../data/parts.db', autoload: true});
+var db = new nedb({filename: './data/parts.db', autoload: true});
 
 module.exports = {getRandomPart, getRandomParts, getAllParts, showAllParts, getPartList, addTag, removeTag};
 
@@ -35,7 +35,7 @@ async function find(query){
  * @returns {Promise} that resolves to an array of parts
  */
 async function getRandomParts(queries, seed){
-
+	
 	var promises = queries.map(q=>{
 		if(q.part=="bible") // bible queries
 			return bible.get(q.passage).catch(log.err);

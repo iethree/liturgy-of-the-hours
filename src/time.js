@@ -1,6 +1,7 @@
 const datefns = require('date-fns');
 const calendar = require('../data/calendar.js');
 
+
 var format = {
 	short: (date)=>{
 		date = getDateObject(date);
@@ -24,6 +25,7 @@ var format = {
    },
    object: date=>getDateObject(date)
 };
+module.exports = {getWeek, getSeason, getCurrentOfficeName, format};
 
 function getDateObject(date){
 	if(!date)
@@ -100,5 +102,4 @@ Object.assign(String.prototype, {
 	}
 });
 
-module.exports = {getWeek, getSeason, getCurrentOfficeName, format};
 

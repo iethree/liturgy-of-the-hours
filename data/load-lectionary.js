@@ -5,9 +5,9 @@ const log = require('logchalk');
 const _ = require('lodash');
 
 var nedb = require('nedb');
-var lectionary = new nedb({filename: '../lectionary.db', autoload: true});
-var calendar = new nedb({filename: '../calendar.db', autoload: true});
-var calendarData = require('../calendar.js');
+var lectionary = new nedb({filename: './lectionary.db', autoload: true});
+var calendar = new nedb({filename: './calendar.db', autoload: true});
+var calendarData = require('./calendar.js');
 
 function readLectionaryData(){
    fs.readFile('./dol-year-1.min.json',      loadData);
@@ -39,8 +39,8 @@ async function weekList(){
    }
    weeks = weeks.sort();
    log.info(weeks);
-   return weeks;
 }
+weekList();
 
 function loadCalendarData(err, data){
    if(err) log.err(err);

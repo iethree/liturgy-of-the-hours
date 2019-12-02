@@ -14,7 +14,7 @@ async function get(query){
 		if(result) //if it's in the db, send it back
 			resolve(result);
 		else{ //check the ESV
-			result = await getESV(query)
+			result = await getESV(query).catch(log.err);
 
 			if(result){ //if found from ESV, save to db, and resulove
 				resolve(result);
@@ -92,6 +92,11 @@ async function getESV(query, options){
 		};
 	
 		request(options, (error, response, body)=>{
+			if(error || !body){
+				reject('no response from ESV');
+				return;
+			}
+				
 			body = JSON.parse(body);
 	
 			if(body.canonical=="" || !body.passages)//if no result

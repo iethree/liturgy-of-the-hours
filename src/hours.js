@@ -84,8 +84,8 @@ const partQueries = {
 	},
 
 	lectionary: async function(date){
-		lessons = await lectionary.lessons(date);
-		psalms  = await lectionary.psalms(date);
+		var lessons = await lectionary.lessons(date).catch(log.err);
+		var psalms  = await lectionary.psalms(date).catch(log.err);
 
 		let all = [];
 		for(let i of [...lessons, ...psalms])
