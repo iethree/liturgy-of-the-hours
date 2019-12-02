@@ -42,7 +42,7 @@ const partQueries = {
 		return [
 			{part: 'preface', season: { $in: [time.getSeason(date), 'any'] } },
 			{part: 'bible', passage: await lectionary.lessons(date)[1]},
-			{themes: 'end', times: {$nin:['evening', 'night', 'morning']}},
+			{themes: 'end'},
 		];
 	},
 
