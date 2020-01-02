@@ -77,6 +77,7 @@
 	"20201206": "Advent 2",
 	"20201213": "Advent 3",
 	"20201220": "Advent 4",
+	"20201225": "Christmas",
 	"20201227": "Christmas 1",
 	"20210103": "Christmas 2",
 	"20210106": "Epiphany",
