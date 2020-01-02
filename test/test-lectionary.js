@@ -11,7 +11,7 @@ function getWeekTest(){
 lectionaryTest();
 async function lectionaryTest(){
    var date = '20201231';
-   for (let i=0; i<365; i++){
+   for (let i=0; i<10; i++){
       let result = await lectionary.getLectionary(date).catch(console.log);
       date = time.subDay(date);
    }
