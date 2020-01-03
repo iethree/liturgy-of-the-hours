@@ -11,7 +11,7 @@
 	"20191103": "Proper 26",
 	"20191110": "Proper 27",
 	"20191117": "Proper 28",
-	"20191124": "Proper 29",
+	"20191124": "Proper 29", // christ the king
 	"20191201": "Advent 1",
 	"20191208": "Advent 2",
 	"20191215": "Advent 3",
@@ -34,21 +34,19 @@
 	"20200315": "Lent 3",
 	"20200322": "Lent 4",
 	"20200329": "Lent 5",
-	"20200405": "Palm Sunday",
-	"20200406": "Holy Week",
-	"20200409": "Maundy Thursday",
-	"20200410": "Good Friday",
-	"20200411": "Holy Saturday",
-	"20200412": "Easter",
+	"20200405": "Holy Week", //palm sunday
+	"20200412": "Easter Week",
 	"20200419": "Easter 2",
 	"20200426": "Easter 3",
 	"20200503": "Easter 4",
 	"20200510": "Easter 5",
 	"20200517": "Easter 6",
-	"20200524": "Easter 7",
 	"20200521": "Ascension Day",
+	"20200524": "Easter 7",
 	"20200531": "Pentecost",
+	"20200601": "Proper 4", //actually a monday
 	"20200607": "Trinity Sunday",
+	"20200608": "Proper 5", //actually a monday
 	"20200614": "Proper 6",
 	"20200621": "Proper 7",
 	"20200628": "Proper 8",
@@ -72,14 +70,14 @@
 	"20201101": "Proper 26",
 	"20201108": "Proper 27",
 	"20201115": "Proper 28",
-	"20201122": "Christ The King",
+	"20201122": "Proper 29", //christ the king
 	"20201129": "Advent 1",
 	"20201206": "Advent 2",
 	"20201213": "Advent 3",
 	"20201220": "Advent 4",
-	"20201225": "Christmas",
-	"20201227": "Christmas 1",
-	"20210103": "Christmas 2",
+	"20201225": "Christmas Day",
+	"20201227": "First Sunday after Christmas",
+	"20210103": "Second Sunday after Christmas",
 	"20210106": "Epiphany",
 	"20210110": "Epiphany 1",
 	"20210117": "Epiphany 2",
@@ -93,11 +91,7 @@
 	"20210307": "Lent 3",
 	"20210314": "Lent 4",
 	"20210321": "Lent 5",
-	"20210328": "Palm Sunday",
-	"20210329": "Holy Week",
-	"20210401": "Maundy Thursday",
-	"20210402": "Good Friday",
-	"20210403": "Holy Saturday",
-	"20210404": "Easter"
+	"20210328": "Holy Week", //palm sunday
+	"20210404": "Easter Week",
 };
 

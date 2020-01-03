@@ -1,6 +1,7 @@
 const rcl = require('../../daily-office');
 const lectionary = require('../src/lectionary.js')
 const time = require('../src/time.js');
+const log = require('logchalk');
 
 // getWeekTest();
 function getWeekTest(){
@@ -8,13 +9,15 @@ function getWeekTest(){
    console.log(x, y)
 }
 
-lectionaryTest();
-async function lectionaryTest(){
-   var date = '20201231';
-   for (let i=0; i<10; i++){
-      let result = await lectionary.getLectionary(date).catch(console.log);
+lectionaryTest('20201231', 365);
+async function lectionaryTest(date, num){
+   let failures = 0;
+   for (let i=0; i<num; i++){
+      let result = await lectionary.getLectionary(date).catch(log.warn);
+      if(!result) failures++;
       date = time.subDay(date);
    }
+   log.err('failures: ', failures, "/", num);
 }
 
 function translateTest(){

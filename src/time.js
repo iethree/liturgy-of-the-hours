@@ -25,7 +25,7 @@ var format = {
    },
    object: date=>getDateObject(date)
 };
-module.exports = {format, subDay};
+module.exports = {format, subDay, isBetween};
 
 /**
  * returns YYYYMMDD formatted date 1 day earlier
@@ -50,6 +50,15 @@ function getDateObject(date){
 		return new Date();
 }
 
+//inclusive
+function isBetween(x, beg, end){
+	x = getDateObject(x);
+	beg = getDateObject(beg);
+	end = getDateObject(end);
+	if(x===beg || x===end) //return true if equal
+		return true;
+	return (datefns.isAfter(x, beg) && datefns.isBefore(x,y));
+}
 
 
 Object.assign(String.prototype, {
