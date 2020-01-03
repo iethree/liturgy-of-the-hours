@@ -57,7 +57,7 @@ function isBetween(x, beg, end){
 	end = getDateObject(end);
 	if(x===beg || x===end) //return true if equal
 		return true;
-	return (datefns.isAfter(x, beg) && datefns.isBefore(x,y));
+	return (datefns.isAfter(x, beg) && datefns.isBefore(x, end));
 }
 
 
