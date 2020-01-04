@@ -20,12 +20,22 @@ async function getLectionary(date){
    if(!todaysLectionary) //otherwise check for title
       todaysLectionary = await rcl.get({year: year, title: longWeek}).catch(log.err);
 
-
    if(!todaysLectionary) 
       return Promise.reject("failed to find lectionary for: "+date+" "+shortWeek+" "+ dow);
 
    todaysLectionary.shortWeek = shortWeek;
-   let collect = await parts.getCollect({$in:[shortWeek, longWeek, todaysLectionary.title]}).catch(()=>{});
+
+   if(!todaysLectionary.week)
+      todaysLectionary.week = longWeek;
+   if(todaysLectionary.season==="The Season after Pentecost")
+      todaysLectionary.season="Ordinary Time";
+   else if(!todaysLectionary.season)
+      todaysLectionary.season=getSeason(shortWeek);
+   
+   todaysLectionary.lessons = deepFlat(todaysLectionary.lessons);
+
+   let collect = await parts.getCollect(todaysLectionary.title).catch(()=>{});
+   if(!collect) collect = await parts.getCollect({$in:[shortWeek, longWeek]}).catch(()=>{});
    todaysLectionary.collect = collect ? collect : null;
 
    return todaysLectionary;
@@ -49,7 +59,7 @@ function getWeek(date){
 	
 	for(cnt=0; cnt<7; cnt++){ //search for last valid title 1 day at a time
 		if(calendar[day]){
-         if(calendar[day]==="Ascension Day"){
+         if(calendar[day]==="Ascension Day"){ //skip
             day = time.subDay(day); 
             continue;
          }
@@ -66,6 +76,8 @@ function getLongWeek(shortWeek){
       return "Ash Wednesday and Following";
    if (shortWeek==="Trinity Sunday")
       return "The First Sunday after Pentecost: Trinity Sunday";
+   if (shortWeek==="Epiphany")
+      return "The Epiphany and Following";
    
    
    let match = /(lent|easter|christmas|advent|epiphany) (\d|last)/i.exec(shortWeek);
@@ -75,7 +87,17 @@ function getLongWeek(shortWeek){
       return shortWeek;
 }
 
-function getShortWeek(longWeek){
+function getSeason(week){
+   let match= /(lent|epiphany|christmas|easter|advent|pentecost)/i.exec(week);
+   if(match)
+      return match[1];
+   if(/proper/i.exec(week))
+      return "Ordinary Time";
+   else
+      return null;
+}
+
+function getShortWeek(longWeek){   
    let match = /Week of (\d|last) (lent|easter|christmas|advent|epiphany)/i.exec(longWeek);
    if(match)
       return `${match[2]} ${match[1]}`; 
@@ -83,21 +105,31 @@ function getShortWeek(longWeek){
       return longWeek;
 }
 
-function getCurrentOfficeName(){
-	var hour = datefns.format(new Date(), 'H');
+function getCurrentOfficeName(date=new Date()){
+	var hour = datefns.format(date, 'H');
 
 	if(hour >= 4 && hour < 8)
 		return "Lauds";
-		if(hour >= 8 && hour < 11)
+	if(hour >= 8 && hour < 11)
 		return "Terce";
 	if(hour >= 11 && hour < 14)
-	return "Sext";
+	   return "Sext";
 	if(hour >= 14 && hour < 16)
-	return "None";
+	   return "None";
 	if(hour >= 16 && hour < 20)
-	return "Vespers";
+	   return "Vespers";
 	if(hour >= 20 && hour < 24)
-	return "Compline";
+	   return "Compline";
 	else
-	return "Matins";
+	   return "Matins";
+}
+
+function deepFlat(obj){
+   var obj = Object.values(obj);
+
+   for (let i in obj){
+      if(typeof(obj[i])==='object')
+         obj[i] = deepFlat(obj[i]);
+   }
+   return obj.flat();
 }
