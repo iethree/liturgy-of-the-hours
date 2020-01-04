@@ -25,7 +25,7 @@ async function getLectionary(date){
       return Promise.reject("failed to find lectionary for: "+date+" "+shortWeek+" "+ dow);
 
    todaysLectionary.shortWeek = shortWeek;
-   let collect = await parts.getCollect(shortWeek).catch(()=>{});
+   let collect = await parts.getCollect({$in:[shortWeek, longWeek, todaysLectionary.title]}).catch(()=>{});
    todaysLectionary.collect = collect ? collect : null;
 
    return todaysLectionary;

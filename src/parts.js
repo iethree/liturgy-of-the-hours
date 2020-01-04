@@ -29,6 +29,7 @@ async function find(query){
 
 async function getCollect(week){
 	let collect = await find({part:'collect', title: week});
+
 	if(collect && collect.length)
 		return collect[0].text;
 	else
