@@ -7,6 +7,7 @@ const calendar = require('../data/calendar.js');
 module.exports = {getLectionary};
 
 async function getLectionary(date){
+   if(!date) date = new Date();
    var year  = getYear(date);
    var [shortWeek, longWeek] = getWeek(date);
    var dow = time.format.dow(date);
@@ -24,6 +25,7 @@ async function getLectionary(date){
       return Promise.reject("failed to find lectionary for: "+date+" "+shortWeek+" "+ dow);
 
    todaysLectionary.shortWeek = shortWeek;
+   todaysLectionary.date = time.format.short(date);
 
    if(!todaysLectionary.week)
       todaysLectionary.week = longWeek;

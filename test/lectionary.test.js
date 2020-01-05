@@ -24,7 +24,7 @@ async function lectionaryTest(date, num){
       log.success('no failures :-)');
 }
 
-//showLectionary('20200412')
+showLectionary('20200412')
 async function showLectionary(date){
    let result = await lectionary.getLectionary(date).catch(log.warn);
    console.log(result);

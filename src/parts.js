@@ -31,7 +31,7 @@ async function getCollect(week){
 	let collect = await find({part:'collect', title: week});
 
 	if(collect && collect.length)
-		return collect[0].text;
+		return collect[0];
 	else
 		return Promise.reject('no collect found for '+week);
 }

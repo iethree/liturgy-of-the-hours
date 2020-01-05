@@ -5,14 +5,14 @@ const lectionary = require('./lectionary.js');
 const time = require('./time');
 const log = require('logchalk');
 
-module.exports = {getHour, getPsalm};
+module.exports = {getHour};
 
 const partQueries = {
 
 	lauds: function(lectionary){ //praise
 		return [
 			{part: 'intro', times: 'morning' },
-			{part: 'bible', passage: "psalm "+(lectionary.psalms.morning[0] || 1)},
+			{part: 'bible', passage: "Psalm "+(lectionary.psalms.morning ? lectionary.psalms.morning[0] : 1)},
 			{part: 'prayer', themes: {$nin:['end', 'petition']}, times: {$nin:['evening', 'night']}},
 			{part: 'prayer', themes: 'end', times: {$nin:['evening', 'night']}},
 		];
@@ -31,14 +31,14 @@ const partQueries = {
 	sext: function(lectionary){ //wisdom
 		return [
 			{part: 'preface', season: { $in: [lectionary.season, 'any'] } },
-			{part: 'bible', passage: getPsalm('ascent', date)},
-			{part: 'collect', title: lectionary.shortWeek},
+			{part: 'bible', passage: getPsalm('ascent', lectionary.date)},
+			{_id: lectionary.collect._id},
 			{part: 'creed'},
 			{themes: 'end', times: {$nin:['evening', 'night']}}
 		];
 	},
 
-	none: async function(lectionary){ //lesson?
+	none: function(lectionary){ //lesson?
 		return [
 			{part: 'preface', season: { $in: [lectionary.season, 'any'] } },
 			{part: 'bible', passage: (lectionary.lessons[1] || "1 Tim 2")},
@@ -49,7 +49,7 @@ const partQueries = {
 	vespers: function(lectionary){ //thanksgiving
 		return [
 			{part: 'intro', times: 'evening' },
-			{part: 'bible', passage: "psalm "+(lectionary.psalms.evening[0] || 1) },
+			{part: 'bible', passage: "Psalm "+(lectionary.psalms.evening ? lectionary.psalms.evening[0] : 100) },
 			{part: 'collect', themes: {$nin:['daily', 'saint']}},
 			{part: 'prayer', title: /general thanksgiving/i},
 			{themes: 'end', times: {$nin:['morning']}},
@@ -83,17 +83,19 @@ const partQueries = {
 		];
 	},
 
-	lectionary: async function(lectionary){
+	lectionary: function(lectionary){
 		let all = [];
-		for(let i of [...lectionary.lessons, ...lectionary.psalms.morning, ...lectionary.psalms.evening])
+		for(let i of flatten(lectionary.lessons, lectionary.psalms))
 			all.push({part: 'bible', passage: i});
-
 		return all;
 	},
 
-	morning: function(date){ 
+	morning: function(lectionary){ 
+		let dom = /(\d+)/.exec(lectionary.date)[1];
+		if(!dom) dom = 1;
+
 		return [
-			{part: 'bible', passage: getPsalm('morning', date)},
+			{part: 'bible', passage: getPsalm('morning', dom)},
 			{part: 'prayer',  $or: [
 				{times: {$in:['morning', 'any']} },
 				{themes:{$in:['petition'] }}
@@ -101,16 +103,22 @@ const partQueries = {
 		];
 	},
 
-	midday: function(date){ 
+	midday: function(lectionary){ 
+		let dom = /(\d+)/.exec(lectionary.date)[1];
+		if(!dom) dom = 1;
+
 		return [
-			{part: 'bible', passage: getPsalm('ascent', date)},
+			{part: 'bible', passage: getPsalm('ascent', dom)},
 			{part: 'collect', title: time.getWeek(date)},
 		];
 	},
 
-	evening: function(date){
+	evening: function(lectionary){
+		let dom = /(\d+)/.exec(lectionary.date)[1];
+		if(!dom) dom = 1;
+
 		return [
-			{part: 'bible', passage: getPsalm('evening', date)},
+			{part: 'bible', passage: getPsalm('evening', dom)},
 			{part: 'prayer',  $or: [
 				{times: {$in:['evening', 'night']} },
 				{themes:{$in:['thanks', 'praise', 'hope', 'rest'] }}
@@ -126,15 +134,15 @@ const partQueries = {
 
 //index
 async function getHour(hour, date){
-	log.debug(hour, date);
+	log.info('getHour', hour, date);
 
 	hour = hour.toLowerCase();
 	if(!partQueries[hour])
 		return Promise.reject("hour not found");
 	
-	var lectionary = lectionary.getLectionary(date);
+	var today = await lectionary.getLectionary(date);
 	
-	let queries = partQueries[hour](lectionary);
+	let queries = partQueries[hour](today);
 
 	if(hour==="random")
 		var hourParts = await parts.getRandomParts(queries, "random"+getRandomInt(1,999))
@@ -144,15 +152,16 @@ async function getHour(hour, date){
 		.catch(log.err);
 	
 	return Promise.resolve({
-		title: hour.charAt(0).toUpperCase() + hour.substr(1),
-		seasonTitle: time.getWeek(date),
-		season: lectionary.season,
-		date: time.format.short(date),
+		hour: hour.charAt(0).toUpperCase() + hour.substr(1),
+		title: today.shortWeek,
+		season: today.season,
+		date: today.date,
 		parts: hourParts
 	});
 }
 
-function getPsalm(type, date){
+function getPsalm(type, dom){
+	
 	var psalms = {
 
 		thanks:
@@ -183,7 +192,7 @@ function getPsalm(type, date){
 		"108", "110", "111", "112", "113", "114", "117", "120", "121", "122", "123", "124"]
 	};
 
-	index = Number(time.format.dom(date))-1;
+	index = Number(dom)-1;
 
 	if(psalms[type] && psalms[type][index])
 		return "psalm"+psalms[type][index];
@@ -191,7 +200,16 @@ function getPsalm(type, date){
 		return "psalm1";
 }
 
-
+function flatten(lessons, psalms){
+	let ps = [];
+	if(psalms.morning)
+		ps = [...ps, ...psalms.morning];
+	if(psalms.evening)
+		ps = [...ps, ...psalms.evening];
+	
+	ps = ps.map(p=>"Psalm "+p);
+	return [...lessons, ...ps];
+}
 function getRandomInt(min, max) { //max is inclusive
 	return Math.random() * (max - min) + min;
  }

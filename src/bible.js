@@ -81,6 +81,12 @@ function updateDB(query, passage){
 async function getESV(query, options){
 
 	return new Promise((resolve, reject)=>{
+		query = query
+			.replace(/–/g,'-')
+			.replace(/\(\[/g,',')
+			.replace(/\)\]/g,'');
+
+
 		log.info("getting data from ESV for: "+query)
 
 		options = options || {
@@ -100,7 +106,7 @@ async function getESV(query, options){
 			body = JSON.parse(body);
 	
 			if(body.canonical=="" || !body.passages)//if no result
-				reject(false);
+				reject(body);
 			else{
 				resolve({
 					title: body.canonical,

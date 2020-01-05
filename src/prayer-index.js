@@ -5,6 +5,8 @@ const log = require('logchalk');
 const parts = require('./parts.js');
 const hours = require('./hours.js');
 const count = require('./count.js');
+const lectionary = require('./lectionary.js');
+
 const time = require('./time');
 
 /** CG routes */
@@ -26,12 +28,12 @@ router.get('/cg', function(req, res, next) {
  });
 
 
-router.get('/', function(req, res, next) {
+router.get('/', async (req, res, next) => {
 
   res.render('daily-index', {
 	title: 'Liturgy of the Hours',
 	date: time.format.short(),
-	season: time.getSeason()
+	season: await lectionary.getLectionary().season
 	});
 });
 
