@@ -12,43 +12,45 @@
   border-color: #800080;
 }
 
+.advent.button {
+  background-color: #800080;
+  color: #fff;
+}
+
 .christmas {
   color: #DAA520;
 }
 
 .christmas .button, .christmas .circle {
   background-color: #DAA520;
-  color: #606060;
+  color: #fff;
 }
 
 .christmas .ringring {
   border-color: #DAA520;
 }
 
-.easter {
-  color: #DAA520;
-}
-
-.easter .button, .easter .circle {
+.christmas.button {
   background-color: #DAA520;
   color: #fff;
 }
 
-.easter .ringring {
-  border-color: #DAA520;
+.epiphany {
+  color: #bfbfbf;
 }
 
-.pentecost {
-  color: #b30000;
+.epiphany .button, .epiphany .circle {
+  background-color: #bfbfbf;
+  color: #606060;
 }
 
-.pentecost .button, .pentecost .circle {
-  background-color: #b30000;
-  color: #fff;
+.epiphany .ringring {
+  border-color: #bfbfbf;
 }
 
-.pentecost .ringring {
-  border-color: #b30000;
+.epiphany.button {
+  background-color: #bfbfbf;
+  color: #606060;
 }
 
 .ordinary {
@@ -64,17 +66,9 @@
   border-color: #008000;
 }
 
-.lent {
-  color: #800080;
-}
-
-.lent .button, .lent .circle {
-  background-color: #800080;
+.ordinary.button {
+  background-color: #008000;
   color: #fff;
-}
-
-.lent .ringring {
-  border-color: #800080;
 }
 
 .holyweek {
@@ -90,16 +84,62 @@
   border-color: #b30000;
 }
 
-.epiphany {
-  color: #bfbfbf;
+.holyweek.button {
+  background-color: #b30000;
+  color: #fff;
 }
 
-.epiphany .button, .epiphany .circle {
+.lent {
+  color: #800080;
+}
+
+.lent .button, .lent .circle {
   background-color: #800080;
   color: #fff;
 }
 
-.epiphany .ringring {
+.lent .ringring {
   border-color: #800080;
+}
+
+.lent.button {
+  background-color: #800080;
+  color: #fff;
+}
+
+.easter {
+  color: #DAA520;
+}
+
+.easter .button, .easter .circle {
+  background-color: #DAA520;
+  color: #606060;
+}
+
+.easter .ringring {
+  border-color: #DAA520;
+}
+
+.easter.button {
+  background-color: #DAA520;
+  color: #606060;
+}
+
+.pentecost {
+  color: #b30000;
+}
+
+.pentecost .button, .pentecost .circle {
+  background-color: #b30000;
+  color: #fff;
+}
+
+.pentecost .ringring {
+  border-color: #b30000;
+}
+
+.pentecost.button {
+  background-color: #b30000;
+  color: #fff;
 }
 /*# sourceMappingURL=seasons.css.map */

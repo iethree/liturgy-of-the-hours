@@ -91,13 +91,16 @@ $light: #fff;
 	}
 }
 .epiphany{
-	color: #bfbfbf;
+	color: $epiphany;
 	
 	.button, .circle{
-		background-color: $advent;
+		background-color: $epiphany;
 		color: $light;
 	}
 	.ringring{
-		border-color: $advent;
+		border-color: $epiphany;
 	}
+}
+.epiphany, .button {
+	background-color: $light;
 }

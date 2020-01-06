@@ -12,12 +12,9 @@ $(document).on('click', '.modal-background, .modal-content, .modal-close', funct
 
 $('.circles').on('click', function(e){
 	
-	
 	$('#explanation').html(	"<p>Pulsing circles represent those here now</p>"+
 							"<p>Static circles represent those here recently</p>");
 	$('.modal').toggleClass('is-active');
-	
-	
 });
 
 
@@ -64,9 +61,6 @@ function saveOffice(options){
 	
 	if(options.first){ //first visit of the day
 		localStorage.today = new Date(); //set date
-		//cache today's readings
-		// if('serviceWorker' in navigator)
-			// navigator.serviceWorker.controller.postMessage('cacheToday');
 	}
 	else if(localStorage.offices){
 		todayOffices = localStorage.offices.split(',');
@@ -95,14 +89,3 @@ function createCircles(counts){
 	}
 }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-	navigator.serviceWorker.register('/service-worker.js', {updateViaCache: 'none'}).then(function(registration) {
-	  // Registration was successful
-	  console.log('ServiceWorker registration successful with scope: ', registration.scope);
-	}, function(err) {
-	  // registration failed :(
-	  console.log('ServiceWorker registration failed: ', err);
-	});
-  });
-}

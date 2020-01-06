@@ -1,0 +1,38 @@
+//seasons.sass
+
+/*seasons*/
+$advent: #800080
+$christmas: #DAA520
+$easter: #DAA520
+$pentecost: #b30000
+$ordinary: #008000
+$lent: #800080
+$holyweek: #b30000
+$epiphany: #bfbfbf
+
+$dark: #606060
+$light: #fff
+
+@mixin season($name, $primary, $secondary)
+   .#{$name}
+      color: $primary
+      .button, .circle
+         background-color: $primary
+         color: $secondary
+      .ringring
+         border-color: $primary
+         
+   .#{$name}.button
+      background-color: $primary
+      color: $secondary
+   
+
+@include season('advent', $advent, $light)
+@include season('christmas', $christmas, $light)
+@include season('epiphany', $epiphany, $dark)
+@include season('ordinary', $ordinary, $light)
+@include season('holyweek', $holyweek, $light)
+@include season('lent', $lent, $light)
+@include season('easter', $easter, $dark)
+@include season('pentecost', $pentecost, $light)
+
