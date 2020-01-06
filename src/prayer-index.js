@@ -29,11 +29,13 @@ router.get('/cg', function(req, res, next) {
 
 
 router.get('/', async (req, res, next) => {
-
-  res.render('daily-index', {
-	title: 'Liturgy of the Hours',
-	date: time.format.short(),
-	season: await lectionary.getLectionary().season
+	let lect = await lectionary.getLectionary();
+	if(!lect) lect.season = "ordinary";
+	
+   res.render('daily-index', {
+		title: 'Liturgy of the Hours',
+		date: time.format.short(),
+		season: lect.season.toLowerCase()
 	});
 });
 

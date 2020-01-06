@@ -2,87 +2,104 @@
 .advent {
   color: #800080;
 }
-.advent.button, .circles.advent .circle {
+
+.advent .button, .advent .circle {
   background-color: #800080;
   color: #fff;
 }
-.circles.advent .ringring {
+
+.advent .ringring {
   border-color: #800080;
 }
 
 .christmas {
   color: #DAA520;
 }
-.christmas.button, .circles.christmas .circle {
+
+.christmas .button, .christmas .circle {
   background-color: #DAA520;
   color: #606060;
 }
-.christmas.ringring {
+
+.christmas .ringring {
   border-color: #DAA520;
 }
 
 .easter {
   color: #DAA520;
 }
-.easter.button, .circles.easter .circle {
+
+.easter .button, .easter .circle {
   background-color: #DAA520;
   color: #fff;
 }
-.circles.easter .ringring {
+
+.easter .ringring {
   border-color: #DAA520;
 }
 
 .pentecost {
   color: #b30000;
 }
-.pentecost.button, .circles.pentecost .circle {
+
+.pentecost .button, .pentecost .circle {
   background-color: #b30000;
   color: #fff;
 }
-.circles.pentecost .ringring {
+
+.pentecost .ringring {
   border-color: #b30000;
 }
 
 .ordinary {
   color: #008000;
 }
-.ordinary.button, .circles.ordinary .circle {
+
+.ordinary .button, .ordinary .circle {
   background-color: #008000;
   color: #fff;
 }
-.circles.ordinary .ringring {
+
+.ordinary .ringring {
   border-color: #008000;
 }
 
 .lent {
   color: #800080;
 }
-.lent.button, .circles.lent .circle {
+
+.lent .button, .lent .circle {
   background-color: #800080;
   color: #fff;
 }
-.circles.lent .ringring {
+
+.lent .ringring {
   border-color: #800080;
 }
 
 .holyweek {
   color: #b30000;
 }
-.holyweek.button, .circles.holyweek .circle {
+
+.holyweek .button, .holyweek .circle {
   background-color: #b30000;
   color: #fff;
 }
-.circles.holyweek .ringring {
+
+.holyweek .ringring {
   border-color: #b30000;
 }
 
-.epiphany, .ascension {
+.epiphany {
   color: #bfbfbf;
 }
-.epiphany.button, .circles.epiphany .circle, .ascension.button, .circles.ascension .circle {
-  background-color: #bfbfbf;
-  color: #000;
+
+.epiphany .button, .epiphany .circle {
+  background-color: #800080;
+  color: #fff;
 }
-.circles.epiphany .ringring, .circles.ascension .ringring {
-  border-color: #bfbfbf;
+
+.epiphany .ringring {
+  border-color: #800080;
 }
+/*# sourceMappingURL=seasons.css.map */
