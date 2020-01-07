@@ -28,6 +28,8 @@ router.get('/cg', function(req, res, next) {
  });
 
 
+/** hour routes */
+
 router.get('/', async (req, res, next) => {
 	let lect = await lectionary.getLectionary();
 	if(!lect) lect.season = "ordinary";

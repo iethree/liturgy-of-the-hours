@@ -1,6 +1,6 @@
 const time = require('./time.js');
 const log = require('logchalk');
-const rcl = require('../../daily-office');
+const rcl = require('daily-office-lectionary');
 const parts = require('./parts.js');
 const calendar = require('../data/calendar.js');
 
