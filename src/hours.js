@@ -10,10 +10,18 @@ module.exports = {getHour};
 const partQueries = {
 
 	lauds: function(lectionary){ //praise
+		let ps;
+		if(lectionary.psalms.morning)
+			ps="Psalm "+lectionary.psalms.morning[0];
+		else{
+			log.warn("no morning psalm for "+lectionary.shortWeek+" "+lectionary.date);
+			ps = "Psalm 1";
+		}
+
 		return [
 			{part: 'intro', times: 'morning' },
-			{part: 'bible', passage: "Psalm "+(lectionary.psalms.morning ? lectionary.psalms.morning[0] : 1)},
-			{part: 'prayer', themes: {$nin:['end', 'petition']}, times: {$nin:['evening', 'night']}},
+			{part: 'bible', passage: ps},
+			{part: 'prayer', themes: {$nin:['end']}, times: {$nin:['evening', 'night']}},
 			{part: 'prayer', themes: 'end', times: {$nin:['evening', 'night']}},
 		];
 	},
@@ -22,7 +30,7 @@ const partQueries = {
 		return [
 			{part: 'preface', season: { $in: [lectionary.season, 'any'] } },
 			{part: 'canticle'},
-			{part:'prayer', themes: 'petition'},
+			{part: {$in:['prayer','collect']}, themes: 'petition'},
 			{title: /lord's prayer/i},
 			{themes: 'end', times: {$nin:['evening', 'night']}},
 		];
@@ -47,10 +55,18 @@ const partQueries = {
 	},
 
 	vespers: function(lectionary){ //thanksgiving
+		let ps;
+		if(lectionary.psalms.evening){
+			ps = "Psalm "+lectionary.psalms.evening[0];
+		}
+		else{
+			log.warn(`no evening psalm for ${lectionary.shortweek} ${lectionary.date}`)
+			ps = "Psalm 100";
+		}
 		return [
 			{part: 'intro', times: 'evening' },
-			{part: 'bible', passage: "Psalm "+(lectionary.psalms.evening ? lectionary.psalms.evening[0] : 100) },
-			{part: 'collect', themes: {$nin:['daily', 'saint']}},
+			{part: 'bible', passage: ps},
+			{part: {$in:['prayer','collect']}, themes: {$nin:['daily', 'saint']}},
 			{part: 'prayer', title: /general thanksgiving/i},
 			{themes: 'end', times: {$nin:['morning']}},
 		];

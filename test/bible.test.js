@@ -1,5 +1,5 @@
-const bible = require ('./bible.js');
-const log   = require('./log.js');
+const bible = require ('../src/bible.js');
+const log   = require('logchalk');
 
 test();
 

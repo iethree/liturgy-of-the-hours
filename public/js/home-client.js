@@ -1,6 +1,8 @@
 
-//check views today
+makeButtons();
+highlight();
 
+//check views today
 function loadVisitedToday(){
 	
 	if (localStorage.today && localStorage.offices){ //if viewed data is there
@@ -9,19 +11,14 @@ function loadVisitedToday(){
 			todayOffices = localStorage.offices.split(',');
 			
 			for(cnt=0;cnt<todayOffices.length;cnt++){
-				
 				var check = '<i class="fa fa-check done-check"></i>';
-				
 				$("a:contains("+todayOffices[cnt]+")").append(check);
 			}
 		} 
 	}
 }
 
-//modal handler 
-$(document).on('click', '.modal-background, .modal-content, .modal-close', function(e){
-	$('.modal').toggleClass('is-active');	
-});
+
 
 //make buttons
 function makeButtons(){
@@ -40,13 +37,12 @@ function makeButtons(){
 	
 	loadVisitedToday();
 }
-makeButtons();
-highlight();
+
 function makeButton(title, date){
 	
-	return "<a id='"+title+"' href = '/hour/"+title+"/"+date+"' class='button is-block'>"+title+"</a><br>"
-	
+	return `<a id='${title}' href = '/hour/${title}/${date}' class='button is-block'>${title}</a><br>`
 }
+
 //highlight button with correct time
 function highlight(){
 	var season = $("#buttonList").attr('season');
@@ -57,7 +53,6 @@ function highlight(){
 
 function findNow(){
 	var hour = dateFns.format(new Date, 'H');
-	console.log("hour", hour);
 
 	if(hour >= 4 && hour < 8)
 		return "Lauds";
@@ -74,6 +69,11 @@ function findNow(){
 	else
 		return "Matins";
 }
+
+//modal handler 
+$(document).on('click', '.modal-background, .modal-content, .modal-close', function(e){
+	$('.modal').toggleClass('is-active');	
+});
 
 $("#about").click(function(e){
 	

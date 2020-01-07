@@ -61,7 +61,6 @@ async function getRandomPart(query, seed){
 	var theone = getOneFrom(results, seed);
 
 	if(theone && theone.text){
-		log.success("part found: "+theone.part);
 		return Promise.resolve({
 			id: theone._id,
 			part: theone.part,

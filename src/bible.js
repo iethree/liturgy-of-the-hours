@@ -1,5 +1,4 @@
 //bible.js
-require('dotenv').config();
 var request = require('request');
 var nedb = require('nedb');
 var db = new nedb({filename: '../data/passages.db', autoload: true});
