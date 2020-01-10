@@ -107,11 +107,9 @@ const partQueries = {
 	},
 
 	morning: function(lectionary){ 
-		let dom = /(\d+)/.exec(lectionary.date)[1];
-		if(!dom) dom = 1;
 
 		return [
-			{part: 'bible', passage: getPsalm('morning', dom)},
+			{part: 'bible', passage: getPsalm('morning', lectionary.date)},
 			{part: 'prayer',  $or: [
 				{times: {$in:['morning', 'any']} },
 				{themes:{$in:['petition'] }}
@@ -120,21 +118,17 @@ const partQueries = {
 	},
 
 	midday: function(lectionary){ 
-		let dom = /(\d+)/.exec(lectionary.date)[1];
-		if(!dom) dom = 1;
 
 		return [
-			{part: 'bible', passage: getPsalm('ascent', dom)},
+			{part: 'bible', passage: getPsalm('ascent', lectionary.date)},
 			{part: 'collect', title: time.getWeek(date)},
 		];
 	},
 
 	evening: function(lectionary){
-		let dom = /(\d+)/.exec(lectionary.date)[1];
-		if(!dom) dom = 1;
 
 		return [
-			{part: 'bible', passage: getPsalm('evening', dom)},
+			{part: 'bible', passage: getPsalm('evening', lectionary.date)},
 			{part: 'prayer',  $or: [
 				{times: {$in:['evening', 'night']} },
 				{themes:{$in:['thanks', 'praise', 'hope', 'rest'] }}
@@ -172,11 +166,14 @@ async function getHour(hour, date){
 		title: today.shortWeek,
 		season: today.season.toLowerCase(),
 		date: today.date,
+		numericalDate: today.numericalDate,
 		parts: hourParts
 	});
 }
 
-function getPsalm(type, dom){
+function getPsalm(type, date){
+	let dom = /(\d+)/.exec(date)[1];
+	if(!dom) dom = 1;
 	
 	var psalms = {
 
@@ -213,7 +210,7 @@ function getPsalm(type, dom){
 	if(psalms[type] && psalms[type][index])
 		return "psalm"+psalms[type][index];
 	else
-		return "psalm1";
+		throw new Error("cannot find psalm for "+date)
 }
 
 function flatten(lessons, psalms){

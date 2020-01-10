@@ -26,6 +26,7 @@ async function getLectionary(date){
 
    todaysLectionary.shortWeek = shortWeek;
    todaysLectionary.date = time.format.short(date);
+   todaysLectionary.numericalDate = time.format.numerical(date);
 
    if(!todaysLectionary.week)
       todaysLectionary.week = longWeek;

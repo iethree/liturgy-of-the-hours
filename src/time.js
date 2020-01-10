@@ -25,7 +25,7 @@ var format = {
    },
    object: date=>getDateObject(date)
 };
-module.exports = {format, subDay, isBetween};
+module.exports = {format, subDay, addDay, isBetween};
 
 /**
  * returns YYYYMMDD formatted date 1 day earlier
@@ -34,6 +34,15 @@ module.exports = {format, subDay, isBetween};
 function subDay(date){
 	date = getDateObject(date);
 	date = datefns.subDays(date, 1);
+	return format.numerical(date);
+}
+/**
+ * returns YYYYMMDD formatted date 1 day later
+ * @param {string|Object} date 
+ */
+function addDay(date){
+	date = getDateObject(date);
+	date = datefns.addDays(date, 1);
 	return format.numerical(date);
 }
 

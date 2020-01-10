@@ -1,0 +1,85 @@
+---
+pagination:
+   data: hours
+   size: 1
+permalink: "/{{ pagination.items[0].hour | lower }}/{{ pagination.items[0].numericalDate }}/index.html"
+---
+{% set hr = pagination.items[0] %}
+{% set title %} 
+   {{ hr.hour | capitalize }} | {{ hr.title | capitalize }} | {{ hr.date }}
+{% endset %}
+<html>
+<head>
+   <title>{{ title }}</title>
+   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="mobile-web-app-capable" content="yes">
+   <meta name="application-name" content="{{ title }}">
+   <meta name="theme-color" content="#fff">
+   <meta name="description" content="Daily 3-5 minute prayers, new every day">
+   <meta name="twitter:card" content="summary">
+   <meta name="twitter:title" content="{{ title }}">
+   <meta name="twitter:image" content="https://prayer.infopanel.org/images/favicon.png">
+   <meta name="twitter:description" content="Daily 3-5 minute prayers, new every day">
+   <meta name="og:url" content="https://prayer.infopanel.org">
+   <meta name="og:type" content="website">
+   <meta name="og:description" content="Daily 3-5 minute prayers, new every day"><meta name="og:title" content="Epiphany">
+   <meta name="og:image" content="https://prayer.infopanel.org/images/favicon.png">
+   <meta name="og:image:height" content="256">
+   <meta name="og:image:width" content="256">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-title" content="{{ title }}">
+   
+   <link rel="manifest" href="/js/manifest.json">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css">
+   <link rel="stylesheet" href="/stylesheets/daily.css">
+   <link rel="stylesheet" href="/stylesheets/seasons.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+</head>
+<body>
+   <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+         <div id="explanation" class="box"></div>
+      </div>
+      <button class="modal-close"></button>
+   </div>
+   <div class="circles {{hr.season | lower }}"></div>
+   <div class="container padded">
+      <div class="columns is-centered">
+         <div class="column is-narrow">
+            <div class="has-text-centered">
+               <div id="heading" office= "{{ hr.hour | capitalize }}">
+                  <a href="/">
+                     <h2 class="{{ hr.season | lower }}">{{ hr.title }} | {{hr.date}}</h2>
+                  </a>
+                  <h3>{{ hr.hour | capitalize }}</h3>
+                  <br>
+               </div>
+               <div id="content">
+                  {% for part in hr.parts %}
+                     <div class="officetext has-text-left" dataID="{{part.id}}">
+                        {% if part.title %}
+                           <h3 class="has-text-left {{hr.season | lower }}">
+                              {{ part.title }}
+                           </h3>
+                        {% endif %}
+                        {{ part.text | safe }}
+                     </div>
+                     <hr>
+                  {% else %}
+                     Error: No Parts Found
+                  {% endfor %}
+                  <a href="/" class="{{ hr.season | lower }}">home</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <script src="/js/jquery.min.js"></script>
+   <script src="/js/date-fns.min.js"></script>
+   <script src="/js/hour-client.js"></script>
+
+</body>
+</html>

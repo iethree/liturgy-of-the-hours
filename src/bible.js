@@ -1,4 +1,5 @@
 //bible.js
+require('dotenv').config();
 var request = require('request');
 var nedb = require('nedb');
 var db = new nedb({filename: '../data/passages.db', autoload: true});
@@ -10,18 +11,21 @@ async function get(query){
 	return new Promise(async(resolve, reject)=>{
 		let result = await getPassage(query).catch(log.warn);
 
-		if(result) //if it's in the db, send it back
+		if(result){ //if it's in the db, send it back
 			resolve(result);
-		else{ //check the ESV
-			result = await getESV(query).catch(log.err);
+			return;
+		} 
+			
+		//check the ESV
+		result = await getESV(query).catch(log.err);
 
-			if(result){ //if found from ESV, save to db, and resulove
-				resolve(result);
-				updateDB(query, result);
-			}
-			else
-				resolve({title: "Bible", text: "no results for: "+query, next:"/", prev: "/"});
+		if(result){ //if found from ESV, save to db, and resulove
+			resolve(result);
+			updateDB(query, result);
+			return;
 		}
+
+		reject(false);
 	});
 }
 

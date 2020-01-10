@@ -1,23 +1,28 @@
+require('dotenv').config();
 const hours = require('../src/hours.js');
 const log = require('logchalk');
 const time = require('../src/time.js');
+const fs = require('fs');
 
 async function testHour(hour, date){
    return 
    log.info(result);
 }
 
-testHours('20200108', 7)
+testHours('20200115', 7)
 
 async function testHours(date, num){
    var failures = 0;
    const hrs = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins"];
+   output = [];
 
    for (let i=0; i<num; i++){
       for(let h of hrs){
          let result = await hours.getHour(h, date).catch(log.err);
          if(!result) failures++;
          else if(!checkHour(result, date)) failures++;
+         else
+            output.push(result);
       }
       
       date = time.subDay(date);
@@ -26,6 +31,11 @@ async function testHours(date, num){
       log.err('failures: '+failures);
    else
       log.success('no failures :-)');
+
+   const filename = './hours.json'
+   fs.writeFile(filename, JSON.stringify(output), (err)=>{
+      if(!err) log.success(`${output.length} offices written to ${filename}`);
+   });
 }
 
 
