@@ -5,7 +5,6 @@ var nedb = require('nedb');
 var logger = new nedb({filename: 'data/users.log', autoload: true});
 
 exports.getCount = async function(id, page){
-	console.log(id, page);
 	return new Promise((resolve, reject)=>{
 		logger.update({user: id} , {$set: {user: id, page: page, date: new Date().toISOString()}, $inc: {visits: 1}}, {upsert: true}, async (err, result)=>{
 			let now = await getRecent(5);

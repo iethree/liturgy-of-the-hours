@@ -1,12 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const log = require('logchalk');
 
-var bible = require('./bible.js');
-var parts = require('./parts.js');
-var hours = require('./hours.js');
-var count = require('./count.js');
-const log = require('./log.js');
-var time = require('./time');
+const parts = require('./parts.js');
+const hours = require('./hours.js');
+const count = require('./count.js');
+const lectionary = require('./lectionary.js');
+
+const time = require('./time');
 
 /** CG routes */
 
@@ -27,12 +28,16 @@ router.get('/cg', function(req, res, next) {
  });
 
 
-router.get('/', function(req, res, next) {
+/** hour routes */
 
-  res.render('daily-index', {
-	title: 'Liturgy of the Hours',
-	date: time.format.short(),
-	season: time.getSeason()
+router.get('/', async (req, res, next) => {
+	let lect = await lectionary.getLectionary();
+	if(!lect) lect.season = "ordinary";
+	
+   res.render('daily-index', {
+		title: 'Liturgy of the Hours',
+		date: time.format.short(),
+		season: lect.season.toLowerCase()
 	});
 });
 
@@ -48,16 +53,6 @@ router.get('/lectionary/:date?', async(req, res, next)=> {
 	let date = time.format.numerical(req.params.date);
 	let results = await hours.getHour('lectionary', date).catch(log.err);
 	res.render('lectionary', results);
-});
-
-router.get('/bible/:query?', async (req, res, next) =>{
-
-	if(!req.params.query)
-		res.render('bible',{title: "Bible", text:""});
-	else{
-		let results = await bible.get(req.params.query).catch(log.err).catch(log.err);
-		res.render('bible', response);
-	}
 });
 
 router.post('/count', async (req, res, next)=>{

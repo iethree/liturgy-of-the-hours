@@ -4,7 +4,9 @@
   "description": "This a a digital liturgy of the hours. It is an attempt to help us mine the vast resources of prayers in the book of common prayer and elsewhere, and practice the patterns of prayer that Christians have practiced for millenia in a format that accounts for our habit of checking our phones too often.",
   "main": "src/prayer-app.js",
   "dependencies": {
+    "@11ty/eleventy": "^0.10.0",
     "chalk": "^2.4.1",
+    "daily-office-lectionary": "^0.9.0",
     "date-fns": "^2.0.1",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
@@ -12,6 +14,7 @@
     "jest": "^24.9.0",
     "load-json-file": "^6.0.0",
     "lodash": "^4.17.15",
+    "logchalk": "^1.0.1",
     "markdown-it": "^8.4.2",
     "morgan": "^1.9.1",
     "nedb": "^1.8.0",
@@ -23,6 +26,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "node src/prayer-app.js",
+    "build-static": "node ./static/generate-hours.js 60 && npx @11ty/eleventy --output=./public/hour --input=./static ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

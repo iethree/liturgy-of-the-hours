@@ -9,7 +9,6 @@ const lowerURLs = require('./lowerURLs.js');
 
 const dailyapp = express();
 const dailyindex = require('./prayer-index.js');
-
 const PORT = 3001;
 
 dailyapp.use(logger('dev'));

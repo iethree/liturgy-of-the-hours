@@ -2,87 +2,144 @@
 .advent {
   color: #800080;
 }
-.advent.button, .circles.advent .circle {
+
+.advent .button, .advent .circle {
   background-color: #800080;
   color: #fff;
 }
-.circles.advent .ringring {
+
+.advent .ringring {
   border-color: #800080;
+}
+
+.advent.button {
+  background-color: #800080;
+  color: #fff;
 }
 
 .christmas {
   color: #DAA520;
 }
-.christmas.button, .circles.christmas .circle {
+
+.christmas .button, .christmas .circle {
   background-color: #DAA520;
+  color: #fff;
+}
+
+.christmas .ringring {
+  border-color: #DAA520;
+}
+
+.christmas.button {
+  background-color: #DAA520;
+  color: #fff;
+}
+
+.epiphany {
+  color: #bfbfbf;
+}
+
+.epiphany .button, .epiphany .circle {
+  background-color: #bfbfbf;
   color: #606060;
 }
-.christmas.ringring {
-  border-color: #DAA520;
+
+.epiphany .ringring {
+  border-color: #bfbfbf;
 }
 
-.easter {
-  color: #DAA520;
-}
-.easter.button, .circles.easter .circle {
-  background-color: #DAA520;
-  color: #fff;
-}
-.circles.easter .ringring {
-  border-color: #DAA520;
-}
-
-.pentecost {
-  color: #b30000;
-}
-.pentecost.button, .circles.pentecost .circle {
-  background-color: #b30000;
-  color: #fff;
-}
-.circles.pentecost .ringring {
-  border-color: #b30000;
+.epiphany.button {
+  background-color: #bfbfbf;
+  color: #606060;
 }
 
 .ordinary {
   color: #008000;
 }
-.ordinary.button, .circles.ordinary .circle {
+
+.ordinary .button, .ordinary .circle {
   background-color: #008000;
   color: #fff;
 }
-.circles.ordinary .ringring {
+
+.ordinary .ringring {
   border-color: #008000;
 }
 
-.lent {
-  color: #800080;
-}
-.lent.button, .circles.lent .circle {
-  background-color: #800080;
+.ordinary.button {
+  background-color: #008000;
   color: #fff;
-}
-.circles.lent .ringring {
-  border-color: #800080;
 }
 
 .holyweek {
   color: #b30000;
 }
-.holyweek.button, .circles.holyweek .circle {
+
+.holyweek .button, .holyweek .circle {
   background-color: #b30000;
   color: #fff;
 }
-.circles.holyweek .ringring {
+
+.holyweek .ringring {
   border-color: #b30000;
 }
 
-.epiphany, .ascension {
-  color: #bfbfbf;
+.holyweek.button {
+  background-color: #b30000;
+  color: #fff;
 }
-.epiphany.button, .circles.epiphany .circle, .ascension.button, .circles.ascension .circle {
-  background-color: #bfbfbf;
-  color: #000;
+
+.lent {
+  color: #800080;
 }
-.circles.epiphany .ringring, .circles.ascension .ringring {
-  border-color: #bfbfbf;
+
+.lent .button, .lent .circle {
+  background-color: #800080;
+  color: #fff;
 }
+
+.lent .ringring {
+  border-color: #800080;
+}
+
+.lent.button {
+  background-color: #800080;
+  color: #fff;
+}
+
+.easter {
+  color: #DAA520;
+}
+
+.easter .button, .easter .circle {
+  background-color: #DAA520;
+  color: #606060;
+}
+
+.easter .ringring {
+  border-color: #DAA520;
+}
+
+.easter.button {
+  background-color: #DAA520;
+  color: #606060;
+}
+
+.pentecost {
+  color: #b30000;
+}
+
+.pentecost .button, .pentecost .circle {
+  background-color: #b30000;
+  color: #fff;
+}
+
+.pentecost .ringring {
+  border-color: #b30000;
+}
+
+.pentecost.button {
+  background-color: #b30000;
+  color: #fff;
+}
+/*# sourceMappingURL=seasons.css.map */
