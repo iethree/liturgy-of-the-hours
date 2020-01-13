@@ -32,6 +32,8 @@ async function getLectionary(date){
       todaysLectionary.week = longWeek;
    if(todaysLectionary.season==="The Season after Pentecost")
       todaysLectionary.season="Ordinary Time";
+   if(todaysLectionary.shortWeek==="Holy Week")
+      todaysLectionary.season="Holy Week";
    else if(!todaysLectionary.season)
       todaysLectionary.season=getSeason(shortWeek);
    
@@ -96,6 +98,8 @@ function getSeason(week){
       return match[1];
    if(/proper/i.exec(week))
       return "Ordinary Time";
+   if(/holy week/i)
+      return "Holy Week";
    else
       return null;
 }

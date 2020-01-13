@@ -1,4 +1,3 @@
-require('dotenv').config();
 const hours = require('../src/hours.js');
 const log = require('logchalk');
 const time = require('../src/time.js');
@@ -9,7 +8,7 @@ async function testHour(hour, date){
    log.info(result);
 }
 
-testHours('20200115', 7)
+testHours('20200113', 60)
 
 async function testHours(date, num){
    var failures = 0;

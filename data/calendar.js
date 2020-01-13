@@ -92,5 +92,8 @@
 	"20210321": "Lent 5",
 	"20210328": "Holy Week", //palm sunday
 	"20210404": "Easter Week",
+	"20210411": "Easter 2",
+	"20210418": "Easter 3",
+	"20220417": "Easter Week"
 };
 

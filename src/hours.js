@@ -164,7 +164,7 @@ async function getHour(hour, date){
 	return Promise.resolve({
 		hour: hour.charAt(0).toUpperCase() + hour.substr(1),
 		title: today.shortWeek,
-		season: today.season.toLowerCase(),
+		season: today.season.toLowerCase().replace(/\s/,''),
 		date: today.date,
 		numericalDate: today.numericalDate,
 		parts: hourParts

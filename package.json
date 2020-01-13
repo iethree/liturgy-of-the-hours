@@ -26,7 +26,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "node src/prayer-app.js",
-    "build-static": "node ./static/generate-hours.js 3 && npx @11ty/eleventy --output=./public/hour --input=./static ",
+    "build-static": "node ./static/generate-hours.js 60 && npx @11ty/eleventy --output=./public/hour --input=./static ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

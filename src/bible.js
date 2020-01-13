@@ -39,9 +39,7 @@ async function getPassage(query){
 
 				resolve({
 					title: result.title,
-					text: result.text,
-					next: result.next,
-					prev: result.prev
+					text: result.text
 				});
 			}
 			else //if can't find in DB
@@ -65,8 +63,6 @@ function updateDB(query, passage){
 			db.insert({
 				title: passage.title,
 				text: passage.text,
-				next: passage.next,
-				prev: passage.prev,
 				queries: [passage.title, query],
 				views: 1
 			},
@@ -113,9 +109,7 @@ async function getESV(query, options){
 			else{
 				resolve({
 					title: body.canonical,
-					text: body.passages.join(' '),
-					next: body.passage_meta[0].next_chapter.join('-'),
-					prev: body.passage_meta[0].prev_chapter.join('-'),
+					text: body.passages.join(' ')
 				});
 			}
 		});
