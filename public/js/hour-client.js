@@ -1,4 +1,8 @@
 //hour-client.js
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('/service-worker.js');
+}
+
 hereNow();
 var id;
 
@@ -47,10 +51,9 @@ function hereNow(){
 		type: 'POST',
 		data: {'id': id, 'page': window.location.pathname},
 		encode: true,
-		error: function(){console.log("Error: Something went wrong");}
+		error: function(){console.log("Could not get presence counts from remote server");}
 	})
 	.done(function(results){
-		
 		createCircles(results);
 	});
 }

@@ -1,3 +1,72 @@
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('/service-worker.js');
+}
+
+
+//cache logic
+const DAYS = 14; // days of offices to keep cached
+const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins"];
+
+caches.open('hour-cache').then((cache) =>{
+	cache.keys().then( k=> {
+		let deleteKeys = getOldKeys(k);
+
+		//figure out if the cache is too small and we need extra days
+		let additionalDays = DAYS - (k.length / OFFICES.length);
+
+		if(deleteKeys.length+additionalDays===0) {//if nothing needs to be cleared/cached, exit
+			console.log('cache up to date')
+			return;
+		}
+
+		let newKeys = generateNewKeys(deleteKeys.length/OFFICES.length + additionalDays); 
+
+		console.log(`Deleting ${deleteKeys.length/OFFICES.length} days of offices `)
+		console.log(`Adding ${newKeys.length/OFFICES.length} days of offices `)
+		
+		for (d of deleteKeys) //delete the old keys
+			cache.delete(d);
+		
+		cache.addAll(newKeys); //add the new ones
+	});
+});
+
+/**
+ * returns array of request objects from prior days
+ * @param {Object} keys array of Request objects
+ */
+function getOldKeys(keys){
+	var oldKeys = [];
+	var today = String(dateFns.format(new Date(), 'YYYYMMDD'));
+	
+	for (let k of keys){
+		let date =  /\d{8}/.exec(k.url);
+		if (!today)// if there's no regex match
+			continue;
+		date = date[0]; //just get the date
+		if(date<today)
+			oldKeys.push(k);
+	}
+	return oldKeys;
+}
+
+/**
+ * generate the number of days of offices in the future that we need to delete in the past
+ * @param {Object} keys array of request objects
+ * @param {number} num integer number of days to generate
+ */
+function generateNewKeys(num){
+	let newKeys = [];
+	let startDate = dateFns.addDays(new Date(), DAYS - num);
+
+	for (let d=0; d<num; d++){ //for each day
+		let date = dateFns.format(dateFns.addDays(startDate, d), 'YYYYMMDD');
+		
+		for (let o of OFFICES)// for each office
+			newKeys.push(`/hour/${o}/${date}/`);
+	}
+	return newKeys;
+}
 
 makeButtons();
 highlight();
@@ -17,8 +86,6 @@ function loadVisitedToday(){
 		} 
 	}
 }
-
-
 
 //make buttons
 function makeButtons(){
@@ -40,7 +107,7 @@ function makeButtons(){
 
 function makeButton(title, date){
 	
-	return `<a id='${title}' href = '/hour/${title}/${date}' class='button is-block'>${title}</a><br>`
+	return `<a id='${title}' href = '/hour/${title}/${date}/' class='button is-block'>${title}</a><br>`
 }
 
 //highlight button with correct time
