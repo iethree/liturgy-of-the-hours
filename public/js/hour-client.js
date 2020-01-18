@@ -16,8 +16,10 @@ $(document).on('click', '.modal-background, .modal-content, .modal-close', funct
 
 $('.circles').on('click', function(e){
 	
-	$('#explanation').html(	"<p>Pulsing circles represent those here now</p>"+
-							"<p>Static circles represent those here recently</p>");
+	$('#explanation').html(	
+		"<p>Pulsing circles represent those here now</p>"+
+		"<p>Static circles represent those here recently</p>"
+	);
 	$('.modal').toggleClass('is-active');
 });
 

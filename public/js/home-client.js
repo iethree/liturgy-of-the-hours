@@ -9,15 +9,18 @@ const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matin
 
 caches.open('hour-cache').then((cache) =>{
 	cache.keys().then( k=> {
+		showCacheStatus(k.length/OFFICES.length/DAYS*100);
 		let deleteKeys = getOldKeys(k);
 
 		//figure out if the cache is too small and we need extra days
 		let additionalDays = DAYS - (k.length / OFFICES.length);
 
+
 		if(deleteKeys.length+additionalDays===0) {//if nothing needs to be cleared/cached, exit
 			console.log('cache up to date')
 			return;
 		}
+		showCacheStatus( (k.length-deleteKeys.length)/OFFICES.length/DAYS*100);
 
 		let newKeys = generateNewKeys(deleteKeys.length/OFFICES.length + additionalDays); 
 
@@ -30,6 +33,15 @@ caches.open('hour-cache').then((cache) =>{
 		cache.addAll(newKeys); //add the new ones
 	});
 });
+
+function showCacheStatus(percent){
+	percent = Math.round(percent)
+	console.log('cache status:'+percent)
+	let loaded = Math.round(percent/100*DAYS)
+	$("#cache-status").html(`
+		<progress class="progress" value=${percent} max="100" title="${loaded} of ${DAYS} days downloaded"></progress>
+	`)
+}
 
 /**
  * returns array of request objects from prior days
