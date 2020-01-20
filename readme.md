@@ -31,6 +31,7 @@ For the most part, text is markdown formatted, but I've made some special custom
 ```
 
 ## To Do
+
 * multiple time zone support, right now anyone more than an hour off of CST is SOL.
 * implement localized/occasional prayers/of the people
 * animations?
