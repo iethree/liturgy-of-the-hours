@@ -17,7 +17,7 @@ var resourceList = [
 	'/js/bible-client.js',
 	'/js/hour-client.js',
 	
-	'images/favicon.png',
+	'/images/favicon.png',
 	
 	'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js',
 	'/js/date-fns.min.js',
