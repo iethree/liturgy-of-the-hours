@@ -1,13 +1,6 @@
 
 extends daily-head
 
-mixin linkbutton(name)
-	if (time == name)
-		a(href='./hour/#{name}' class='button  is-block #{season}') #{name}
-	else
-		a(href='./hour/#{name}').button.is-block #{name} 
-	br
-
 block content
 	div.modal
 		div.modal-background
@@ -18,16 +11,17 @@ block content
 	div.container.padded
 		div.columns.is-centered.is-mobile
 			div.column.is-narrow.has-text-centered
-				a.button.is-small.right-button#about
-					i.fa.fa-question
-				
 				h1(class="#{season}") Liturgy of the Hours
 				h3#date
 		div.columns.is-centered.is-mobile
+			div.column.is-10-mobile.is-4-tablet.is-4-desktop#cache-status(class="#{season}")
+				progress.progress( value="0" max="100" )
+		div.columns.is-centered.is-mobile
 			div.column.is-10-mobile.is-4-tablet.is-4-desktop(season = '#{season}')#buttonList
 		div.columns.is-centered.is-mobile
-			div.column.is-10-mobile.is-4-tablet.is-4-desktop#cache-status
-				progress.progress( value="0" max="100" )
+			a#about(class="#{season}") about
+			br
+			br
 
 				
 block scripts

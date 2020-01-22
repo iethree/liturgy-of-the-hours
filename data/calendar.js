@@ -1,4 +1,6 @@
-﻿module.exports = {
+﻿// http://www.trinitysolebury.org/churchyear
+
+module.exports = {
 	"20190901": "Proper 17",
 	"20190908": "Proper 18",
 	"20190915": "Proper 19",

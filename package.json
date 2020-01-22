@@ -1,6 +1,6 @@
 {
   "name": "liturgy-of-the-hours",
-  "version": "0.3.0",
+  "version": "0.9.0",
   "description": "This a a digital liturgy of the hours. It is an attempt to help us mine the vast resources of prayers in the book of common prayer and elsewhere, and practice the patterns of prayer that Christians have practiced for millenia in a format that accounts for our habit of checking our phones too often.",
   "main": "src/prayer-app.js",
   "dependencies": {
