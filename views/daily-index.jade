@@ -19,12 +19,11 @@ block content
 		div.columns.is-centered.is-mobile
 			div.column.is-10-mobile.is-4-tablet.is-4-desktop(season = '#{season}')#buttonList
 		div.columns.is-centered.is-mobile
-			a#about(class="#{season}") about
+			a#about(class="#{season}" onclick='showExplanation()') about
 			br
 			br
 
 				
 block scripts
-	script(src='/js/jquery.min.js')
 	script(src='/js/date-fns.min.js')
 	script(src='/js/home-client.js')
