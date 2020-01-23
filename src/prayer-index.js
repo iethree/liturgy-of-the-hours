@@ -56,7 +56,6 @@ router.get('/lectionary/:date?', async(req, res, next)=> {
 });
 
 router.post('/count', async (req, res, next)=>{
-	
 	var cnt = await count.getCount(req.body.id, req.body.page).catch(log.err);
 	log.info('count', cnt);
 	res.status(200).send(cnt);

@@ -4,31 +4,19 @@ if ('serviceWorker' in navigator) {
 }
 
 hereNow();
-var id;
 
-allparts = $('.officetext');
-
-$(document).on('click', '.modal-background, .modal-content, .modal-close', function(e){
-	
-	$('.modal').toggleClass('is-active');
-	
+['.modal-background', '.modal-close'].forEach((i)=>{
+	document.querySelector(i).addEventListener('click', toggleModal);	
 });
 
-$('.circles').on('click', function(e){
-	
-	$('#explanation').html(	
-		"<p>Pulsing circles represent those here now</p>"+
-		"<p>Static circles represent those here recently</p>"
-	);
-	$('.modal').toggleClass('is-active');
-});
-
+function toggleModal(){
+	document.querySelector('.modal').classList.toggle('is-active');
+}
 
 function hereNow(){
 	
 	//log individual office visit locally
 	if (localStorage.today){
-		
 		if(dateFns.isToday(localStorage.today)) //if the saved day is today, it's  not the first of the day
 			saveOffice({first: false});
 		else
@@ -37,6 +25,7 @@ function hereNow(){
 	else
 		saveOffice({first: true});
 	
+	var id;
 	//check if a user ID has been assigned
 	if (localStorage.id)
 		id = localStorage.id;
@@ -47,17 +36,17 @@ function hereNow(){
 	}
 	
 	//check in to this office and get number of 'active' users
-	
-	$.ajax({
-		url: '/count',
-		type: 'POST',
-		data: {'id': id, 'page': window.location.pathname},
-		encode: true,
-		error: function(){console.log("Could not get presence counts from remote server");}
+	fetch('/count',{
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({'id': id, 'page': window.location.pathname}),
 	})
-	.done(function(results){
-		createCircles(results);
-	});
+	.then(r=>r.json())
+	.then(r=>{
+		console.log(r)
+		createCircles(r);
+	})
+	.catch(console.log);
 }
 
 function saveOffice(options){
@@ -71,9 +60,9 @@ function saveOffice(options){
 		todayOffices = localStorage.offices.split(',');
 	}
 	
-	thisOffice = $("#heading").attr('office');
+	let thisOffice = document.getElementById("heading").getAttribute('office');
 	
-	if(todayOffices.indexOf(thisOffice)==-1){
+	if(!todayOffices.includes(thisOffice)){
 		todayOffices.push(thisOffice);
 		localStorage.offices = todayOffices;
 	} //if it isn't already stored, store it
@@ -81,16 +70,17 @@ function saveOffice(options){
 
 function createCircles(counts){
 	
-	var pulsing = '<div class="ring-container"><div class="circle"></div><div class="ringring"></div></div>';
-	var circle = '<div class="ring-container"><div class="circle"></div></div>';
+	let pulsing = '<div class="ring-container"><div class="circle"></div><div class="ringring"></div></div>';
+	let circle = '<div class="ring-container"><div class="circle"></div></div>';
 	
-	$('.circles').empty();
+	let circles = ''
 	
-	for(var cnt=0; cnt<counts.now; cnt++){
-		$('.circles').append(pulsing);
-	}
-	for(cnt=0; cnt<counts.recent; cnt++){
-		$('.circles').append(circle);
-	}
+	for(let cnt=0; cnt<counts.now; cnt++)
+		circles+=pulsing;
+	
+	for(let cnt=0; cnt<counts.recent; cnt++)
+		circles+=circle;
+	
+	document.querySelector('.circles').innerHTML = circles;
 }
 

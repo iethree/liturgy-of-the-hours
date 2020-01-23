@@ -160,6 +160,5 @@ function showExplanation(){
 }
 
 function toggleModal(){
-	console.log('fire')
 	document.querySelector('.modal').classList.toggle('is-active');
 }
