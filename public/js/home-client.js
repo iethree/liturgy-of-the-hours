@@ -147,12 +147,14 @@ function makeButtons(){
 
 	for(let o of offices[version])
 		buttons+=makeButton(o, today, visited.includes(o));
+	
+	//add random button at the end
+	buttons += `<a id='random' href = '/hour/random/' class='button'><i class='fa fa-random'></i> </a> <br>`;
 
 	document.getElementById('version').innerHTML = version==='lite'?'full':'lite';
 
 	document.getElementById("buttonList").innerHTML = buttons;
 	highlight(version);
-
 }
 
 function makeButton(title, date, checked){
