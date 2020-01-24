@@ -81,17 +81,21 @@ function generateNewKeys(num){
 
 makeButtons();
 
-function color(){
+function getColor(){
 	fetch('/season')
 	.then(r=>r.text())
-	.then(season=>{
-		season = season.toLowerCase();
-		document.querySelector('h1').classList.add(season); //title
-		document.querySelector('.active').classList.add(season); //active button
-		document.getElementById('cache-status').classList.add(season); //progress bar
-		document.getElementById('about').classList.add(season); //about button
-		document.getElementById('version').classList.add(season); //toggle button
+	.then(s=>{
+		drawColor(s);
+		localStorage.setItem('season', s);
 	});
+}
+function drawColor(season){
+	season = season.toLowerCase();
+	document.querySelector('h1').classList.add(season); //title
+	document.querySelector('.active').classList.add(season); //active button
+	document.getElementById('cache-status').classList.add(season); //progress bar
+	document.getElementById('about').classList.add(season); //about button
+	document.getElementById('version').classList.add(season); //toggle button
 }
 
 //check views today
@@ -119,7 +123,10 @@ function checkVersion(){
 	let queryString = window.location.search;
 	let urlParams = new URLSearchParams(queryString);
 	let v = urlParams.get('v');
-	if(v) setVersion(v);
+	if(v) {
+		setVersion(v);
+		window.history.pushState("object or string", "Liturgy of the Hours", "/");
+	}
 	return loadVersion();
 }
 
@@ -166,7 +173,9 @@ function makeButtons(){
 
 	document.getElementById("buttonList").innerHTML = buttons;
 	highlight(version);
-	color();
+	if(localStorage.season) //check season cache
+		drawColor(localStorage.season)
+	getColor();
 }
 
 function makeButton(title, date, checked){
