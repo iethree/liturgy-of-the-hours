@@ -9,25 +9,6 @@ const lectionary = require('./lectionary.js');
 
 const time = require('./time');
 
-/** CG routes */
-
-router.get('/cg', function(req, res, next) {
-
-	res.render('cg-index', {
-	 title: 'Daily Prayer',
-	 date: time.format.short(),
-	 season: time.getSeason()
-	 });
- });
-
- router.get('/cg/:hour/:date?', async(req, res, next)=> {
-
-	let date = time.format.numerical(req.params.date);
-	let results = await hours.getHour(req.params.hour, date).catch(log.err);
-	res.render('cg-hour', results );
- });
-
-
 /** hour routes */
 
 router.get('/', async (req, res, next) => {

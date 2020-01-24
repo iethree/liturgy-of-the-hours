@@ -19,7 +19,9 @@ block content
 		div.columns.is-centered.is-mobile
 			div.column.is-10-mobile.is-4-tablet.is-4-desktop(season = '#{season}')#buttonList
 		div.columns.is-centered.is-mobile
-			a#about(class="#{season}" onclick='showExplanation()') about
+			a#version(class="#{season}" onclick="toggleVersion()") lite
+			&nbsp;|&nbsp; 
+			a#about(class="#{season}" onclick="showExplanation()") about
 			br
 			br
 

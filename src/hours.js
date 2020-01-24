@@ -117,11 +117,11 @@ const partQueries = {
 		];
 	},
 
-	midday: function(lectionary){ 
+	noon: function(lectionary){ 
 
 		return [
 			{part: 'bible', passage: getPsalm('ascent', lectionary.date)},
-			{part: 'collect', title: time.getWeek(date)},
+			{_id: lectionary.collect._id},
 		];
 	},
 

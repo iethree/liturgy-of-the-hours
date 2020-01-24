@@ -82,7 +82,6 @@ function generateNewKeys(num){
 }
 
 makeButtons();
-highlight();
 
 //check views today
 function loadVisitedToday(){	
@@ -94,20 +93,65 @@ function loadVisitedToday(){
 		return [];
 }
 
+//read version from localStorage
+function loadVersion(){
+	if(localStorage.version)
+		return localStorage.version;
+	else{
+		localStorage.setItem('version','full');
+		return "full";
+	}
+}
+
+//check if there's a query string to change version, always return current version
+function checkVersion(){
+	let queryString = window.location.search;
+	let urlParams = new URLSearchParams(queryString);
+	let v = urlParams.get('v');
+	if(v) setVersion(v);
+	return loadVersion();
+}
+
+//set version to lite or full, default to full
+function setVersion(v){
+	v = v.toLowerCase();
+	let set = v==='lite' ? 'lite' : 'full';
+	localStorage.setItem('version', set);
+	return set;
+}
+
+//toggle version and redraw buttons
+function toggleVersion(){
+	if(checkVersion()==='lite')
+		setVersion('full');
+	else
+		setVersion('lite');
+
+	makeButtons();
+}
+
 //make buttons
 function makeButtons(){
 	var date = new Date;
 	document.getElementById("date").innerHTML = dateFns.format(date, 'MMMM D');
 	var today = dateFns.format(date, 'YYYYMMDD');
-	var offices = ['Lauds', 'Terce', 'Sext', 'None', 'Vespers', 'Compline', 'Matins', 'Lectionary'];
+	
+	var offices = {
+		full: ['Lauds', 'Terce', 'Sext', 'None', 'Vespers', 'Compline', 'Matins', 'Lectionary'],
+		lite: ['Morning', 'Noon', 'Evening']
+	};
+	var version = checkVersion();
 
 	var visited = loadVisitedToday();
-	var buttons = ''
+	var buttons = '';	
 
-	for(let o of offices)
+	for(let o of offices[version])
 		buttons+=makeButton(o, today, visited.includes(o));
-	
+
+	document.getElementById('version').innerHTML = version==='lite'?'full':'lite';
+
 	document.getElementById("buttonList").innerHTML = buttons;
+	highlight(version);
 
 }
 
@@ -117,15 +161,22 @@ function makeButton(title, date, checked){
 }
 
 //highlight button with correct time
-function highlight(){
+function highlight(version){
 	var season = document.getElementById("buttonList").getAttribute('season');
-	var time = findNow();
-	
+	var time = findNow(version);
 	document.getElementById(time).classList.add(season);
 }
 
-function findNow(){
+function findNow(version){
 	var hour = dateFns.format(new Date, 'H');
+	if(version==='lite'){
+		if(hour >= 3 && hour < 11)
+			return "Morning";
+		if(hour < 16)
+			return "Noon";
+		else
+			return "Evening";
+	}
 
 	if(hour >= 4 && hour < 8)
 		return "Lauds";
