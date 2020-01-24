@@ -15,7 +15,7 @@ generateHours(time.format.numerical(new Date()), Number(process.argv[2]) || 7);
  * @param {number} num integer number of days for which to generate offices
  */
 async function generateHours(date, num){
-   const hrs = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins"];
+   const hrs = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins", "Morning", "Noon", "Evening"];
    var output = [];
 
    for (let i=0; i<num; i++){

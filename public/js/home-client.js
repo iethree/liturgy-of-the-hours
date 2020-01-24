@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator) {
 
 //cache logic
 const DAYS = 14; // days of offices to keep cached
-const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins"];
+const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins", "Morning", "Noon", "Evening"];
 
 caches.open('hour-cache').then((cache) =>{
 	cache.keys().then( k=> {
@@ -14,7 +14,6 @@ caches.open('hour-cache').then((cache) =>{
 
 		//figure out if the cache is too small and we need extra days
 		let additionalDays = DAYS - (k.length / OFFICES.length);
-
 
 		if(deleteKeys.length+additionalDays===0) {//if nothing needs to be cleared/cached, exit
 			console.log('cache up to date')

@@ -4,7 +4,7 @@ const RESOURCECACHE = 'resource-cache_2020-01-21b';
 const HOURCACHE = 'hour-cache';
 const HOMECACHE = 'home-cache'
 
-const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins"];
+const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins", "Morning", "Noon", "Evening"];
 
 function numericalDate(date=new Date()){
   return dateFns.format( date, 'YYYYMMDD');
