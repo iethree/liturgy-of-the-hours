@@ -2,7 +2,6 @@ self.importScripts('/js/date-fns.min.js');
 
 const RESOURCECACHE = 'resource-cache_2020-01-21b';
 const HOURCACHE = 'hour-cache';
-const HOMECACHE = 'home-cache'
 
 const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins", "Morning", "Noon", "Evening"];
 
@@ -56,7 +55,7 @@ self.addEventListener('install', event => {
 
 // The activate handler takes care of cleaning up old caches.
 self.addEventListener('activate', event => {
-  const currentCaches = [RESOURCECACHE, HOURCACHE, HOMECACHE];
+  const currentCaches = [RESOURCECACHE, HOURCACHE];
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
@@ -76,15 +75,6 @@ self.addEventListener('fetch', event => {
     event.respondWith(
        fetch(event.request).catch(e=>console.log)
     );
-
-  //prefer network for homepage  
-  else if(event.request.url === self.location.origin+"/") {
-    event.respondWith(
-      fetch(event.request).catch(function() {
-        return caches.match(event.request);
-      })
-    );
-  }
 
   //for everything else, cache falling back to network
   else

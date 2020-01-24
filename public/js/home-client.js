@@ -2,7 +2,6 @@ if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/service-worker.js');
 }
 
-
 //cache logic
 const DAYS = 14; // days of offices to keep cached
 const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins", "Morning", "Noon", "Evening"];
@@ -82,6 +81,19 @@ function generateNewKeys(num){
 
 makeButtons();
 
+function color(){
+	fetch('/season')
+	.then(r=>r.text())
+	.then(season=>{
+		season = season.toLowerCase();
+		document.querySelector('h1').classList.add(season); //title
+		document.querySelector('.active').classList.add(season); //active button
+		document.getElementById('cache-status').classList.add(season); //progress bar
+		document.getElementById('about').classList.add(season); //about button
+		document.getElementById('version').classList.add(season); //toggle button
+	});
+}
+
 //check views today
 function loadVisitedToday(){	
 	if (localStorage.today 
@@ -154,6 +166,7 @@ function makeButtons(){
 
 	document.getElementById("buttonList").innerHTML = buttons;
 	highlight(version);
+	color();
 }
 
 function makeButton(title, date, checked){
@@ -163,9 +176,8 @@ function makeButton(title, date, checked){
 
 //highlight button with correct time
 function highlight(version){
-	var season = document.getElementById("buttonList").getAttribute('season');
 	var time = findNow(version);
-	document.getElementById(time).classList.add(season);
+	document.getElementById(time).classList.add('active');
 }
 
 function findNow(version){

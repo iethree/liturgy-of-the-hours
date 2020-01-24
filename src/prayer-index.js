@@ -29,6 +29,12 @@ router.get('/hour/:hour/:date?', async(req, res, next)=>{
 	res.render('hour', results);
 });
 
+router.get('/season/:date?', async(req, res, next)=>{
+	let date = req.params.date ? time.format.numerical(req.params.date) : time.format.numerical(new Date());
+	let lect = await lectionary.getLectionary(date);
+	res.send(lect.season);
+});
+
 router.get('/lectionary/:date?', async(req, res, next)=> {
 	
 	let date = time.format.numerical(req.params.date);

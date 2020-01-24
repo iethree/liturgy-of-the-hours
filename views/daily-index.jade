@@ -11,21 +11,20 @@ block content
 	div.container.padded
 		div.columns.is-centered.is-mobile
 			div.column.is-narrow.has-text-centered
-				h1(class="#{season}") Liturgy of the Hours
+				h1 Liturgy of the Hours
 				h3#date
 		div.columns.is-centered.is-mobile
-			div.column.is-10-mobile.is-4-tablet.is-4-desktop#cache-status(class="#{season}")
+			div.column.is-10-mobile.is-4-tablet.is-4-desktop#cache-status
 				progress.progress( value="0" max="100" )
 		div.columns.is-centered.is-mobile
-			div.column.is-10-mobile.is-4-tablet.is-4-desktop.has-text-centered(season = '#{season}')#buttonList
+			div.column.is-10-mobile.is-4-tablet.is-4-desktop.has-text-centered#buttonList
 		div.columns.is-centered.is-mobile
-			a#version(class="#{season}" onclick="toggleVersion()") lite
+			a#version(onclick="toggleVersion()") lite
 			&nbsp;|&nbsp; 
-			a#about(class="#{season}" onclick="showExplanation()") about
+			a#about(onclick="showExplanation()") about
 			br
 			br
 
-				
 block scripts
 	script(src='/js/date-fns.min.js')
 	script(src='/js/home-client.js')
