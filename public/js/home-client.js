@@ -14,10 +14,9 @@ caches.open('hour-cache').then((cache) =>{
 		//figure out if the cache is too small and we need extra days
 		let additionalDays = DAYS - (k.length / OFFICES.length);
 
-		if(deleteKeys.length+additionalDays===0) {//if nothing needs to be cleared/cached, exit
-			console.log('cache up to date')
+		if(deleteKeys.length+additionalDays===0) //if nothing needs to be cleared/cached, exit
 			return;
-		}
+		
 		showCacheStatus( (k.length-deleteKeys.length)/OFFICES.length/DAYS*100);
 
 		let newKeys = generateNewKeys(deleteKeys.length/OFFICES.length + additionalDays); 
@@ -28,13 +27,14 @@ caches.open('hour-cache').then((cache) =>{
 		for (d of deleteKeys) //delete the old keys
 			cache.delete(d);
 		
-		cache.addAll(newKeys); //add the new ones
+		cache.addAll(newKeys).then(()=>{
+			showCacheStatus( (k.length-deleteKeys.length+newKeys.length) / OFFICES.length / DAYS*100 ) ;
+		}); //add the new ones
 	});
 });
 
 function showCacheStatus(percent){
 	percent = Math.round(percent)
-	console.log('cache status:'+percent)
 	let loaded = Math.round(percent/100*DAYS)
 	document.getElementById('cache-status').innerHTML=`
 		<progress class="progress" value=${percent} max="100" 
@@ -167,7 +167,7 @@ function makeButtons(){
 		buttons+=makeButton(o, today, visited.includes(o));
 	
 	//add random button at the end
-	buttons += `<a id='random' href = '/hour/random/' class='button'><i class='fa fa-random'></i> </a> <br>`;
+	buttons += `<a id='random' href = '/hour/random/' class='button'><i class='fas fa-random'></i> </a> <br>`;
 
 	document.getElementById('version').innerHTML = version==='lite'?'full':'lite';
 
@@ -179,7 +179,7 @@ function makeButtons(){
 }
 
 function makeButton(title, date, checked){
-	let check = checked ? '<i class="fa fa-check done-check"></i>' : '';
+	let check = checked ? '<i class="fas fa-check done-check"></i>' : '';
 	return `<a id='${title}' href = '/hour/${title}/${date}/' class='button is-block'>${title} ${check}</a><br>`
 }
 
@@ -223,7 +223,6 @@ function findNow(version){
 
 
 function showExplanation(){
-	console.log('explain')
 	
 	var text = "<div class='content'><h3>About</h3><p>The Book of Common Prayer is <em>common</em> in two senses. First, in that it is aimed at the common man - it is not a book just for religious professionals - or even the very pious.  Second, it is common in that it is meant to be used by people together - we are meant to have our prayers in common. </p><p> For more than a few reasons, the daily offices in the book of common prayer are less common than they once were. It is less feasible for each of us to make our way to the village church a few times a day to pray together. We have also been shaped by a world of technology and bite-size information that carves our time into many small chunks, rather than few large ones. We can bemoan this change, and perhaps we should fight it, but the fact remains that God meets us where we are, even if we are attention-deficit. <p> Drawing on the ancient monastic tradition of attending many prayer services throughout the day, this liturgy of the hours is divided into seven short (3-5 minute) prayer services. </div>";
 	

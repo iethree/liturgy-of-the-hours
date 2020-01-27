@@ -2,7 +2,6 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const lowerURLs = require('./lowerURLs.js');
@@ -18,7 +17,6 @@ dailyapp.set('view engine', 'jade');
 
 dailyapp.use(bodyParser.json());
 dailyapp.use(bodyParser.urlencoded({ extended: true }));
-dailyapp.use(favicon(path.join(__dirname, '../public/images', 'favicon.png')));
 
 dailyapp.use(express.static(path.join(__dirname, '../public')));
 dailyapp.use(lowerURLs);

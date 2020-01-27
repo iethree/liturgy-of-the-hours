@@ -1,6 +1,6 @@
 self.importScripts('/js/date-fns.min.js');
 
-const RESOURCECACHE = 'resource-cache_2020-01-21b';
+const RESOURCECACHE = 'resource-cache_2020-01-27';
 const HOURCACHE = 'hour-cache';
 
 const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins", "Morning", "Noon", "Evening"];
@@ -14,7 +14,9 @@ const RESOURCECACHE_URLS = [
   '/',
   '/stylesheets/seasons.min.css',
   '/stylesheets/daily.min.css',
-  'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css',
+  '/stylesheets/bulma.min.css',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/webfonts/fa-solid-900.woff2',
 
   '/js/home-client.js',
   '/js/hour-client.js',
@@ -23,7 +25,6 @@ const RESOURCECACHE_URLS = [
 
   '/js/manifest.json',
   '/images/favicon.png',
-  'https://use.fontawesome.com/releases/v5.5.0/css/all.css'
 ];
 
 function getDays(num){
@@ -69,7 +70,6 @@ self.addEventListener('activate', event => {
 
 // The fetch handler serves responses for resources from a cache.
 self.addEventListener('fetch', event => {
-
   //ignore extension and post requests
   if(event.request.url.includes('chrome-extension') || event.request.method==="POST")
     event.respondWith(
@@ -83,5 +83,4 @@ self.addEventListener('fetch', event => {
         return response || fetch(event.request);
       })
     );
-
 });
