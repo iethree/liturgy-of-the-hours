@@ -5,7 +5,7 @@ block content
 	div.modal
 		div.modal-background
 		div.modal-content
-			div.box#explanation
+			div.box#modal-content
 		button.modal-close
 		
 	div.container.padded
@@ -23,6 +23,10 @@ block content
 			&nbsp;|&nbsp;
 			a#about(onclick="showExplanation()") about
 			br
+			br
+			br
+			a.button.has-icon(onclick="configureNotifications()")
+				i.fas.fa-bell
 			br
 
 block scripts

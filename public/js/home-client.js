@@ -27,9 +27,9 @@ caches.open('hour-cache').then((cache) =>{
 		for (d of deleteKeys) //delete the old keys
 			cache.delete(d);
 		
-		cache.addAll(newKeys).then(()=>{
-			showCacheStatus( (k.length-deleteKeys.length+newKeys.length) / OFFICES.length / DAYS*100 ) ;
-		}); //add the new ones
+		cache.addAll(newKeys).then(()=>{ //add the new ones
+			showCacheStatus( 100 ) ;
+		}); 
 	});
 });
 
@@ -81,6 +81,7 @@ function generateNewKeys(num){
 
 makeButtons();
 
+//get current season/color from server and cache locally
 function getColor(){
 	fetch('/season')
 	.then(r=>r.text())
@@ -89,6 +90,8 @@ function getColor(){
 		localStorage.setItem('season', s);
 	});
 }
+
+//apply color to colorable elements
 function drawColor(season){
 	season = season.toLowerCase();
 	document.querySelector('h1').classList.add(season); //title
@@ -130,10 +133,10 @@ function checkVersion(){
 	return loadVersion();
 }
 
-//set version to lite or full, default to full
+//set version to lite or full, default to lite
 function setVersion(v){
 	v = v.toLowerCase();
-	let set = v==='lite' ? 'lite' : 'full';
+	let set = v==='full' ? 'full' : 'lite';
 	localStorage.setItem('version', set);
 	return set;
 }
@@ -221,16 +224,67 @@ function findNow(version){
 	document.querySelector(i).addEventListener('click', toggleModal);	
 });
 
-
 function showExplanation(){
-	
-	var text = "<div class='content'><h3>About</h3><p>The Book of Common Prayer is <em>common</em> in two senses. First, in that it is aimed at the common man - it is not a book just for religious professionals - or even the very pious.  Second, it is common in that it is meant to be used by people together - we are meant to have our prayers in common. </p><p> For more than a few reasons, the daily offices in the book of common prayer are less common than they once were. It is less feasible for each of us to make our way to the village church a few times a day to pray together. We have also been shaped by a world of technology and bite-size information that carves our time into many small chunks, rather than few large ones. We can bemoan this change, and perhaps we should fight it, but the fact remains that God meets us where we are, even if we are attention-deficit. <p> Drawing on the ancient monastic tradition of attending many prayer services throughout the day, this liturgy of the hours is divided into seven short (3-5 minute) prayer services. </div>";
-	
-	document.getElementById('explanation').innerHTML = text;
 
+	let explanation = `<div class="content">
+		<h3>About</h3>
+		<p>The Book of Common Prayer is <em>common</em> in two senses. First, in that it is aimed at the common man - it is not a book just for religious professionals - or even the very pious.  Second, it is common in that it is meant to be used by people together - we are meant to have our prayers in common. </p><p> For more than a few reasons, the daily offices in the book of common prayer are less common than they once were. It is less feasible for each of us to make our way to the village church a few times a day to pray together. We have also been shaped by a world of technology and bite-size information that carves our time into many small chunks, rather than few large ones. We can bemoan this change, and perhaps we should fight it, but the fact remains that God meets us where we are, even if we are attention-deficit. <p> Drawing on the ancient monastic tradition of attending many prayer services throughout the day, this liturgy of the hours is divided into seven short (3-5 minute) prayer services.
+	</div>`;
+	document.getElementById('modal-content').innerHTML=explanation;
 	toggleModal();
 }
 
+function configureNotifications(){
+	if ('Notification' in window) {
+		Notification.requestPermission(status => {
+			if (status === 'granted')
+				showNotificationSettings();
+			else
+				showNotificationEnable();
+		 });
+	 }
+	else
+		setModal("Sorry, your browser does not support notifications");
+}
+
+function showNotificationEnable(){	
+	setModal(
+		`<div class="has-text-centered">
+			<button class="button" onClick="enableNotifications()">Enable Notifications</button>
+		</div>`
+	);
+}
+
+function enableNotifications(){
+ //get permission
+}
+
+function showNotificationSettings(){
+	setModal(
+		`<div>
+			Notification Settings <br>
+			Setting 1 <br>
+			Setting 2 <br>
+		</div>
+		`
+	);
+}
+
+function configureNotifications(){
+
+}
+
+
 function toggleModal(){
 	document.querySelector('.modal').classList.toggle('is-active');
+}
+
+function showModal(){
+	if(!document.querySelector('.modal').classList.contains('is-active'))
+		toggleModal();
+}
+
+function setModal(content){
+	document.getElementById('modal-content').innerHTML=content;
+	showModal();
 }

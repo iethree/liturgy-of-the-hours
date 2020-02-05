@@ -84,3 +84,11 @@ function createCircles(counts){
 	document.querySelector('.circles').innerHTML = circles;
 }
 
+//modal handler 
+['.modal-background', '.modal-close', '.circles' ].forEach((i)=>{
+	document.querySelector(i).addEventListener('click', toggleModal);	
+});
+
+function toggleModal(){
+	document.querySelector('.modal').classList.toggle('is-active');
+}

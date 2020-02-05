@@ -24,8 +24,56 @@ const RESOURCECACHE_URLS = [
   '/js/jquery.min.js',
 
   '/js/manifest.json',
+
   '/images/favicon.png',
+  '/images/bell.png',
+  '/images/clock.png',
+  '/images/clockw.png',
+
 ];
+
+//notifications
+
+//push listener
+self.addEventListener('push', function(event) {
+
+  const title = 'Call to Prayer';
+  const options = {
+    body: event.data.text(),
+    icon: '/images/bell.png',
+    badge: '/images/clockw.png',
+    url: '/hour/'+event.data.text().toLowerCase(),
+    actions: [
+      {
+        action: 'go',
+        title: 'Go',
+        icon:  '/images/go.png'
+      },
+      {
+        action: 'snooze',
+        title: 'Snooze 15m',
+        icon:  '/images/snooze.png'
+      }
+    ]
+  };
+  if (Notification.permission == 'granted')
+    event.waitUntil(self.registration.showNotification(title, options));
+});
+
+
+self.addEventListener('notificationclick', (event) => {  
+
+  
+  console.log(event.notification);
+
+  if (event.action === 'snooze')
+    snooze(event);
+  else 
+    clients.openWindow("/hour/"+event.notification.body.toLowerCase());
+  
+  event.notification.close();
+  
+}, false);
 
 function getDays(num){
    var today = new Date();
@@ -38,6 +86,25 @@ function getDays(num){
          hrs.push(`/hour/${o}/${day}/`);
    }
    return hrs;
+}
+
+function snooze(event){
+	console.log('snooze');
+	
+	self.registration.pushManager.getSubscription()
+    .then((subscription) => {
+      console.log(subscription)
+      var data = {
+        subscription: JSON.stringify(subscription),
+        type: 'snooze'
+      };
+
+      fetch('/snooze/', {
+        method: 'PUT',
+
+      });
+
+	});
 }
 
 // The install handler takes care of precaching the resources we always need.

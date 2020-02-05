@@ -41,15 +41,25 @@ permalink: "/{{ pagination.items[0].hour | lower }}/{{ pagination.items[0].numer
    <div class="modal">
       <div class="modal-background"></div>
       <div class="modal-content">
-         <div id="explanation" class="box"></div>
+         <div id="explanation" class="box">
+            <div> 
+               <div class="ring-container"><div class="circle"></div><div class="ringring"></div></div> 
+               Current Visitor
+            </div>
+            <div> 
+               <div class="ring-container"><div class="circle"></div></div> 
+               Recent Visitor
+            </div>
+         </div>
       </div>
       <button class="modal-close"></button>
    </div>
-   <div class="circles {{hr.season | lower }}"></div>
+   
    <div class="container padded">
       <div class="columns is-centered">
          <div class="column is-narrow">
             <div class="has-text-centered">
+               <div class="circles {{hr.season | lower }}"></div>
                <div id="heading" office= "{{ hr.hour | capitalize }}">
                   <a href="/">
                      <h2 class="{{ hr.season | lower }}">{{ hr.title }} | {{hr.date}}</h2>

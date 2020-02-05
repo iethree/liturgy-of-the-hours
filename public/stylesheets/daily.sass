@@ -22,6 +22,7 @@ h1
 h2
   font-size: 20px
   margin: 15px 0px
+  display: inline-block
 
 h3, .content h3
   font-size: 16px
@@ -36,7 +37,8 @@ h4
 .esv
   h2, h3, h4
     padding: 0 0 0 0
-
+#heading
+  display: inline-block
 .officetext
   p
     margin-top: 10px
@@ -165,9 +167,7 @@ h4
   height: 11px
   background-color: $epiphany
   border-radius: 50%
-  position: absolute
-  top: 5px
-  left: 5px
+
 
 .ringring
   border: 3px solid $epiphany
@@ -175,8 +175,8 @@ h4
   height: 21px
   width: 21px
   position: absolute
-  left: 0px
-  top: 0px
+  left: -5px
+  top: -5px
   -webkit-animation: pulsate 3s ease-out
   -webkit-animation-iteration-count: infinite
   opacity: 0
@@ -186,6 +186,7 @@ h4
 
 .modal-content
   max-width: 90%
+  min-width: 50%
   border-radius: 5px
 
 @-webkit-keyframes pulsate

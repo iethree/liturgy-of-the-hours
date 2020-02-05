@@ -3,7 +3,6 @@
 var resourceCache = 'resources';
 var contentCache = 'content';
 self.importScripts('/js/date-fns.min.js');
-// self.importScripts('/js/jquery.min.js');
 
 var resourceList = [
 	'https://use.fontawesome.com/releases/v5.5.0/css/all.css',
