@@ -66,6 +66,7 @@ router.post('/rp', async(req, res, next)=>{
 router.get('/list', async(req, res, next)=>{
 
 	let results = await parts.getPartList().catch(log.err);
+	console.log(results)
 	res.render('parts-index', {parts: results});
 });
 

@@ -1,6 +1,7 @@
-{% block head %}
+<html>
+
 <head>
-   <title>{{ title }}</title>
+   <title>Liturgy of the Hours</title>
 
    <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,7 +10,7 @@
    <meta name="theme-color" content="#fff" />
    <meta name="description" content="Daily 3-5 minute prayers, new every day" />
    <meta name="twitter:card" content="summary" />
-   <meta name="twitter:title" content={{ title }} />
+   <meta name="twitter:title" content="Liturgy of the Hours" />
    <meta name="twitter:image" content="https://prayer.infopanel.org/images/favicon.png" />
    <meta name="twitter:description" content="Daily 3-5 minute prayers, new every day" />
    <meta name="og:url" content="https://prayer.infopanel.org" />
@@ -29,4 +30,50 @@
    <link rel="stylesheet" href="/stylesheets/seasons.min.css" />
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
 </head>
-{% endblock %}
+
+<body>
+   <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+         <div id="modal-content" class="box"></div>
+      </div><button class="modal-close"></button>
+   </div>
+   <div class="container padded">
+
+      <div class="columns is-centered is-mobile">
+         <div class="column is-narrow has-text-centered">
+            <h1>Liturgy of the Hours</h1>
+            <h3 id="date"></h3>
+         </div>
+      </div>
+
+      <div class="columns is-centered is-mobile">
+         <div id="cache-status" class="column is-10-mobile is-4-tablet is-4-desktop">
+            <progress value="0" max="100"class="progress"></progress>
+         </div>
+      </div>
+
+      <div class="columns is-centered is-mobile">
+         <div id="buttonList" class="column is-10-mobile is-4-tablet is-4-desktop has-text-centered"></div>
+      </div>
+
+      <div class="has-text-centered is-mobile">
+         <div>
+            <a id="version" onclick="toggleVersion()">lite</a>
+            &nbsp;|&nbsp;
+            <a id="about"  onclick="showExplanation()">about</a> 
+            &nbsp;|&nbsp;
+            <a id="notify" onclick="configure_notifications()">
+               Notifications
+               <i class="fas fa-bell"></i>
+            </a>
+         </div>
+         <br>
+      </div>
+
+   </div>
+   <script src="/js/date-fns.min.js"></script>
+   <script src="/js/home-client.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+
+{% extends "base.njk" %}
+
+{% block body %}
+<body>
+   <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+         <div id="explanation" class="box">
+            <div> 
+               <div class="ring-container"><div class="circle"></div><div class="ringring"></div></div> 
+               Current Visitor
+            </div>
+            <div> 
+               <div class="ring-container"><div class="circle"></div></div> 
+               Recent Visitor
+            </div>
+         </div>
+      </div>
+      <button class="modal-close"></button>
+   </div>
+   
+   <div class="container padded">
+      <div class="columns is-centered is-mobile">
+         <div class="column is-12-mobile is-6-tablet is-6-desktop">
+            <div class="has-text-centered">
+               <a href="/">
+                  <h1> Liturgy of the Hours Parts</h1>
+               </a>
+
+               <div class="buttons is-centered">
+                  {% for part in parts %}
+                     <a href='./list/{{ part | lower }}' class="button"> {{ part }} </a>
+                  {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+

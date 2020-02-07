@@ -5,6 +5,7 @@ const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const lowerURLs = require('./lowerURLs.js');
+const nunjucks = require('nunjucks');
 
 const dailyapp = express();
 const dailyindex = require('./prayer-index.js');
@@ -13,7 +14,12 @@ const PORT = 3001;
 dailyapp.use(logger('dev'));
 
 dailyapp.set('views', path.join(__dirname, '../views'));
-dailyapp.set('view engine', 'jade');
+dailyapp.set('view engine', 'nunjucks');
+
+nunjucks.configure('views', {
+  autoescape: true,
+  express: dailyapp
+});
 
 dailyapp.use(bodyParser.json());
 dailyapp.use(bodyParser.urlencoded({ extended: true }));

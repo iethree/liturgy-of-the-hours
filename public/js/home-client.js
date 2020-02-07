@@ -98,6 +98,7 @@ function drawColor(season){
 	document.querySelector('.active').classList.add(season); //active button
 	document.getElementById('cache-status').classList.add(season); //progress bar
 	document.getElementById('about').classList.add(season); //about button
+	document.getElementById('notify').classList.add(season); //about button
 	document.getElementById('version').classList.add(season); //toggle button
 }
 
@@ -234,7 +235,11 @@ function showExplanation(){
 	toggleModal();
 }
 
-function configureNotifications(){
+function clicker(){console.log('click')}
+
+function configure_notifications(){
+	console.log('configuring');
+
 	if ('Notification' in window) {
 		Notification.requestPermission(status => {
 			if (status === 'granted')
