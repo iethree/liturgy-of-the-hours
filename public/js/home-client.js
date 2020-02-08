@@ -1,5 +1,9 @@
+var swRegistration;
+const VAPIDPUBLIC='BL-jTe04esa9qJhMDuCCoh6sw8KwicUEGzd0QrrIYJQa_qW-HWLK5_9CPoIm2E8FTXcdNCybnNAAfr-MVx_IAVE'
+; //public VAPID key
+
 if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('/service-worker.js');
+	navigator.serviceWorker.register('/service-worker.js').then(r=>swRegistration=r);
 }
 
 //cache logic
@@ -245,38 +249,107 @@ function configure_notifications(){
 			if (status === 'granted')
 				showNotificationSettings();
 			else
-				showNotificationEnable();
+				showBlockedNotice();
 		 });
 	 }
 	else
 		setModal("Sorry, your browser does not support notifications");
 }
 
+
 function showNotificationEnable(){	
 	setModal(
 		`<div class="has-text-centered">
-			<button class="button" onClick="enableNotifications()">Enable Notifications</button>
+		<button class="button" onClick="enableNotifications()">Enable Notifications</button>
 		</div>`
 	);
 }
-
-function enableNotifications(){
- //get permission
-}
-
-function showNotificationSettings(){
+	
+function showBlockedNotice(){
 	setModal(
-		`<div>
-			Notification Settings <br>
-			Setting 1 <br>
-			Setting 2 <br>
-		</div>
-		`
-	);
+		`<div class="has-text-left">
+		<i class="fas fa-exclamation-triangle"></i> &nbsp;
+		You have blocked notifications from this site. Please <a href="https://www.google.com/search?q=how+to+enable+browser+notifications"> enable them in your browser's settings </a> to use this feature.
+		</div>`
+		);
+}
+		
+function showNotificationSettings(){
+	
+	swRegistration.pushManager.getSubscription()
+	.then(subscription => {
+		isSubscribed = (subscription !== null);
+		//updateSubscriptionOnServer(subscription);
+		let subButton;
+		if (isSubscribed)
+			subButton=`<button class="button" onclick="unsubscribe()"> Unsubscribe </button>`;
+		else
+			subButton=`<button class="button" onclick="subscribe()"> Sign me up! </button>`;
+		setModal(
+			`<div>
+			<h3>Notification Settings</h3>
+			${subButton}
+			<button class="button" onclick="testNotification()"> Test Notification </button>
+			
+			</div>
+			`
+		);
+	});		
+}
+			
+function subscribe(){
+	swRegistration.pushManager.subscribe({
+			userVisibleOnly: true,
+			applicationServerKey: urlB64ToUint8Array(VAPIDPUBLIC)
+		})
+		.then(subscription => {
+		console.log('User is subscribed:', subscription);
+		updateSubscriptionOnServer(subscription);
+		isSubscribed = true;
+		//updateBtn();
+		})
+		.catch(err => {
+		if (Notification.permission === 'denied') {
+			console.warn('Permission for notifications was denied');
+		} else {
+			console.error('Failed to subscribe the user: ', err);
+		}
+		//updateBtn();
+		});
 }
 
-function configureNotifications(){
+function unsubscribe(){
+	swRegistration.pushManager.getSubscription()
+	.then(subscription => {
+	if (subscription) {
+		return subscription.unsubscribe();
+	}
+	})
+	.catch(err => {
+		console.log('Error unsubscribing', err);
+	})
+	.then(() => {
+		updateSubscriptionOnServer({payload: null} );
+		console.log('User is unsubscribed');
+		isSubscribed = false;
+		//updateBtn();
+	});
+}
 
+function testNotification(){
+	if (Notification.permission == 'granted') {
+		navigator.serviceWorker.getRegistration().then(reg => {
+		  reg.showNotification('Test Notification Received!');
+		});
+	 }
+}
+
+function updateSubscriptionOnServer(sub){
+	fetch('/subscribe', {
+		method: "POST",
+		headers:{ "Content-Type": 'application/json'},
+		body: JSON.stringify(sub)
+	})
 }
 
 
@@ -293,3 +366,18 @@ function setModal(content){
 	document.getElementById('modal-content').innerHTML=content;
 	showModal();
 }
+
+function urlB64ToUint8Array(base64String) {
+	const padding = '='.repeat((4 - base64String.length % 4) % 4);
+	const base64 = (base64String + padding)
+	  .replace(/\-/g, '+')
+	  .replace(/_/g, '/');
+ 
+	const rawData = window.atob(base64);
+	const outputArray = new Uint8Array(rawData.length);
+ 
+	for (let i = 0; i < rawData.length; ++i) {
+	  outputArray[i] = rawData.charCodeAt(i);
+	}
+	return outputArray;
+ }

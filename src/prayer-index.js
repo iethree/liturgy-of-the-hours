@@ -6,6 +6,7 @@ const parts = require('./parts.js');
 const hours = require('./hours.js');
 const count = require('./count.js');
 const lectionary = require('./lectionary.js');
+const push = require('./push.js');
 
 const time = require('./time');
 
@@ -96,6 +97,12 @@ router.post('/removeTag', async(req, res, next)=>{
 		res.sendStatus(200);
 	else
 		res.sendStatus(400);
+});
+
+router.post('/subscribe', async(req, res, next)=>{
+	log.debug(req.body)
+	push.subscribe(req.body);
+	res.sendStatus(201);
 });
 
 module.exports = router;
