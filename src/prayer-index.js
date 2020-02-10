@@ -100,9 +100,13 @@ router.post('/removeTag', async(req, res, next)=>{
 });
 
 router.post('/subscribe', async(req, res, next)=>{
-	log.debug(req.body)
 	push.subscribe(req.body);
 	res.sendStatus(201);
+});
+
+router.post('/unsubscribe', async(req, res, next)=>{
+	push.unsubscribe(req.body);
+	res.sendStatus(202);
 });
 
 module.exports = router;

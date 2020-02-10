@@ -1,5 +1,5 @@
 var swRegistration;
-const VAPIDPUBLIC='BL-jTe04esa9qJhMDuCCoh6sw8KwicUEGzd0QrrIYJQa_qW-HWLK5_9CPoIm2E8FTXcdNCybnNAAfr-MVx_IAVE'
+const VAPIDPUBLIC='BDGjlxI-5G_q0k910Oez3eCAKlk9CV0t3yY1y4ypeh041Rv4Wgi-EwSpsVvUc4b4m7-dv6tfj6ClyGNTSAxQ3xQ';
 ; //public VAPID key
 
 if ('serviceWorker' in navigator) {
@@ -278,10 +278,8 @@ function showNotificationSettings(){
 	
 	swRegistration.pushManager.getSubscription()
 	.then(subscription => {
-		isSubscribed = (subscription !== null);
-		//updateSubscriptionOnServer(subscription);
 		let subButton;
-		if (isSubscribed)
+		if (subscription !== null)
 			subButton=`<button class="button" onclick="unsubscribe()"> Unsubscribe </button>`;
 		else
 			subButton=`<button class="button" onclick="subscribe()"> Sign me up! </button>`;
@@ -303,10 +301,9 @@ function subscribe(){
 			applicationServerKey: urlB64ToUint8Array(VAPIDPUBLIC)
 		})
 		.then(subscription => {
-		console.log('User is subscribed:', subscription);
-		updateSubscriptionOnServer(subscription);
-		isSubscribed = true;
-		//updateBtn();
+			console.log('User is subscribed:', subscription);
+			serverSubscribe(subscription);
+			showNotificationSettings();
 		})
 		.catch(err => {
 		if (Notification.permission === 'denied') {
@@ -314,25 +311,23 @@ function subscribe(){
 		} else {
 			console.error('Failed to subscribe the user: ', err);
 		}
-		//updateBtn();
 		});
 }
 
 function unsubscribe(){
 	swRegistration.pushManager.getSubscription()
 	.then(subscription => {
-	if (subscription) {
-		return subscription.unsubscribe();
-	}
+		if (subscription) {
+			serverUnsubscribe(subscription);
+			return subscription.unsubscribe();
+		}
 	})
 	.catch(err => {
 		console.log('Error unsubscribing', err);
 	})
 	.then(() => {
-		updateSubscriptionOnServer({payload: null} );
 		console.log('User is unsubscribed');
-		isSubscribed = false;
-		//updateBtn();
+		showNotificationSettings();
 	});
 }
 
@@ -344,8 +339,17 @@ function testNotification(){
 	 }
 }
 
-function updateSubscriptionOnServer(sub){
+function serverSubscribe(sub){
+	sub = {...sub, id: localStorage.id};
 	fetch('/subscribe', {
+		method: "POST",
+		headers:{ "Content-Type": 'application/json'},
+		body: JSON.stringify(sub)
+	})
+}
+
+function serverUnsubscribe(sub){
+	fetch('/unsubscribe', {
 		method: "POST",
 		headers:{ "Content-Type": 'application/json'},
 		body: JSON.stringify(sub)
@@ -381,3 +385,4 @@ function urlB64ToUint8Array(base64String) {
 	}
 	return outputArray;
  }
+
