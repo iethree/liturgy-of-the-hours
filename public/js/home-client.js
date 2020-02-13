@@ -1,6 +1,20 @@
-var swRegistration;
+var swRegistration, alarms; //globals
+
 const VAPIDPUBLIC='BDGjlxI-5G_q0k910Oez3eCAKlk9CV0t3yY1y4ypeh041Rv4Wgi-EwSpsVvUc4b4m7-dv6tfj6ClyGNTSAxQ3xQ';
-; //public VAPID key
+const DEFAULT_ALARMS = {
+	Morning: 	{hr: "07", min: "00", enabled: false}, 
+	Noon: 		{hr: "12", min: "00", enabled: false}, 
+	Evening: 	{hr: "18", min: "00", enabled: false},
+	Lauds: 		{hr: "07", min: "00", enabled: false},
+	Terce: 		{hr: "10", min: "00", enabled: false},
+	Sext: 		{hr: "12", min: "00", enabled: false},
+	None: 		{hr: "15", min: "00", enabled: false},
+	Vespers: 	{hr: "18", min: "00", enabled: false},
+	Compline: 	{hr: "21", min: "00", enabled: false},
+	Matins: 		{hr: "22", min: "00", enabled: false},
+};
+
+const TZ_OFFSET_HOURS = new Date().getTimezoneOffset()/60;
 
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/service-worker.js').then(r=>swRegistration=r);
@@ -8,7 +22,9 @@ if ('serviceWorker' in navigator) {
 
 //cache logic
 const DAYS = 14; // days of offices to keep cached
-const OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins", "Morning", "Noon", "Evening"];
+const FULL_OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins"];
+const LITE_OFFICES = ["Morning", "Noon", "Evening"];
+const OFFICES =  [...FULL_OFFICES,...LITE_OFFICES];
 
 caches.open('hour-cache').then((cache) =>{
 	cache.keys().then( k=> {
@@ -242,8 +258,6 @@ function showExplanation(){
 function clicker(){console.log('click')}
 
 function configure_notifications(){
-	console.log('configuring');
-
 	if ('Notification' in window) {
 		Notification.requestPermission(status => {
 			if (status === 'granted')
@@ -279,16 +293,21 @@ function showNotificationSettings(){
 	swRegistration.pushManager.getSubscription()
 	.then(subscription => {
 		let subButton;
-		if (subscription !== null)
-			subButton=`<button class="button" onclick="unsubscribe()"> Unsubscribe </button>`;
+		if (subscription == null)
+			setModal(`<button class="button" onclick="subscribe()"> Subscribe to Notifications </button>`)
 		else
-			subButton=`<button class="button" onclick="subscribe()"> Sign me up! </button>`;
+			
 		setModal(
 			`<div>
 			<h3>Notification Settings</h3>
-			${subButton}
-			<button class="button" onclick="testNotification()"> Test Notification </button>
+			${showAlarmSettings()}
+
+			<div class="buttons is-right"> 
+				${subButton}
+			</div>
 			
+			<button class="button" onclick="testNotification()"> Test Notification </button>
+			<button class="button" onclick="unsubscribe()"> Unsubscribe </button>`;
 			</div>
 			`
 		);
@@ -296,22 +315,24 @@ function showNotificationSettings(){
 }
 			
 function subscribe(){
+	console.log('subbing')
+
 	swRegistration.pushManager.subscribe({
-			userVisibleOnly: true,
-			applicationServerKey: urlB64ToUint8Array(VAPIDPUBLIC)
-		})
-		.then(subscription => {
-			console.log('User is subscribed:', subscription);
-			serverSubscribe(subscription);
-			showNotificationSettings();
-		})
-		.catch(err => {
+		applicationServerKey: urlB64ToUint8Array(VAPIDPUBLIC),
+		userVisibleOnly: true
+	})
+	.then(subscription => {
+		console.log('User is subscribed:', subscription);
+		serverSubscribe(subscription);
+		showNotificationSettings();
+	})
+	.catch(err => {
 		if (Notification.permission === 'denied') {
 			console.warn('Permission for notifications was denied');
 		} else {
 			console.error('Failed to subscribe the user: ', err);
 		}
-		});
+	});
 }
 
 function unsubscribe(){
@@ -340,12 +361,20 @@ function testNotification(){
 }
 
 function serverSubscribe(sub){
-	sub = {...sub, id: localStorage.id};
+
 	fetch('/subscribe', {
 		method: "POST",
 		headers:{ "Content-Type": 'application/json'},
-		body: JSON.stringify(sub)
+		body: JSON.stringify(addSettings(sub))
 	})
+}
+
+function addSettings(subscription){
+	let settings = {
+		id: localStorage.id,
+		alarms: localStorage.alarms
+	}
+	return {subscription, settings};
 }
 
 function serverUnsubscribe(sub){
@@ -385,4 +414,56 @@ function urlB64ToUint8Array(base64String) {
 	}
 	return outputArray;
  }
+
+ //sets an alarm in UTC given a local time
+function showAlarmSettings(){
+	let offices = localStorage.version==='full' ? FULL_OFFICES : LITE_OFFICES;
+	if (localStorage.alarms)
+		alarms = JSON.parse(localStorage.alarms);
+	else
+		alarms = DEFAULT_ALARMS;
+	
+	let sliders = '';
+	offices.forEach(o=>{
+		sliders+=alarmChooser(o, alarms[o]);
+	});
+	return sliders;
+}
+
+function alarmChooser(label, val){
+	
+	//only show input if val is enabled
+
+	return `
+		<div class="alarm-input" id="alarm-input-${label}">
+			<label class="checkbox alarm-label">
+				<input type="checkbox" name="check_${label}" onclick="checkboxclick(event)" ${val.enabled ? "checked" : ""}>
+				${label}
+			</label>
+			<input class="input is-small ${!val.enabled ? "hidden" : ""}" type="time" name="alarm_${label}" 
+			value="${val.hr}:${val.min}" step="900" 
+			pattern="[0-1]{1}[0-9]{1}:(00|15|30|45){1}"
+			title="please enter a time in quarter-hour increments (7:00, 7:15, 7:30, 7:45, etc.)"
+			onchange="alarmchange(event)"> </input>
+		</div>
+	`;
+}
+
+function alarmchange(e){
+	let office = e.target.name.replace('alarm_','');
+	let [h,m] = e.target.value.split(':');
+	alarms[office].hr = h;
+	alarms[office].min = m;
+
+	console.log(alarms[office]);
+}
+
+function checkboxclick(e){
+	let office = e.target.name.replace('check_','');
+	alarms[office].enabled = !alarms[office].enabled; //toggle value
+	console.log(alarms[office]);
+	//redraw
+	document.getElementById('alarm-input-'+office).outerHTML = alarmChooser(office, alarms[office]);
+}
+
 

@@ -26,7 +26,11 @@ router.get('/', async (req, res, next) => {
 router.get('/hour/:hour/:date?', async(req, res, next)=>{
 
 	let date = time.format.numerical(req.params.date);
-	let results = await hours.getHour(req.params.hour, date).catch(log.err);
+	let results = await hours.getHour(req.params.hour, date)
+	.catch(e=>{
+		log.err(e);
+		res.redirect('/');
+	});
 	res.render('hour', results);
 });
 

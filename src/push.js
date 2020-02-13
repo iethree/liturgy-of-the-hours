@@ -1,24 +1,28 @@
 const webPush = require('web-push');
 const log = require('logchalk');
 
-const payload = 'Call to Prayer';
 const nedb = require('nedb');
 var db = new nedb({filename: __dirname+'/../data/subscriptions.db', autoload: true});
 
 module.exports = {subscribe, unsubscribe}
 
 function subscribe(sub){
-   log.info('sub', getBrowser(sub.endpoint), sub.endpoint.slice(sub.endpoint.length-6));
+   if(!sub.subscription.endpoint)
+      return false;
+   log.info('sub', getBrowser(sub.subscription.endpoint), sub.settings.id);
    db.insert(sub, (err)=>{
       if(err) log.err(err);
-      else send(sub, "Successfully Subscribed!")
+      else send(sub.subscription, "Successfully Subscribed!")
    });
 }
 
 function unsubscribe(sub){
-   log.info('unsub', getBrowser(sub.endpoint), sub.endpoint.slice(sub.endpoint.length-6));
+   if(!sub.endpoint)
+      return false;
+   
    db.remove({endpoint: sub.endpoint}, (err)=>{
       if(err) log.err(err);
+      log.info('unsub', getBrowser(sub.endpoint));
    });
 }
 
