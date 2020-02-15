@@ -113,4 +113,9 @@ router.post('/unsubscribe', async(req, res, next)=>{
 	res.sendStatus(202);
 });
 
+router.post('/alarms', async(req, res, next)=>{
+	push.setAlarms(req.body);
+	res.sendStatus(204);
+});
+
 module.exports = router;

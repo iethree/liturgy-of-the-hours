@@ -4,12 +4,13 @@ const log = require('logchalk');
 const nedb = require('nedb');
 var db = new nedb({filename: __dirname+'/../data/subscriptions.db', autoload: true});
 
-module.exports = {subscribe, unsubscribe}
+module.exports = {subscribe, unsubscribe, setAlarms}
 
 function subscribe(sub){
-   if(!sub.subscription.endpoint)
+   if(!sub.subscription || !sub.subscription.endpoint)
       return false;
-   log.info('sub', getBrowser(sub.subscription.endpoint), sub.settings.id);
+   
+   log.info('sub', getBrowser(sub.subscription.endpoint), sub.id);
    db.insert(sub, (err)=>{
       if(err) log.err(err);
       else send(sub.subscription, "Successfully Subscribed!")
@@ -20,9 +21,10 @@ function unsubscribe(sub){
    if(!sub.endpoint)
       return false;
    
-   db.remove({endpoint: sub.endpoint}, (err)=>{
+   db.remove({"subscription.endpoint": sub.endpoint}, {}, (err, numRemoved)=>{
       if(err) log.err(err);
-      log.info('unsub', getBrowser(sub.endpoint));
+      log.warn('removed', numRemoved)
+      log.info('unsub', getBrowser(sub.endpoint), sub.endpoint.slice(-6));
    });
 }
 
@@ -50,4 +52,11 @@ function getBrowser(str){
       return 'Chrome';
    else 
       return 'Unknown Browser';
+}
+
+function setAlarms(settings){
+   db.update({id: settings.id}, { $set: {alarms: settings.alarms} }, (err, numReplaced)=>{
+      if(err) log.err(err);
+      else log.info('replaced', numReplaced, 'for', settings.id);
+   });
 }

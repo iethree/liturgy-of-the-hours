@@ -289,28 +289,29 @@ function showBlockedNotice(){
 }
 		
 function showNotificationSettings(){
+	if (localStorage.alarms)
+		alarms = JSON.parse(localStorage.alarms);
+	else
+		alarms = DEFAULT_ALARMS;
 	
 	swRegistration.pushManager.getSubscription()
 	.then(subscription => {
 		let subButton;
 		if (subscription == null)
-			setModal(`<button class="button" onclick="subscribe()"> Subscribe to Notifications </button>`)
+			setModal(`<div class="has-text-centered"><button class="button is-primary" onclick="subscribe()"> Subscribe to Notifications </button></div>`)
 		else
-			
-		setModal(
-			`<div>
-			<h3>Notification Settings</h3>
-			${showAlarmSettings()}
+			setModal(
+				`<div>
+					<h3>Notification Settings</h3>
+					${showAlarmSettings()}
 
-			<div class="buttons is-right"> 
-				${subButton}
-			</div>
-			
-			<button class="button" onclick="testNotification()"> Test Notification </button>
-			<button class="button" onclick="unsubscribe()"> Unsubscribe </button>`;
-			</div>
-			`
-		);
+					<div class="buttons is-right"> 
+						<button id="save" class="button is-primary" onclick="saveAlarms()">Save</button>
+						<button class="button" onclick="unsubscribe()"> Unsubscribe </button>
+					</div>
+				</div>
+				`
+			);
 	});		
 }
 			
@@ -365,16 +366,12 @@ function serverSubscribe(sub){
 	fetch('/subscribe', {
 		method: "POST",
 		headers:{ "Content-Type": 'application/json'},
-		body: JSON.stringify(addSettings(sub))
-	})
-}
-
-function addSettings(subscription){
-	let settings = {
-		id: localStorage.id,
-		alarms: localStorage.alarms
-	}
-	return {subscription, settings};
+		body: JSON.stringify({
+			id: localStorage.id,
+			alarms: alarms,
+			subscription: sub
+		})
+	});
 }
 
 function serverUnsubscribe(sub){
@@ -384,7 +381,6 @@ function serverUnsubscribe(sub){
 		body: JSON.stringify(sub)
 	})
 }
-
 
 function toggleModal(){
 	document.querySelector('.modal').classList.toggle('is-active');
@@ -418,10 +414,6 @@ function urlB64ToUint8Array(base64String) {
  //sets an alarm in UTC given a local time
 function showAlarmSettings(){
 	let offices = localStorage.version==='full' ? FULL_OFFICES : LITE_OFFICES;
-	if (localStorage.alarms)
-		alarms = JSON.parse(localStorage.alarms);
-	else
-		alarms = DEFAULT_ALARMS;
 	
 	let sliders = '';
 	offices.forEach(o=>{
@@ -440,9 +432,10 @@ function alarmChooser(label, val){
 				<input type="checkbox" name="check_${label}" onclick="checkboxclick(event)" ${val.enabled ? "checked" : ""}>
 				${label}
 			</label>
-			<input class="input is-small ${!val.enabled ? "hidden" : ""}" type="time" name="alarm_${label}" 
+			<input class="input is-small ${!val.enabled ? "hidden" : ""}" type="time" name="alarm_${label}" id="alarm_${label}"
 			value="${val.hr}:${val.min}" step="900" 
 			pattern="[0-1]{1}[0-9]{1}:(00|15|30|45){1}"
+			onblur="roundInput(event)"
 			title="please enter a time in quarter-hour increments (7:00, 7:15, 7:30, 7:45, etc.)"
 			onchange="alarmchange(event)"> </input>
 		</div>
@@ -466,4 +459,46 @@ function checkboxclick(e){
 	document.getElementById('alarm-input-'+office).outerHTML = alarmChooser(office, alarms[office]);
 }
 
+//save to localStorage and server
+function saveAlarms(){
+	localStorage.setItem('alarms', JSON.stringify(alarms));
+	document.getElementById('save').classList.add('is-loading')
 
+	fetch('/alarms', {
+		method: "POST",
+		headers:{ "Content-Type": 'application/json'},
+		body: JSON.stringify({id: localStorage.id, alarms: alarms})
+	})
+	.then(()=>{
+		let saveButton = document.getElementById('save')
+		saveButton.classList.remove('is-loading');
+		saveButton.innerHTML="Saved!";
+
+		setTimeout(()=>{
+			toggleModal();
+			saveButton.innerHTML = "Save";
+		}, 500);
+	});
+}
+
+//
+function roundInput(e){
+	console.log(e.target)
+	let time = e.target.value;
+	document.getElementById(e.target.id).value = roundTime(time);
+}
+
+//round to nearest 15 minute interval
+function roundMinutes(time){
+	let [hr, min] = time.split(":");
+
+	min = Number(min);
+	if(min<8) return hr+":00";
+	if(min>52) return String(hr+1)
+
+	let diff = min % 15;
+
+	if(diff === 0) return hr+":"+String(min);
+	if(diff<7) 		return hrString(min-diff);
+	else 				return String(min + (15-diff));
+}
