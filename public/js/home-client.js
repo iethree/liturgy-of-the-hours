@@ -368,7 +368,7 @@ function serverSubscribe(sub){
 		headers:{ "Content-Type": 'application/json'},
 		body: JSON.stringify({
 			id: localStorage.id,
-			alarms: alarms,
+			alarms: UTC(alarms),
 			subscription: sub
 		})
 	});
@@ -435,7 +435,6 @@ function alarmChooser(label, val){
 			<input class="input is-small ${!val.enabled ? "hidden" : ""}" type="time" name="alarm_${label}" id="alarm_${label}"
 			value="${val.hr}:${val.min}" step="900" 
 			pattern="[0-1]{1}[0-9]{1}:(00|15|30|45){1}"
-			onblur="roundInput(event)"
 			title="please enter a time in quarter-hour increments (7:00, 7:15, 7:30, 7:45, etc.)"
 			onchange="alarmchange(event)"> </input>
 		</div>
@@ -467,7 +466,7 @@ function saveAlarms(){
 	fetch('/alarms', {
 		method: "POST",
 		headers:{ "Content-Type": 'application/json'},
-		body: JSON.stringify({id: localStorage.id, alarms: alarms})
+		body: JSON.stringify({id: localStorage.id, alarms: UTC(alarms)})
 	})
 	.then(()=>{
 		let saveButton = document.getElementById('save')
@@ -481,24 +480,13 @@ function saveAlarms(){
 	});
 }
 
-//
-function roundInput(e){
-	console.log(e.target)
-	let time = e.target.value;
-	document.getElementById(e.target.id).value = roundTime(time);
-}
-
-//round to nearest 15 minute interval
-function roundMinutes(time){
-	let [hr, min] = time.split(":");
-
-	min = Number(min);
-	if(min<8) return hr+":00";
-	if(min>52) return String(hr+1)
-
-	let diff = min % 15;
-
-	if(diff === 0) return hr+":"+String(min);
-	if(diff<7) 		return hrString(min-diff);
-	else 				return String(min + (15-diff));
+//change alarms to UTC before sending to server
+function UTC(alarms){
+	for(let t in alarms){
+		let newhr = Number(alarms[t].hr)+TZ_OFFSET_HOURS;
+		if(newhr>23) newhr-=24;
+		alarms[t].hr=newhr;
+	}
+		
+	return alarms;
 }

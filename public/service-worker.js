@@ -46,13 +46,7 @@ self.addEventListener('push', function(event) {
     actions: [
       {
         action: 'go',
-        title: 'Go',
-        icon:  '/images/go.png'
-      },
-      {
-        action: 'snooze',
-        title: 'Snooze 15m',
-        icon:  '/images/snooze.png'
+        title: 'Go'
       }
     ]
   };
@@ -63,13 +57,8 @@ self.addEventListener('push', function(event) {
 
 self.addEventListener('notificationclick', (event) => {  
 
-  
-  console.log(event.notification);
-
-  if (event.action === 'snooze')
-    snooze(event);
-  else 
-    clients.openWindow("/hour/"+event.notification.body.toLowerCase());
+  let date = new Date();
+  clients.openWindow("/hour/"+event.notification.body.toLowerCase()+"/"+numericalDate());
   
   event.notification.close();
   

@@ -23,15 +23,18 @@ router.get('/', async (req, res, next) => {
 	});
 });
 
-router.get('/hour/:hour/:date?', async(req, res, next)=>{
+router.get('/hour/:hour/:date?', (req, res, next)=>{
 
 	let date = time.format.numerical(req.params.date);
-	let results = await hours.getHour(req.params.hour, date)
+	hours.getHour(req.params.hour, date)
+	.then(results=>{
+		res.render('hour', results);
+	})
 	.catch(e=>{
 		log.err(e);
-		res.redirect('/');
-	});
-	res.render('hour', results);
+		res.redirect('/'); 
+	})
+	
 });
 
 router.get('/season/:date?', async(req, res, next)=>{
