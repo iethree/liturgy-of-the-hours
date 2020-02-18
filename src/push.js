@@ -1,47 +1,66 @@
 const webPush = require('web-push');
 const log = require('logchalk');
-const schedule = require('node-schedule')
+const schedule = require('node-schedule');
 
 const nedb = require('nedb');
-var db = new nedb({filename: __dirname+'/../data/subscriptions.db', autoload: true});
+var sub_db = new nedb({filename: __dirname+'/../data/subscriptions.db', autoload: true});
+var alarm_db = new nedb({filename: __dirname+'/../data/alarms.db', autoload: true});
 
 module.exports = {subscribe, unsubscribe, setAlarms}
 
-schedule.scheduleJob('*/1 * * * *', async ()=>{
+/**
+ * check every minute for users to notify
+ */
+schedule.scheduleJob('*/1 * * * *', async()=>{
    let now = new Date();
-   log.info('checking for alarms:', now.getHours()+":"+now.getMinutes());
    
    let notifications = await findUsersToNotify( now.getUTCHours(), now.getUTCMinutes() );
    if(notifications.length)
       for(let n of notifications){
-         send(n.subscription, n.alarm);
+         log.info(`Notifying: ${now.getHours()}:${now.getMinutes()} - ${n.title} - ${n.id}`);
+         send(await getSubFromId(n.id).catch(log.warn), n.title);
       }
 });
 
-function subscribe(sub){
-   if(!sub.subscription || !sub.subscription.endpoint)
+function subscribe({subscription, alarms, id}){
+   if(!subscription || !subscription.endpoint)
       return false;
    
-   log.info('sub', getBrowser(sub.subscription.endpoint), sub.id);
-   db.insert(sub, (err)=>{
-      if(err) log.err(err);
-      else send(sub.subscription, "Successfully Subscribed!")
+   log.info('sub', getBrowser(subscription.endpoint), id);
+
+   sub_db.update({id}, {subscription, id}, {upsert: true}, (err, numReplaced)=>{
+      if(err || !numReplaced) log.err(err || "no update made");
+      else {
+         send(subscription, "Successfully Subscribed!");
+         setAlarms({id, alarms});
+      }
    });
 }
 
-function unsubscribe(sub){
-   if(!sub.endpoint)
-      return false;
+function getSubFromId(id){
+   return new Promise((resolve, reject)=>{
+      sub_db.findOne({id: id}, (err, result)=>{
+         if(err || !result)
+            reject('no subscription found for id', id);
+         else
+            resolve(result.subscription);
+      });
+   });
+}
+
+function unsubscribe(id){
    
-   db.remove({"subscription.endpoint": sub.endpoint}, {}, (err, numRemoved)=>{
+   sub_db.remove({id}, {multi: true}, (err, numRemoved)=>{
       if(err) log.err(err);
-      log.warn('removed', numRemoved)
-      log.info('unsub', getBrowser(sub.endpoint), sub.endpoint.slice(-6));
+      log.warn('removed sub', numRemoved, id)
+   });
+   alarm_db.remove({id}, {multi: true}, (err, numRemoved)=>{
+      if(err) log.err(err);
+      log.warn('removed alarms', numRemoved, id)
    });
 }
 
 function send(sub, msg){
-   log.info('sending notification:',msg)
    const options = {
       TTL: 60,
       vapidDetails: {
@@ -67,31 +86,39 @@ function getBrowser(str){
       return 'Unknown Browser';
 }
 
-function setAlarms(settings){
-   db.update({id: settings.id}, { $set: {alarms: settings.alarms} }, (err, numReplaced)=>{
-      if(err) log.err(err);
-      else log.info('replaced', numReplaced, 'for', settings.id);
-   });
+function setAlarms({alarms, id}){
+
+   // filter down to enabled alarms
+   let records = {saved: []};
+   for (let i in alarms){
+      let alarm = alarms[i];
+      if(alarm.enabled){ //replace/upsert enabled alarms
+         records.saved.push(i);
+         alarm_db.update(
+            {id: id, title: i}, 
+            {$set: {id: id, title: i, hr: Number(alarm.hr), min: Number(alarm.min)} }, 
+            {upsert: true}, 
+            (err, numReplaced)=>{
+            if(err) log.err(err);
+         });
+      }
+      else{ //delete disabled alarms
+         alarm_db.remove( {id: id, title: i}, (err, numRemoved)=>{
+            if(err) log.err(err);
+         });
+      }
+   }
+   log.info('alarms for:', id, 'saved:', records.saved.join(','));
+
 }
 
 // find users to notify for a given hour and minute
 // just loops through everything, not very efficient or scalable
 function findUsersToNotify(h, m){
    return new Promise((resolve, reject)=>{
-      let usersToNotify = [];
-      db.find({alarms: {$exists: true}}, (err, results)=>{
+      alarm_db.find({hr: h, min: m}, (err, results)=>{
          if(err) reject(err);
-         else{
-            for (let s of results){ //for each subscription
-               for (let a in s.alarms){ //for each alarm
-                  if(s.alarms[a].enabled && s.alarms[a].hr==h && s.alarms[a].min==m){
-                     log.info('found alarm for', a, s.id)
-                     usersToNotify.push({ subscription: s.subscription, alarm: a });
-                  }
-               }
-            }
-            resolve(usersToNotify);
-         }
-      })
+         else    resolve(results);
+      });
    });
 }

@@ -25,15 +25,7 @@ function hereNow(){
 	else
 		saveOffice({first: true});
 	
-	var id;
-	//check if a user ID has been assigned
-	if (localStorage.id)
-		id = localStorage.id;
-	else{ //generate a new ID number
-		id = new Date;
-		id = id.getTime();
-		localStorage.id = id;
-	}
+	var id = getId();	
 	
 	//check in to this office and get number of 'active' users
 	fetch('/count',{
@@ -47,6 +39,18 @@ function hereNow(){
 		createCircles(r);
 	})
 	.catch(console.log);
+}
+
+function getId(){
+	let id;
+	//check if a user ID has been assigned
+	if (localStorage.id)
+		id = localStorage.id;
+	else{ //generate a new ID number
+		id = new Date().getTime();
+		localStorage.setItem('id', id);
+	}
+	return id;
 }
 
 function saveOffice(options){

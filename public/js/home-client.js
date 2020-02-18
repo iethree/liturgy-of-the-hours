@@ -20,6 +20,20 @@ if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/service-worker.js').then(r=>swRegistration=r);
 }
 
+//load id into localstorage if this is a first visit
+getId();
+function getId(){
+	let id;
+	//check if a user ID has been assigned
+	if (localStorage.id)
+		id = localStorage.id;
+	else{ //generate a new ID number
+		id = new Date().getTime();
+		localStorage.setItem('id', id);
+	}
+	return id;
+}
+
 //cache logic
 const DAYS = 14; // days of offices to keep cached
 const FULL_OFFICES = ["Lauds", "Terce", "Sext", "None", "Vespers", "Compline", "Matins"];
@@ -132,13 +146,13 @@ function loadVisitedToday(){
 		return [];
 }
 
-//read version from localStorage
+//read version from localStorage, default to lite
 function loadVersion(){
 	if(localStorage.version)
 		return localStorage.version;
 	else{
-		localStorage.setItem('version','full');
-		return "full";
+		localStorage.setItem('version','lite');
+		return "lite";
 	}
 }
 
@@ -267,7 +281,7 @@ function configure_notifications(){
 		 });
 	 }
 	else
-		setModal("Sorry, your browser does not support notifications");
+		setModal("Sorry, your browser does not support web push notifications, you're probably using an Apple device. ☹️");
 }
 
 
@@ -306,7 +320,7 @@ function showNotificationSettings(){
 					${showAlarmSettings()}
 
 					<div class="buttons is-right"> 
-						<button id="save" class="button is-primary" onclick="saveAlarms()">Save</button>
+						<button id="save" class="button ${localStorage.season}" onclick="saveAlarms()">Save</button>
 						<button class="button" onclick="unsubscribe()"> Unsubscribe </button>
 					</div>
 				</div>
@@ -340,7 +354,7 @@ function unsubscribe(){
 	swRegistration.pushManager.getSubscription()
 	.then(subscription => {
 		if (subscription) {
-			serverUnsubscribe(subscription);
+			serverUnsubscribe(localStorage.id);
 			return subscription.unsubscribe();
 		}
 	})
@@ -374,11 +388,11 @@ function serverSubscribe(sub){
 	});
 }
 
-function serverUnsubscribe(sub){
+function serverUnsubscribe(id){
 	fetch('/unsubscribe', {
 		method: "POST",
-		headers:{ "Content-Type": 'application/json'},
-		body: JSON.stringify(sub)
+		headers:{ "Content-Type": 'text/plain'},
+		body: id
 	})
 }
 
