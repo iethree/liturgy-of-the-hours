@@ -50,6 +50,20 @@ router.get('/lectionary/:date?', async(req, res, next)=> {
 	res.render('lectionary', results);
 });
 
+router.get('/collect/:date?', async(req, res, next)=> {
+	
+	let date = time.format.numerical(req.params.date);
+	let today = await lectionary.getLectionary(date);
+	res.render('hour', {
+		hour: "Collect",
+		title: today.shortWeek,
+		season: today.season.toLowerCase().replace(/\s/,''),
+		date: today.date,
+		numericalDate: today.numericalDate,
+		parts: [{title: today.collect.title, text: today.collect.text}]
+	} );
+});
+
 router.post('/count', async (req, res, next)=>{
 	var cnt = await count.getCount(req.body.id, req.body.page).catch(log.err);
 	log.info('count', cnt);
