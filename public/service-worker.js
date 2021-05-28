@@ -64,19 +64,6 @@ self.addEventListener('notificationclick', (event) => {
   
 }, false);
 
-function getDays(num){
-   var today = new Date();
-   var hrs = [];
-
-   for(let d=0; d<num; d++){
-      let day = numericalDate( dateFns.addDays(today, d) );
-
-      for(let o of OFFICES)
-         hrs.push(`/hour/${o}/${day}/`);
-   }
-   return hrs;
-}
-
 function snooze(event){
 	console.log('snooze');
 	
@@ -95,48 +82,3 @@ function snooze(event){
 
 	});
 }
-
-// The install handler takes care of precaching the resources we always need.
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(RESOURCECACHE)
-      .then(cache => cache.addAll(RESOURCECACHE_URLS))
-      .then(self.skipWaiting())
-  );
-  event.waitUntil(
-    caches.open(HOURCACHE)
-      .then( cache=>cache.addAll( getDays(14) ) )
-      .then( self.skipWaiting() )
-  );
-});
-
-// The activate handler takes care of cleaning up old caches.
-self.addEventListener('activate', event => {
-  const currentCaches = [RESOURCECACHE, HOURCACHE];
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
-    }).then(cachesToDelete => {
-      return Promise.all(cachesToDelete.map(cacheToDelete => {
-        return caches.delete(cacheToDelete);
-      }));
-    }).then(() => self.clients.claim())
-  );
-});
-
-// The fetch handler serves responses for resources from a cache.
-self.addEventListener('fetch', event => {
-  //ignore extension and post requests
-  if(event.request.url.includes('chrome-extension') || event.request.method==="POST")
-    event.respondWith(
-       fetch(event.request).catch(e=>console.log)
-    );
-
-  //for everything else, cache falling back to network
-  else
-    event.respondWith(
-      caches.match(event.request).then((response)=>{
-        return response || fetch(event.request);
-      })
-    );
-});

@@ -102,6 +102,7 @@ module.exports = {
 	"20210513": "Ascension Day",
 	"20210516": "Easter 7",
 	"20210523": "Pentecost",
+	"20210524": "Proper 4", //actually a monday
 	"20210530": "Trinity Sunday",
 	"20210606": "Proper 5", //actually a monday
 	"20210613": "Proper 6",
