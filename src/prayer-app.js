@@ -9,7 +9,7 @@ const nunjucks = require('nunjucks');
 
 const dailyapp = express();
 const dailyindex = require('./prayer-index.js');
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 dailyapp.use(logger('dev'));
 
