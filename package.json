@@ -8,7 +8,7 @@
     "chalk": "^2.4.1",
     "daily-office-lectionary": "^0.9.0",
     "date-fns": "^2.0.1",
-    "dotenv": "^6.1.0",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "jade": "^1.11.0",
     "jest": "^24.9.0",
@@ -26,8 +26,8 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "constantinople": ">=3.1.1",
     "clean-css": ">=4.1.11",
+    "constantinople": ">=3.1.1",
     "handlebars": ">=4.5.3"
   },
   "scripts": {
