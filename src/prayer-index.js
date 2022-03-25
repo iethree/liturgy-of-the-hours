@@ -15,7 +15,7 @@ const time = require('./time');
 router.get('/', async (req, res, next) => {
 	let lect = await lectionary.getLectionary();
 	if(!lect) lect.season = "ordinary";
-	
+
    res.render('daily-index', {
 		title: 'Liturgy of the Hours',
 		date: time.format.short(),
@@ -32,9 +32,9 @@ router.get('/hour/:hour/:date?', (req, res, next)=>{
 	})
 	.catch(e=>{
 		log.err(e);
-		res.redirect('/'); 
+		res.redirect('/');
 	})
-	
+
 });
 
 router.get('/season/:date?', async(req, res, next)=>{
@@ -44,14 +44,14 @@ router.get('/season/:date?', async(req, res, next)=>{
 });
 
 router.get('/lectionary/:date?', async(req, res, next)=> {
-	
+
 	let date = time.format.numerical(req.params.date);
 	let results = await hours.getHour('lectionary', date).catch(log.err);
 	res.render('lectionary', results);
 });
 
 router.get('/collect/:date?', async(req, res, next)=> {
-	
+
 	let date = time.format.numerical(req.params.date);
 	let today = await lectionary.getLectionary(date);
 	res.render('hour', {
@@ -62,6 +62,20 @@ router.get('/collect/:date?', async(req, res, next)=> {
 		numericalDate: today.numericalDate,
 		parts: [{title: today.collect.title, text: today.collect.text}]
 	} );
+});
+
+router.get('/api/collect/:date?', async(req, res, next)=> {
+
+	let date = time.format.numerical(req.params.date);
+	let today = await lectionary.getLectionary(date);
+	res.send({
+		hour: "Collect",
+		title: today.shortWeek,
+		season: today.season.toLowerCase().replace(/\s/,''),
+		date: today.date,
+		numericalDate: today.numericalDate,
+		parts: [{title: today.collect.title, text: today.collect.text}]
+	});
 });
 
 router.post('/count', async (req, res, next)=>{
