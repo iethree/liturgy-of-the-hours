@@ -1,5 +1,5 @@
 exports.dailyOfficeLectionary = {
-//keys must be lower case
+// keys must be lower case
 "proper 7":{
 	'sunday':{
 		'one': ['1 Samuel 4:12-22', 'James 1:18', 'Matt. 19:23-30'],
@@ -10,7 +10,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Num. 16:1-19', 'Rom. 3:21-31', 'Matt. 19:13-22'],
 	},
 	'tuesday':{
-		'one': ['1 Samuel 6:1-16', 'Acts 5:27-42', 'Luke 21:37--22:13'],
+		'one': ['1 Samuel 6:1-16', 'Acts 5:27-42', 'Luke 21:37-22:13'],
 		'two': ['Num. 16:20-35', 'Rom. 4:1-12', 'Matt. 19:23-30'],
 	},
 	'wednesday':{
@@ -18,7 +18,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Num. 16:36-50', 'Rom. 4:13-25', 'Matt. 20:1-16'],
 	},
 	'thursday':{
-		'one': ['1 Samuel 8:1-22', 'Acts 6:15--7:16', 'Luke 22:24-30'],
+		'one': ['1 Samuel 8:1-22', 'Acts 6:15-7:16', 'Luke 22:24-30'],
 		'two': ['Num. 17:1-11', 'Rom. 5:1-11', 'Matt. 20:17-28'],
 	},
 	'friday':{
@@ -26,7 +26,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Num. 20:1-13', 'Rom. 5:12-21', 'Matt. 20:29-34'],
 	},
 	'saturday':{
-		'one': ['1 Samuel 9:15--10:1', 'Acts 7:30-43', 'Luke 22:39-51'],
+		'one': ['1 Samuel 9:15-10:1', 'Acts 7:30-43', 'Luke 22:39-51'],
 		'two': ['Num. 20:14-29', 'Rom. 6:1-11', 'Matt. 21:1-11'],
 	},
 },
@@ -36,7 +36,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Num. 21:4-9, 21-35', 'Acts 17:(12-21)22-34', 'Luke 13:10-17'],
 	},
 	'monday':{
-		'one': ['1 Samuel 10:17-27', 'Acts 7:44--8:1a', 'Luke 22:52-62'],
+		'one': ['1 Samuel 10:17-27', 'Acts 7:44-8:1a', 'Luke 22:52-62'],
 		'two': ['Num. 22:1-21', 'Rom. 6:12-23', 'Matt. 21:12-22'],
 	},
 	'tuesday':{
@@ -45,14 +45,14 @@ exports.dailyOfficeLectionary = {
 	},
 	'wednesday':{
 		'one': ['1 Samuel 12:1-6, 16-25', 'Acts 8:14-25', 'Luke 23:1-12'],
-		'two': ['Num. 22:41--23:12', 'Rom. 7:13-25', 'Matt. 21:33-46'],
+		'two': ['Num. 22:41-23:12', 'Rom. 7:13-25', 'Matt. 21:33-46'],
 	},
 	'thursday':{
 		'one': ['1 Samuel 13:5-18', 'Acts 8:26-40', 'Luke 23:13-25'],
 		'two': ['Num. 23:11-26', 'Rom. 8:1-11', 'Matt. 22:1-14'],
 	},
 	'friday':{
-		'one': ['1 Samuel 13:19--14:15', 'Acts 9:1-9', 'Luke 23:26-31'],
+		'one': ['1 Samuel 13:19-14:15', 'Acts 9:1-9', 'Luke 23:26-31'],
 		'two': ['Num. 24:1-13', 'Rom. 8:12-17', 'Matt. 22:15-22'],
 	},
 	'saturday':{
@@ -70,7 +70,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Num. 32:1-6, 16-27', 'Rom. 8:26-30', 'Matt. 23:1-12'],
 	},
 	'tuesday':{
-		'one': ['1 Samuel 15:24-35', 'Acts 9:32-43', 'Luke 23:56b--24:11'],
+		'one': ['1 Samuel 15:24-35', 'Acts 9:32-43', 'Luke 23:56b-24:11'],
 		'two': ['Num. 35:1-3, 9-15, 30-34', 'Rom. 8:31-39', 'Matt. 23:13-26'],
 	},
 	'wednesday':{
@@ -78,12 +78,12 @@ exports.dailyOfficeLectionary = {
 		'two': ['Deut. 1:1-18', 'Rom. 9:1-18', 'Matt. 23:27-39'],
 	},
 	'thursday':{
-		'one': ['1 Samuel 16:14--17:11', 'Acts 10:17-33', 'Luke 24:36-53'],
+		'one': ['1 Samuel 16:14-17:11', 'Acts 10:17-33', 'Luke 24:36-53'],
 		'two': ['Deut. 3:18-28', 'Rom. 9:19-33', 'Matt. 24:1-14'],
 	},
 	'friday':{
 		'one': ['1 Samuel 17:17-30', 'Acts 10:34-48', 'Mark 1:1-13'],
-		'two': ['Deut. 31:7-13, 24--32:4', 'Rom. 10:1-13', 'Matt. 24:15-31'],
+		'two': ['Deut. 31:7-13, 24-32:4', 'Rom. 10:1-13', 'Matt. 24:15-31'],
 	},
 	'saturday':{
 		'one': ['1 Samuel 17:31-49', 'Acts 11:1-18', 'Mark 1:14-28'],
@@ -108,12 +108,12 @@ exports.dailyOfficeLectionary = {
 		'two': ["Joshua 3:1-13", "Rom. 11:25-36", "Matt. 25:31-46"],
 	},
 	'thursday':{
-		'one': ["1 Samuel 20:24-42", "Acts 13:1-12", "Mark 2:23--3:6"],
-		'two': ["Joshua 3:14--4:7", "Rom. 12:1-8", "Matt. 26:1-16"],
+		'one': ["1 Samuel 20:24-42", "Acts 13:1-12", "Mark 2:23-3:6"],
+		'two': ["Joshua 3:14-4:7", "Rom. 12:1-8", "Matt. 26:1-16"],
 	},
 	'friday':{
 		'one': ["1 Samuel 21:1-15", "Acts 13:13-25", "Mark 3:7-19a"],
-		'two': ["Joshua 4:19--5:1, 10-15", "Rom. 12:9-21", "Matt. 26:17-25"],
+		'two': ["Joshua 4:19-5:1, 10-15", "Rom. 12:9-21", "Matt. 26:17-25"],
 	},
 	'saturday':{
 		'one': ["1 Samuel 22:1-23", "Acts 13:26-43", "Mark 3:19b-35"],
@@ -122,8 +122,8 @@ exports.dailyOfficeLectionary = {
 },
 "proper 11":{
 	'sunday':{
-		'one': ['1 Samuel 23:7-18', 'Rom. 11:33--12:2', 'Matt. 25:14-30'],
-		'two': ['Joshua 6:15-27', 'Acts 22:30--23:11', 'Mark 2:1-12'],
+		'one': ['1 Samuel 23:7-18', 'Rom. 11:33-12:2', 'Matt. 25:14-30'],
+		'two': ['Joshua 6:15-27', 'Acts 22:30-23:11', 'Mark 2:1-12'],
 	},
 	'monday':{
 		'one': ['1 Samuel 24:1-22', 'Acts 13:44-52', 'Mark 4:1-20'],
@@ -143,7 +143,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'friday':{
 		'one': ['1 Samuel 31:1-13', 'Acts 15:12-21', 'Mark 5:21-43'],
-		'two': ['Joshua 9:22--10:15', 'Rom. 15:14-24', 'Matt. 27:1-10'],
+		'two': ['Joshua 9:22-10:15', 'Rom. 15:14-24', 'Matt. 27:1-10'],
 	},
 	'saturday':{
 		'one': ['2 Samuel 1:1-16', 'Acts 15:22-35', 'Mark 6:1-13'],
@@ -156,7 +156,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Joshua 24:1-15', 'Acts 28:23-31', 'Mark 2:23-28'],
 	},
 	'monday':{
-		'one': ['2 Samuel 2:1-11', 'Acts 15:36--16:5', 'Mark 6:14-29'],
+		'one': ['2 Samuel 2:1-11', 'Acts 15:36-16:5', 'Mark 6:14-29'],
 		'two': ['Joshua 24:16-33', 'Rom. 16:1-16', 'Matt. 27:24-31'],
 	},
 	'tuesday':{
@@ -176,7 +176,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Judges 5:1-18', 'Acts 2:1-21', 'Matt. 28:1-10'],
 	},
 	'saturday':{
-		'one': ['2 Samuel 5:22--6:11', 'Acts 17:16-34', 'Mark 8:1-10'],
+		'one': ['2 Samuel 5:22-6:11', 'Acts 17:16-34', 'Mark 8:1-10'],
 		'two': ['Judges 5:19-31', 'Acts 2:22-36', 'Matt. 28:11-20'],
 	},
 },
@@ -194,8 +194,8 @@ exports.dailyOfficeLectionary = {
 		'two': ['Judges 7:1-18', 'Acts 3:1-11', 'John 1:19-28'],
 	},
 	'wednesday':{
-		'one': ['2 Samuel 9:1-13', 'Acts 19:1-10', 'Mark 8:34--9:1'],
-		'two': ['Judges 7:19--8:12', 'Acts 3:12-26', 'John 1:29-42'],
+		'one': ['2 Samuel 9:1-13', 'Acts 19:1-10', 'Mark 8:34-9:1'],
+		'two': ['Judges 7:19-8:12', 'Acts 3:12-26', 'John 1:29-42'],
 	},
 	'thursday':{
 		'one': ['2 Samuel 11:1-27', 'Acts 19:11-20', 'Mark 9:2-13'],
@@ -207,7 +207,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'saturday':{
 		'one': ['2 Samuel 12:15-31', 'Acts 20:1-16', 'Mark 9:30-41'],
-		'two': ['Judges 9:22-25, 50-57', 'Acts 4:32--5:11', 'John 2:13-25'],
+		'two': ['Judges 9:22-25, 50-57', 'Acts 4:32-5:11', 'John 2:13-25'],
 	},
 },
 "proper 14":{
@@ -229,11 +229,11 @@ exports.dailyOfficeLectionary = {
 	},
 	'thursday':{
 		'one': ['2 Samuel 15:1-18', 'Acts 21:27-36', 'Mark 10:32-45'],
-		'two': ['Judges 14:1-19', 'Acts 6:15--7:16', 'John 4:27-42'],
+		'two': ['Judges 14:1-19', 'Acts 6:15-7:16', 'John 4:27-42'],
 	},
 	'friday':{
-		'one': ['2 Samuel 15:19-37', 'Acts 21:37--22:16', 'Mark 10:46-52'],
-		'two': ['Judges 14:20--15:20', 'Acts 7:17-29', 'John 4:43-54'],
+		'one': ['2 Samuel 15:19-37', 'Acts 21:37-22:16', 'Mark 10:46-52'],
+		'two': ['Judges 14:20-15:20', 'Acts 7:17-29', 'John 4:43-54'],
 	},
 	'saturday':{
 		'one': ['2 Samuel 16:1-23', 'Acts 22:17-29', 'Mark 11:1-11'],
@@ -246,11 +246,11 @@ exports.dailyOfficeLectionary = {
 		'two': ['Judges 16:15-31', '2 Cor. 13:1-11', 'Mark 5:25-34'],
 	},
 	'monday':{
-		'one': ['2 Samuel 17:24--18:8', 'Acts 22:30--23:11', 'Mark 11:12-26'],
-		'two': ['Judges 17:1-13', 'Acts 7:44--8:1a', 'John 5:19-29'],
+		'one': ['2 Samuel 17:24-18:8', 'Acts 22:30-23:11', 'Mark 11:12-26'],
+		'two': ['Judges 17:1-13', 'Acts 7:44-8:1a', 'John 5:19-29'],
 	},
 	'tuesday':{
-		'one': ['2 Samuel 18:9-18', 'Acts 23:12-24', 'Mark 11:27--12:12'],
+		'one': ['2 Samuel 18:9-18', 'Acts 23:12-24', 'Mark 11:27-12:12'],
 		'two': ['Judges 18:1-15', 'Acts 8:1-13', 'John 5:30-47'],
 	},
 	'wednesday':{
@@ -262,7 +262,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Job 1:1-22', 'Acts 8:26-40', 'John 6:16-27'],
 	},
 	'friday':{
-		'one': ['2 Samuel 19:24-43', 'Acts 24:24--25:12', 'Mark 12:35-44'],
+		'one': ['2 Samuel 19:24-43', 'Acts 24:24-25:12', 'Mark 12:35-44'],
 		'two': ['Job 2:1-13', 'Acts 9:1-9', 'John 6:27-40'],
 	},
 	'saturday':{
@@ -272,7 +272,7 @@ exports.dailyOfficeLectionary = {
 },
 "proper 16":{
 	'sunday':{
-		'one': ['2 Samuel 24:1-2, 10-25', 'Gal. 3:23--4:7', 'John 8:12-20'],
+		'one': ['2 Samuel 24:1-2, 10-25', 'Gal. 3:23-4:7', 'John 8:12-20'],
 		'two': ['Job 4:1-6, 12-21', 'Rev. 4:1-11', 'Mark 6:1-6a'],
 	},
 	'monday':{
@@ -280,7 +280,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Job 4:1; 5:1-11, 17-21, 26-27', 'Acts 9:19b-31', 'John 6:52-59'],
 	},
 	'tuesday':{
-		'one': ['1 Kings 1:38--2:4', 'Acts 26:24--27:8', 'Mark 13:28-37'],
+		'one': ['1 Kings 1:38-2:4', 'Acts 26:24-27:8', 'Mark 13:28-37'],
 		'two': ['Job 6:1-4, 8-15, 21', 'Acts 9:32-43', 'John 6:60-71'],
 	},
 	'wednesday':{
@@ -292,11 +292,11 @@ exports.dailyOfficeLectionary = {
 		'two': ['Job 8:1-10, 20-22', 'Acts 10:17-33', 'John 7:14-36'],
 	},
 	'friday':{
-		'one': ['1 Kings 5:1--6:1, 7', 'Acts 28:1-16', 'Mark 14:27-42'],
+		'one': ['1 Kings 5:1-6:1, 7', 'Acts 28:1-16', 'Mark 14:27-42'],
 		'two': ['Job 9:1-15, 32-35', 'Acts 10:34-48', 'John 7:37-52'],
 	},
 	'saturday':{
-		'one': ['1 Kings 7:51--8:21', 'Acts 28:17-31', 'Mark 14:43-52'],
+		'one': ['1 Kings 7:51-8:21', 'Acts 28:17-31', 'Mark 14:43-52'],
 		'two': ['Job 9:1; 10:1-9, 16-22', 'Acts 11:1-18', 'John 8:12-20'],
 	},
 },
@@ -307,28 +307,28 @@ exports.dailyOfficeLectionary = {
 		'two': ['Job 11:1-9, 13-20','Rev. 5:1-14','Matt. 5:1-12'],
 	},
 	'monday':{
-		'one': ['2 Chron. 6:32--7:7','James 2:1-13','Mark 14:53-65'],
+		'one': ['2 Chron. 6:32-7:7','James 2:1-13','Mark 14:53-65'],
 		'two': ['Job 12:1-6, 13-25','Acts 11:19-30','John 8:21-32'],
 	},
 	'tuesday':{
-		'one': ['1 Kings 8:65--9:9','James 2:14-26','Mark 14:66-72'],
+		'one': ['1 Kings 8:65-9:9','James 2:14-26','Mark 14:66-72'],
 		'two': ['Job 12:1; 13:3-17, 21-27','Acts 12:1-17','John 8:33-47'],
 	},
 	'wednesday':{
-		'one': ['1 Kings 9:24--10:13','James 3:1-12','Mark 15:1-11'],
+		'one': ['1 Kings 9:24-10:13','James 3:1-12','Mark 15:1-11'],
 		'two': ['Job 12:1; 14:1-22','Acts 12:18-25','John 8:47-59'],
 	},
 	'thursday':{
-		'one': ['1 Kings 11:1-13','James 3:13--4:12','Mark 15:12-21'],
+		'one': ['1 Kings 11:1-13','James 3:13-4:12','Mark 15:12-21'],
 		'two': ['Job 16:16-22; 17:1, 13-16','Acts 13:1-12','John 9:1-17'],
 	},
 	'friday':{
-		'one': ['1 Kings 11:26-43','James 4:13--5:6','Mark 15:22-32'],
+		'one': ['1 Kings 11:26-43','James 4:13-5:6','Mark 15:22-32'],
 		'two': ['Job 19:1-7, 14-27','Acts 13:13-25','John 9:18-41'],
 	},
 	'saturday':{
 		'one': ['1 Kings 12:1-20','James 5:7-12, 19-20','Mark 15:33-39'],
-		'two': ['Job 22:1-4, 21--23:7','Acts 13:26-43','John 10:1-18'],
+		'two': ['Job 22:1-4, 21-23:7','Acts 13:26-43','John 10:1-18'],
 	},
 },
 
@@ -339,7 +339,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'monday':{
 		'one': ['1 Kings 13:1-10','Phil. 1:1-11','Mark 15:40-47'],
-		'two': ['Job 32:1-10, 19--33:1, 19-28','Acts 13:44-52','John 10:19-30'],
+		'two': ['Job 32:1-10, 19-33:1, 19-28','Acts 13:44-52','John 10:19-30'],
 	},
 	'tuesday':{
 		'one': ['1 Kings 16:23-34','Phil. 1:12-30','Mark 16:1-8(9-20)'],
@@ -358,7 +358,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Job 29:1; 31:24-40','Acts 15:12-21','John 11:30-44'],
 	},
 	'saturday':{
-		'one': ['1 Kings 18:41--19:8','Phil. 3:17--4:7','Matt. 3:13-17'],
+		'one': ['1 Kings 18:41-19:8','Phil. 3:17-4:7','Matt. 3:13-17'],
 		'two': ['Job 38:1-17','Acts 15:22-35','John 11:45-54'],
 	},
 },
@@ -370,7 +370,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'monday':{
 		'one': ['1 Kings 21:1-16','1 Cor. 1:1-19','Matt. 4:1-11'],
-		'two': ['Job 40:1-24','Acts 15:36--16:5','John 11:55--12:8'],
+		'two': ['Job 40:1-24','Acts 15:36-16:5','John 11:55-12:8'],
 	},
 	'tuesday':{
 		'one': ['1 Kings 21:17-29','1 Cor. 1:20-31','Matt. 4:12-17'],
@@ -381,7 +381,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Job 42:1-17','ACts 16:16-24','John 12:20-26'],
 	},
 	'thursday':{
-		'one': ['1 Kings 22:29-45','1 Cor. 2:14--3:15','Matt. 5:1-10'],
+		'one': ['1 Kings 22:29-45','1 Cor. 2:14-3:15','Matt. 5:1-10'],
 		'two': ['Job 28:1-28','Acts 16:25-40','John 12:27-36a'],
 	},
 	'friday':{
@@ -397,7 +397,7 @@ exports.dailyOfficeLectionary = {
 "proper 20":{
 	'sunday':{
 		'one': ['2 Kings 4:8-37','Acts 9:10-31','Luke 3:7-18'],
-		'two': ['Esther 3:1--4:3*','James 1:19-27','Matt. 6:1-6, 16-18'],
+		'two': ['Esther 3:1-4:3*','James 1:19-27','Matt. 6:1-6, 16-18'],
 	},
 	'monday':{
 		'one': ['2 Kings 5:1-19','1 Cor. 4:8-21','Matt. 5:21-26'],
@@ -408,7 +408,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Esther 5:1-14*','Acts 18:12-28','Luke 3:15-22'],
 	},
 	'wednesday':{
-		'one': ['2 Kings 6:1-23','1 Cor. 5:9--6:8','Matt. 5:38-48'],
+		'one': ['2 Kings 6:1-23','1 Cor. 5:9-6:8','Matt. 5:38-48'],
 		'two': ['Esther 6:1-14*','Acts 19:1-10','Luke 4:1-13'],
 	},
 	'thursday':{
@@ -421,7 +421,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'saturday':{
 		'one': ['2 Kings 11:1-20a','1 Cor. 7:10-24','Matt. 6:19-24'],
-		'two': ['Hosea 1:1--2:1','Acts 20:1-16','Luke 4:38-44'],
+		'two': ['Hosea 1:1-2:1','Acts 20:1-16','Luke 4:38-44'],
 	},
 },
 
@@ -444,11 +444,11 @@ exports.dailyOfficeLectionary = {
 	},
 	'thursday':{
 		'one': ['2 Kings 18:28-37','1 Cor. 9:1-15','Matt. 7:22-29'],
-		'two': ['Hosea 5:8--6:6','Acts 21:27-36','Luke 6:1-11'],
+		'two': ['Hosea 5:8-6:6','Acts 21:27-36','Luke 6:1-11'],
 	},
 	'friday':{
 		'one': ['2 Kings 19:1-20','1 Cor. 9:16-27','Matt. 8:1-17'],
-		'two': ['Hosea 10:1-15','Acts 21:37--22:16','Luke 6:12-26'],
+		'two': ['Hosea 10:1-15','Acts 21:37-22:16','Luke 6:12-26'],
 	},
 	'saturday':{
 		'one': ['2 Kings 19:21-36','1 Cor. 10:1-13','Matt. 8:18-27'],
@@ -461,15 +461,15 @@ exports.dailyOfficeLectionary = {
 		'two': ['Hosea 13:4-14','1 Cor. 2:6-16','Matt. 14:1-12'],
 	},
 	'monday':{
-		'one': ['2 Kings 21:1-18','1 Cor. 10:14--11:1','Matt. 8:28-34'],
-		'two': ['Hosea 14:1-9','Acts 22:30--23:11','Luke 6:39-49'],
+		'one': ['2 Kings 21:1-18','1 Cor. 10:14-11:1','Matt. 8:28-34'],
+		'two': ['Hosea 14:1-9','Acts 22:30-23:11','Luke 6:39-49'],
 	},
 	'tuesday':{
 		'one': ['2 Kings 22:1-13','1 Cor. 11:2, 17-22','Matt. 9:1-8'],
 		'two': ['Micah 1:1-9','Acts 23:12-24','Luke 7:1-17'],
 	},
 	'wednesday':{
-		'one': ['2 Kings 22:14--23:3','1 Cor 11:23-34','Matt: 9:9-17'],
+		'one': ['2 Kings 22:14-23:3','1 Cor 11:23-34','Matt: 9:9-17'],
 		'two': ['Micah 2:1-13','Acts 23:23-35','Luke 7:18-35'],
 	},
 	'thursday':{
@@ -477,11 +477,11 @@ exports.dailyOfficeLectionary = {
 		'two': ['Micah 3:1-8','Acts 24:1-23','Luke 7:36-50'],
 	},
 	'friday':{
-		'one': ['2 Kings 23:36--24:17','1 Cor. 12:12-26','Matt. 9:27-34'],
-		'two': ['Micah 3:9--4:5','Acts 24:24--25:12','Luke 8:1-15'],
+		'one': ['2 Kings 23:36-24:17','1 Cor. 12:12-26','Matt. 9:27-34'],
+		'two': ['Micah 3:9-4:5','Acts 24:24-25:12','Luke 8:1-15'],
 	},
 	'saturday':{
-		'one': ['Jer. 35:1-19','1 Cor. 12:27--13:3','Matt. 9:35--10:4'],
+		'one': ['Jer. 35:1-19','1 Cor. 12:27-13:3','Matt. 9:35-10:4'],
 		'two': ['Micah 5:1-4, 10-15','Acts 25:13-27','Luke 8:16-25'],
 	},
 },
@@ -495,16 +495,16 @@ exports.dailyOfficeLectionary = {
 		'two': ['Micah 7:1-7','Acts 26:1-23','Luke 8:26-39'],
 	},
 	'tuesday':{
-		'one': ['Jer. 36:27--37:2','1 Cor. 14:1-12','Matt. 10:16-23'],
-		'two': ['Jonah 1:1-17a','Acts 26:24--27:8','Luke 8:40-56'],
+		'one': ['Jer. 36:27-37:2','1 Cor. 14:1-12','Matt. 10:16-23'],
+		'two': ['Jonah 1:1-17a','Acts 26:24-27:8','Luke 8:40-56'],
 	},
 	'wednesday':{
 		'one': ['Jer. 37:3-21','1 Cor. 14:13-25','Matt. 10:24-33'],
-		'two': ['Jonah 1:17--2:10','Acts 27:9-26','Luke 9:1-17'],
+		'two': ['Jonah 1:17-2:10','Acts 27:9-26','Luke 9:1-17'],
 	},
 	'thursday':{
 		'one': ['Jer. 38:1-13','1 Cor. 14:26-33a, 37-40','Matt. 10:34-42'],
-		'two': ['Jonah 3:1--4:11','Acts 27:27-44','Luke 9:18-27'],
+		'two': ['Jonah 3:1-4:11','Acts 27:27-44','Luke 9:18-27'],
 	},
 	'friday':{
 		'one': ['Jer. 38:14-28','1 Cor. 15:1-11','Matt. 11:1-6'],
@@ -523,7 +523,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'monday':{
 		'one': ['Jer. 44:1-14','1 Cor. 15:30-41','Matt. 11:16-24'],
-		'two': ['Ecclus. 4:20--5:7','Rev. 7:1-8','Luke 9:51-62'],
+		'two': ['Ecclus. 4:20-5:7','Rev. 7:1-8','Luke 9:51-62'],
 	},
 	'tuesday':{
 		'one': ['Lam. 1:1-5(6-9)10-12','1 Cor. 15:41-50','Matt. 11:25-30'],
@@ -549,7 +549,7 @@ exports.dailyOfficeLectionary = {
 
 "proper 25":{
 	'sunday':{
-		'one': ['Haggai 1:1--2:9','Acts 18:24--19:7','Luke 10:25-37'],
+		'one': ['Haggai 1:1-2:9','Acts 18:24-19:7','Luke 10:25-37'],
 		'two': ['Ecclus. 18:19-33','1 Cor. 10:15-24','Matt. 18:15-20'],
 	},
 	'monday':{
@@ -565,11 +565,11 @@ exports.dailyOfficeLectionary = {
 		'two': ['Ecclus. 28:14-26','Rev. 12:1-6','Luke 11:37-52'],
 	},
 	'thursday':{
-		'one': ['Neh. 1:1-11','Rev. 5:11--6:11','Matt. 13:18-23'],
-		'two': ['Ecclus. 31:12-18, 25--32:2','REv. 12:7-17','Luke 11:53--12:12'],
+		'one': ['Neh. 1:1-11','Rev. 5:11-6:11','Matt. 13:18-23'],
+		'two': ['Ecclus. 31:12-18, 25-32:2','REv. 12:7-17','Luke 11:53-12:12'],
 	},
 	'friday':{
-		'one': ['Neh. 2:1-20','Rev. 6:12--7:4','Matt. 13:24-30'],
+		'one': ['Neh. 2:1-20','Rev. 6:12-7:4','Matt. 13:24-30'],
 		'two': ['Ecclus. 34:1-8, 18-22','Rev. 13:1-10','Luke 12:13-31'],
 	},
 	'saturday':{
@@ -581,7 +581,7 @@ exports.dailyOfficeLectionary = {
 "proper 26":{
 	'sunday':{
 		'one': ['Neh. 5:1-19','Acts 20:7-12','Luke 12:22-31'],
-		'two': ['Ecclus. 36:1-17','1 Cor. 12:27--13:13','Matt. 18:21-35'],
+		'two': ['Ecclus. 36:1-17','1 Cor. 12:27-13:13','Matt. 18:21-35'],
 	},
 	'monday':{
 		'one': ['Neh. 6:1-19','Rev. 10:1-11','Matt. 13:36-43'],
@@ -589,7 +589,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'tuesday':{
 		'one': ['Neh. 12:27-31a, 42b-47','Rev. 11:1-19','Matt. 13:44-52'],
-		'two': ['Ecclus. 43:1-22','Rev. 14:14--15:8','Luke 13:1-9'],
+		'two': ['Ecclus. 43:1-22','Rev. 14:14-15:8','Luke 13:1-9'],
 	},
 	'wednesday':{
 		'one': ['Neh. 13:4-22','Rev. 12:1-12','Matt. 13:53-58'],
@@ -620,10 +620,10 @@ exports.dailyOfficeLectionary = {
 	},
 	'tuesday':{
 		'one': ['Neh. 9:26-38','Rev. 18:9-20','Matt. 15:21-28'],
-		'two': ['Joel 1:15--2:2(3-11)','Rev. 19:1-10','Luke 14:25-35'],
+		'two': ['Joel 1:15-2:2(3-11)','Rev. 19:1-10','Luke 14:25-35'],
 	},
 	'wednesday':{
-		'one': ['Neh. 7:73b--8:3, 5-18','Rev. 18:21-24','Matt. 15:29-39'],
+		'one': ['Neh. 7:73b-8:3, 5-18','Rev. 18:21-24','Matt. 15:29-39'],
 		'two': ['Joel 2:12-19','Rev. 19:11-21','Luke 15:1-10'],
 	},
 	'thursday':{
@@ -632,7 +632,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'friday':{
 		'one': ['1 Macc. 1:41-63','Rev. 19:11-16','Matt. 16:13-20'],
-		'two': ['Joel 2:28--3:8','James 1:16-27','Luke 16:1-9'],
+		'two': ['Joel 2:28-3:8','James 1:16-27','Luke 16:1-9'],
 	},
 	'saturday':{
 		'one': ['1 Macc. 2:1-28','Rev. 20:1-6','Matt. 16:21-28'],
@@ -643,7 +643,7 @@ exports.dailyOfficeLectionary = {
 "proper 28":{
 	'sunday':{
 		'one': ['1 Macc. 2:29-43, 49-50','Acts 28:14b-23','Luke 16:1-13'],
-		'two': ['Hab. 1:1-4(5-11)12--2:1','Phil. 3:13--4:1','Matt. 23:13-24'],
+		'two': ['Hab. 1:1-4(5-11)12-2:1','Phil. 3:13-4:1','Matt. 23:13-24'],
 	},
 	'monday':{
 		'one': ['1 Macc. 3:1-24','Rev. 20:7-15','Matt. 17:1-13'],
@@ -655,11 +655,11 @@ exports.dailyOfficeLectionary = {
 	},
 	'wednesday':{
 		'one': ['1 Macc. 3:42-60','Rev. 21:9-21','Matt. 17:22-27'],
-		'two': ['Mal. 1:1, 6-14','James 3:13--4:12','Luke 17:11-19'],
+		'two': ['Mal. 1:1, 6-14','James 3:13-4:12','Luke 17:11-19'],
 	},
 	'thursday':{
-		'one': ['1 Macc. 4:1-25','Rev. 21:22--22:5','Matt. 18:1-9'],
-		'two': ['Mal. 2:1-16','James 4:13--5:6','Luke 17:20-37'],
+		'one': ['1 Macc. 4:1-25','Rev. 21:22-22:5','Matt. 18:1-9'],
+		'two': ['Mal. 2:1-16','James 4:13-5:6','Luke 17:20-37'],
 	},
 	'friday':{
 		'one': ['1 Macc. 4:36-59','Rev. 22:6-13','Matt. 18:10-20'],
@@ -667,7 +667,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'saturday':{
 		'one': ['Isa. 65:17-25','Rev. 22:14-21','Matt. 18:21-35'],
-		'two': ['Mal. 3:13--4:6','James 5:13-20','Luke 18:9-14'],
+		'two': ['Mal. 3:13-4:6','James 5:13-20','Luke 18:9-14'],
 	},
 },
 
@@ -693,7 +693,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Zech. 13:1-9','Eph. 1:15-23','Luke 19:11-27'],
 	},
 	'friday':{
-		'one': ['Isa. 24:14-23','1 Pet. 3:13--4:6','Matt. 20:17-28'],
+		'one': ['Isa. 24:14-23','1 Pet. 3:13-4:6','Matt. 20:17-28'],
 		'two': ['Zech. 14:1-11','Rom. 15:7-13','Luke 19:28-40'],
 	},
 	'saturday':{
@@ -705,7 +705,7 @@ exports.dailyOfficeLectionary = {
 "first sunday of advent":{
 	'sunday':{
 		'one': ['Isa. 1:1-9','2 Pet. 3:1-10'],
-		'two': ['Amos 1:1-5, 13--2:8','1Thess. 5:1-11','Luke 21:5-19'],
+		'two': ['Amos 1:1-5, 13-2:8','1Thess. 5:1-11','Luke 21:5-19'],
 	},
 	'monday':{
 		'one': ['Isa. 1:10-20','1 Thess. 1:1-10','Luke 20:1-'],
@@ -717,14 +717,14 @@ exports.dailyOfficeLectionary = {
 	},
 	'wednesday':{
 		'one': ['Isa. 2:1-11','1 Thess. 2:13-20','Luke 20:19-26'],
-		'two': ['Amos 3:12--4:5','2 Pet. 3:1-10','Matt. 21:23-32'],
+		'two': ['Amos 3:12-4:5','2 Pet. 3:1-10','Matt. 21:23-32'],
 	},
 	'thursday':{
 		'one': ['Isa. 2:12-22','1 Thess. 3:1-13','Luke 20:27-40'],
 		'two': ['Amos 4:6-13','2 Pet. 3:11-18','Matt. 21:33-46'],
 	},
 	'friday':{
-		'one': ['Isa. 3:8-15','1 Thess. 4:1-12','Luke 20:41--21:4'],
+		'one': ['Isa. 3:8-15','1 Thess. 4:1-12','Luke 20:41-21:4'],
 		'two': ['Amos 5:1-17','Jude 1-16','Matt. 22_1-14'],
 	},
 	'saturday':{
@@ -747,15 +747,15 @@ exports.dailyOfficeLectionary = {
 		'two': ['Amos 7:10-17','Rev. 1:9-16','Matt. 22:34-46'],
 	},
 	'wednesday':{
-		'one': ['Isa. 6:1-13','2 Thess. 1:1-12','John 7:53--8:11'],
-		'two': ['Amos 8:1-14','Rev. 1:17--2:7','Matt. 23:1-12'],
+		'one': ['Isa. 6:1-13','2 Thess. 1:1-12','John 7:53-8:11'],
+		'two': ['Amos 8:1-14','Rev. 1:17-2:7','Matt. 23:1-12'],
 	},
 	'thursday':{
 		'one': ['Isa. 7:1-9','2 Thess. 2:1-12','Luke 22:1-13'],
 		'two': ['Amos 9:1-10','Rev. 2:8-17','Matt. 23:13-26'],
 	},
 	'friday':{
-		'one': ['Isa. 7:10-25','2 Thess. 2:13--3:5','Luke 22:14-30'],
+		'one': ['Isa. 7:10-25','2 Thess. 2:13-3:5','Luke 22:14-30'],
 		'two': ['Haggai 1:1-15','Rev. 2:18-29','Matt. 23:27-39'],
 	},
 	'saturday':{
@@ -770,7 +770,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Amos 9:11-15','2 Thess. 2:1-3, 13-17','John 5:30-47'],
 	},
 	'monday':{
-		'one': ['Isa. 8:16--9:1','2 Pet. 1:1-11','Luke 22:39-53'],
+		'one': ['Isa. 8:16-9:1','2 Pet. 1:1-11','Luke 22:39-53'],
 		'two': ['Zech. 1:7-17','Rev. 3:7-13','Matt. 24:15-3'],
 	},
 	'tuesday':{
@@ -782,12 +782,12 @@ exports.dailyOfficeLectionary = {
 		'two': ['Zech. 3:1-10','Rev. 4:1-8','Matt. 24:45-51'],
 	},
 	'thursday':{
-		'one': ['Isa. 9:18--10:4','2 Pet. 2:10b-16','Matt. 3:1-12'],
-		'two': ['Zech. 4:1-14','Rev. 4:9--5:5','Matt. 25:1-13'],
+		'one': ['Isa. 9:18-10:4','2 Pet. 2:10b-16','Matt. 3:1-12'],
+		'two': ['Zech. 4:1-14','Rev. 4:9-5:5','Matt. 25:1-13'],
 	},
 	'friday':{
 		'one': ['Isa. 10:5-19','2 Pet. 2:17-22','Matt. 11:2-15'],
-		'two': ['Zech. 7:8--8:8','Rev. 5:6-14','Matt. 25:14-30'],
+		'two': ['Zech. 7:8-8:8','Rev. 5:6-14','Matt. 25:14-30'],
 	},
 	'saturday':{
 		'one': ['Isa. 10:20-27','Jude 17-25','Luke 3:1-9'],
@@ -805,15 +805,15 @@ exports.dailyOfficeLectionary = {
 		'two': ['Zeph. 3:14-20','Titus 1:1-16','Luke 1:1-25'],
 	},
 	'tuesday':{
-		'one': ['Isa 11:10-16','Rev. 20:11--21:8','Luke 1:5-25'],
+		'one': ['Isa 11:10-16','Rev. 20:11-21:8','Luke 1:5-25'],
 		'two': ['1 Samuel 2:1b-10','Titus 2:1-10','Luke 1:26-38'],
 	},
 	'wednesday':{
 		'one': ['Isa. 28:9-22','Rev. 21:9-21','Luke 1:26-38'],
-		'two': ['2 Samuel 7:1-17','Titus 2:11--3:8a','Luke 1:39-48a(48b-56)'],
+		'two': ['2 Samuel 7:1-17','Titus 2:11-3:8a','Luke 1:39-48a(48b-56)'],
 	},
 	'thursday':{
-		'one': ['Isa. 29:13-24','Rev. 21:22--22:5','Luke 1:39-48a(48b-56)'],
+		'one': ['Isa. 29:13-24','Rev. 21:22-22:5','Luke 1:39-48a(48b-56)'],
 		'two': ['2 Samuel 7:18-29','Gal. 3:1-14','Luke 1:57-66'],
 	},
 	'friday':{
@@ -828,7 +828,7 @@ exports.dailyOfficeLectionary = {
 
 "christmas eve":{
 	'dec 24':{
-		'one': ['Baruch 4:36--5:9','Gal. 3:23--4:7','Mat. 1:18-25'],
+		'one': ['Baruch 4:36-5:9','Gal. 3:23-4:7','Mat. 1:18-25'],
 		'two': ['Isa. 35:1-10','Rev. 22:12-17, 21','Luke 1:67-80'],
 	},
 	'christmas eve':{
@@ -840,18 +840,18 @@ exports.dailyOfficeLectionary = {
 "sixth sunday after the epiphany":{
 	'sunday':{
 		'one': ['Isa. 62:6-12', '1 John 2:3-11', 'John 8:12-19'],
-		'two': ['Gen. 29:20-35', '1 Tim. 3:14--4:10', 'Mark 10:23-31'],
+		'two': ['Gen. 29:20-35', '1 Tim. 3:14-4:10', 'Mark 10:23-31'],
 	},
 	'monday':{
 		'one': ['Isa. 63:1-6', '1 Tim. 1:1-17', 'Mark 11:1-11'],
 		'two': ['Gen. 30:1-24', '1 John 1:1-10', 'John 9:1-17'],
 	},
 	'tuesday':{
-		'one': ['Isa. 63:7-14', '1 Tim. 1:18--2:8', 'Mark 11:12-26'],
+		'one': ['Isa. 63:7-14', '1 Tim. 1:18-2:8', 'Mark 11:12-26'],
 		'two': ['Gen. 31:1-24', '1 John 2:1-11', 'John 9:18-41'],
 	},
 	'wednesday':{
-		'one': ['Isa. 63:15--64:9', '1 Tim. 3:1-16', 'Mark 11:27--12:12'],
+		'one': ['Isa. 63:15-64:9', '1 Tim. 3:1-16', 'Mark 11:27-12:12'],
 		'two': ['Gen. 31:25-50', '1 John 2:12-17', 'John 10:1-18'],
 	},
 	'thursday':{
@@ -860,7 +860,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'friday':{
 		'one': ['Isa. 65:17-25', '1 Tim. 5:17-22(23-25)', 'Mark 12:28-34'],
-		'two': ['Gen. 32:22--33:17', '1 John 3:1-10', 'John 10:31-42'],
+		'two': ['Gen. 32:22-33:17', '1 John 3:1-10', 'John 10:31-42'],
 	},
 	'saturday':{
 		'one': ['Isa. 66:1-6', '1 Tim. 6:6-21', 'Mark 12:35-44'],
@@ -875,26 +875,26 @@ exports.dailyOfficeLectionary = {
 	},
 	'monday':{
 		'one': ['Ruth 1:1-14', '2 Cor. 1:1-11', 'Matt. 5:1-12'],
-		'two': ['Prov. 3:11-20', '1 John 3:18--4:6', 'John 11:17-29'],
+		'two': ['Prov. 3:11-20', '1 John 3:18-4:6', 'John 11:17-29'],
 	},
 	'tuesday':{
 		'one': ['Ruth 1:15-22', '2 Cor. 1:12-22', 'Matt. 5:13-20'],
 		'two': ['Prov. 4:1-27', '1 John 4:7-21', 'John 11:30-44'],
 	},
 	'wednesday':{
-		'one': ['Ruth 2:1-13', '2  Cor. 1:23--2:17', 'Matt. 5:21-26'],
+		'one': ['Ruth 2:1-13', '2  Cor. 1:23-2:17', 'Matt. 5:21-26'],
 		'two': ['Prov. 6:1-19', '1 John 5:1-12', 'John 11:45-54'],
 	},
 	'thursday':{
 		'one': ['Ruth 2:14-23', '2 Cor. 3:1-18', 'Matt. 5:27-37'],
-		'two': ['Prov. 7:1-27', '1 John 5:13-21', 'John 11:55--12:8'],
+		'two': ['Prov. 7:1-27', '1 John 5:13-21', 'John 11:55-12:8'],
 	},
 	'friday':{
 		'one': ['Ruth 3:1-18', '2 Cor. 4:1-12', 'Matt. 5:38-48'],
 		'two': ['Prov. 8:1-21', 'Philemon 1-25', 'John 12:9-19'],
 	},
 	'saturday':{
-		'one': ['Ruth 4:1-17', '2 Cor. 4:13--5:10', 'Matt. 6:1-16'],
+		'one': ['Ruth 4:1-17', '2 Cor. 4:13-5:10', 'Matt. 6:1-16'],
 		'two': ['Prov. 8:22-36', '2 Tim. 1:1-14', 'John 12:20-26'],
 	},
 },
@@ -906,7 +906,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'monday':{
 		'one': ['Deut. 4:9-14', '2 Cor. 10:1-18', 'Matt. 6:7-15'],
-		'two': ['Prov. 10:1-12', '2 Tim. 1:15--2:13', 'John 12:27-36a'],
+		'two': ['Prov. 10:1-12', '2 Tim. 1:15-2:13', 'John 12:27-36a'],
 	},
 	'tuesday':{
 		'one': ['Deut. 4:15-24', '2 Cor. 11:1-21a', 'Matt. 6:16-23'],
@@ -918,11 +918,11 @@ exports.dailyOfficeLectionary = {
 	},
 	'thursday':{
 		'one': ['Deut. 4:32-40', '2 Cor. 12:1-10', 'Matt. 7:1-12'],
-		'two': ['Prov. 21:30--22:6', '2 Tim. 4:1-8', 'John 13:21-30'],
+		'two': ['Prov. 21:30-22:6', '2 Tim. 4:1-8', 'John 13:21-30'],
 	},
 	'friday':{
 		'one': ['Deut. 5:1-22', '2 Cor. 12:11-21', ' Matt. 7:13-21'],
-		'two': ['Prov. 23:19-21, 29--24:2', '2 Tim. 4:9-22', 'John 13:31-38'],
+		'two': ['Prov. 23:19-21, 29-24:2', '2 Tim. 4:9-22', 'John 13:31-38'],
 	},
 	'saturday':{
 		'one': ['Deut. 5:22-33', '2 Cor. 13:1-14', 'Matt. 7:22-29'],
@@ -944,7 +944,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Prov. 30:1-4, 24-33', 'Phil. 3:1-11', 'John 18:28-38'],
 	},
 	'wednesday':{ //ash wed
-		'one': ['Jonah 3:1--4:11', 'Heb. 12:1-14', 'Luke 18:9-14'],
+		'one': ['Jonah 3:1-4:11', 'Heb. 12:1-14', 'Luke 18:9-14'],
 		'two': ['Amos 5:6-15', 'Heb. 12:1-14', 'Luke 18:9-14'],
 	},
 	'thursday':{
@@ -975,12 +975,12 @@ exports.dailyOfficeLectionary = {
 		'two': ['Gen. 37:12-24', '1 Cor. 1:20-31', 'Mark 1:14-28'],
 	},
 	'wednesday':{
-		'one': ['Deut. 9:13-21', 'Heb. 3:12-19', 'John 2:23--3:15'],
+		'one': ['Deut. 9:13-21', 'Heb. 3:12-19', 'John 2:23-3:15'],
 		'two': ['Gen. 37:25-36', '1 Cor. 2:1-13', 'Mark 1:29-45'],
 	},
 	'thursday':{
-		'one': ['Deut. 9:23--10:5', 'Heb. 4:1-10', 'John 3:16-21'],
-		'two': ['Gen. 39:1-23', '1 Cor. 2:14--3:15', 'Mark 2:1-12'],
+		'one': ['Deut. 9:23-10:5', 'Heb. 4:1-10', 'John 3:16-21'],
+		'two': ['Gen. 39:1-23', '1 Cor. 2:14-3:15', 'Mark 2:1-12'],
 	},
 	'friday':{
 		'one': ['Deut. 10:12-22', 'Heb. 4:11-16', 'John 3:22-36'],
@@ -988,13 +988,13 @@ exports.dailyOfficeLectionary = {
 	},
 	'saturday':{
 		'one': ['Deut. 11:18-28', 'Heb. 5:1-10', 'John 4:1-26'],
-		'two': ['Gen. 41:1-13', '1 Cor. 4:1-7', 'Mark 2:23--3:6'],
+		'two': ['Gen. 41:1-13', '1 Cor. 4:1-7', 'Mark 2:23-3:6'],
 	},
 },
 
 "lent 2":{
 	'sunday':{
-		'one': ['Jer. 1:1-10', '1 Cor. 3:11-23', 'Mark 3:31--4:9'],
+		'one': ['Jer. 1:1-10', '1 Cor. 3:11-23', 'Mark 3:31-4:9'],
 		'two': ['Gen. 41:14-45', 'Rom. 6:3-14', 'John 5:19-24'],
 	},
 	'monday':{
@@ -1006,15 +1006,15 @@ exports.dailyOfficeLectionary = {
 		'two': ['Gen. 42:1-17', '1 Cor. 5:1-8', 'Mark 3:19b-35'],
 	},
 	'wednesday':{
-		'one': ['Jer. 3:6-18', 'Rom. 1:28--2:11', 'John 5:1-18'],
-		'two': ['Gen. 42:18-28', '1 Cor. 5:9--6:8', 'Mark 4:1-20'],
+		'one': ['Jer. 3:6-18', 'Rom. 1:28-2:11', 'John 5:1-18'],
+		'two': ['Gen. 42:18-28', '1 Cor. 5:9-6:8', 'Mark 4:1-20'],
 	},
 	'thursday':{
 		'one': ['Jer. 4:9-10, 19-28', 'Rom. 2:12-24', 'John 5:19-29'],
 		'two': ['Gen. 42:29-38', '1 Cor. 6:12-20', 'Mark 4:21-34'],
 	},
 	'friday':{
-		'one': ['Jer. 5:1-9', 'Rom. 2:25--3:18', 'John 5:30-47'],
+		'one': ['Jer. 5:1-9', 'Rom. 2:25-3:18', 'John 5:30-47'],
 		'two': ['Gen. 43:1-15', '1 Cor. 7:1-9', 'Mark 4:35-41'],
 	},
 	'saturday':{
@@ -1037,7 +1037,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Gen. 45:1-15', '1 Cor. 7:32-40', 'Mark 6:1-13'],
 	},
 	'wednesday':{
-		'one': ['Jer. 8:18--9:6', 'Rom. 5:1-11', 'John 8:12-20'],
+		'one': ['Jer. 8:18-9:6', 'Rom. 5:1-11', 'John 8:12-20'],
 		'two': ['Gen. 45:16-28', '1 Cor. 8:1-13', 'Mark 6:13-29'],
 	},
 	'thursday':{
@@ -1050,22 +1050,22 @@ exports.dailyOfficeLectionary = {
 	},
 	'saturday':{
 		'one': ['Jer. 13:1-11', 'Rom. 6:12-23', 'John 8:47-59'],
-		'two': ['Gen. 47:27--48:7', '1 Cor. 10:1-13', 'Mark 7:1-23'],
+		'two': ['Gen. 47:27-48:7', '1 Cor. 10:1-13', 'Mark 7:1-23'],
 	},
 },
 
 "lent 4":{
 	'sunday':{
-		'one': ['Jer. 14:1-9, 17-22', 'Gal. 4:21--5:1', 'Mark 8:11-21'],
+		'one': ['Jer. 14:1-9, 17-22', 'Gal. 4:21-5:1', 'Mark 8:11-21'],
 		'two': ['Gen. 48:8-22', 'Rom. 8:11-25', 'John 6:27-40'],
 	},
 	'monday':{
 		'one': ['Jer. 16:10-21', 'Rom. 7:1-12', 'John 6:1-15'],
-		'two': ['Gen. 49:1-28', '1 Cor. 10:14--11:1', 'Mark 7:24-37'],
+		'two': ['Gen. 49:1-28', '1 Cor. 10:14-11:1', 'Mark 7:24-37'],
 	},
 	'tuesday':{
 		'one': ['Jer. 17:19-27', 'Rom. 7:13-25', 'John 6:16-27'],
-		'two': ['Gen. 49:29--50:14', '1 Cor. 11:17-34', 'Mark 8:1-10'],
+		'two': ['Gen. 49:29-50:14', '1 Cor. 11:17-34', 'Mark 8:1-10'],
 	},
 	'wednesday':{
 		'one': ['Jer. 18:1-11', 'Rom. 8:1-11', 'John 6:27-40'],
@@ -1073,22 +1073,22 @@ exports.dailyOfficeLectionary = {
 	},
 	'thursday':{
 		'one': ['Jer. 22:13-23', 'Rom. 8:12-27', 'John 6:41-51'],
-		'two': ['Exod. 1:6-22', '1 Cor. 12:12-26', 'Mark 8:27--9:1'],
+		'two': ['Exod. 1:6-22', '1 Cor. 12:12-26', 'Mark 8:27-9:1'],
 	},
 	'friday':{
 		'one': ['Jer. 23:1-8', 'Rom. 8:28-39', 'John 6:52-59'],
-		'two': ['Exod. 2:1-22', '1 Cor. 12:27--13:3', 'Mark 9:2-13'],
+		'two': ['Exod. 2:1-22', '1 Cor. 12:27-13:3', 'Mark 9:2-13'],
 	},
 	'saturday':{
 		'one': ['Jer. 23:9-15', 'Rom. 9:1-18', 'John 6:60-71'],
-		'two': ['Exod. 2:23--3:15', '1 Cor. 13:1-13', 'Mark 9:14-29'],
+		'two': ['Exod. 2:23-3:15', '1 Cor. 13:1-13', 'Mark 9:14-29'],
 	},
 },
 
 "lent 5":{
 	'sunday':{
-		'one': ['Jer. 23:16-32', '1 Cor. 9:19-27', 'Mark 8:31--9:1'],
-		'two': ['Exod. 3:16--4:12', 'Rom. 12:1-21', 'John 8:46-59'],
+		'one': ['Jer. 23:16-32', '1 Cor. 9:19-27', 'Mark 8:31-9:1'],
+		'two': ['Exod. 3:16-4:12', 'Rom. 12:1-21', 'John 8:46-59'],
 	},
 	'monday':{
 		'one': ['Jer. 24:1-10', 'Rom. 9:19-33', 'John 9:1-17'],
@@ -1096,15 +1096,15 @@ exports.dailyOfficeLectionary = {
 	},
 	'tuesday':{
 		'one': ['Jer. 25:8-17', 'Rom. 10:1-13', 'John 9:18-41'],
-		'two': ['Exod. 5:1--6:1', '1 Cor. 14:20-33, 39-40', 'Mark 9:42-50'],
+		'two': ['Exod. 5:1-6:1', '1 Cor. 14:20-33, 39-40', 'Mark 9:42-50'],
 	},
 	'wednesday':{
 		'one': ['Jer. 25:30-38', 'Rom. 10:14-21', 'John 10:1-18'],
-		'two': ['Exod. 7:8-24', '2 Cor. 2:14--3:6', 'Mark 10:1-16'],
+		'two': ['Exod. 7:8-24', '2 Cor. 2:14-3:6', 'Mark 10:1-16'],
 	},
 	'thursday':{
 		'one': ['Jer. 26:1-16', 'Rom. 11:1-12', 'John 10:19-42'],
-		'two': ['Exod. 7:25--8:19', '2 Cor. 3:7-18', 'Mark 10:17-31'],
+		'two': ['Exod. 7:25-8:19', '2 Cor. 3:7-18', 'Mark 10:17-31'],
 	},
 	'friday':{
 		'one': ['Jer. 29:1, 4-13', 'Rom. 11:13-24', 'John 11:1-27, or 12:1-10'],
@@ -1112,7 +1112,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'saturday':{
 		'one': ['Jer. 31:27-34', 'Rom. 11:25-36', 'John 11:28-44, or 12:37-50'],
-		'two': ['Exod. 10:21--11:8', '2 Cor. 4:13-18', 'Mark 10:46-52'],
+		'two': ['Exod. 10:21-11:8', '2 Cor. 4:13-18', 'Mark 10:46-52'],
 	},
 },
 
@@ -1131,7 +1131,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'wednesday':{
 		'one': ['Jer. 17:5-10, 14-17', 'Phil. 4:1-13', 'John 12:27-36'],
-		'two': ['Lam. 2:1-9', '2 Cor. 1:23--2:11', 'Mark 12:1-11'],
+		'two': ['Lam. 2:1-9', '2 Cor. 1:23-2:11', 'Mark 12:1-11'],
 	},
 	'thursday':{
 		'one': ['Jer. 20:7-11', '1 Cor. 10:14-17; 11:27-32', 'John 17:1-11(12-26)'],
@@ -1174,7 +1174,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'saturday':{
 		'one': ['Isa. 25:1-9', 'Acts 4:13-31', 'John 16:16-33'],
-		'two': ['Exod 13:17--14:4', '2 Cor. 4:16--5:10', 'Mark 12:18-27'],
+		'two': ['Exod 13:17-14:4', '2 Cor. 4:16-5:10', 'Mark 12:18-27'],
 	},
 },
 
@@ -1193,7 +1193,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'wednesday':{
 		'one': ['Dan. 2:17-30', '1 John 2:12-17', 'John 17:20-26'],
-		'two': ['Exod. 15:22--16:10', '1 Pet. 2:1-10', 'John 15:1-11'],
+		'two': ['Exod. 15:22-16:10', '1 Pet. 2:1-10', 'John 15:1-11'],
 	},
 	'thursday':{
 		'one': ['Dan. 2:31-49', '1 John 2:18-29', 'Luke 3:1-14'],
@@ -1201,7 +1201,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'friday':{
 		'one': ['Dan. 3:1-18', '1 John 3:1-10', 'Luke 3:15-22'],
-		'two': ['Exod. 16:22-36', '1 Pet. 3:13--4:6', 'John 16:1-15'],
+		'two': ['Exod. 16:22-36', '1 Pet. 3:13-4:6', 'John 16:1-15'],
 	},
 	'saturday':{
 		'one': ['Dan. 3:19-30', '1 John 3:11-18', 'Luke 4:1-13'],
@@ -1215,7 +1215,7 @@ exports.dailyOfficeLectionary = {
 		'two': ['Exod. 18:1-12', '1 John 2:7-17', 'Mark 16:9-20'],
 	},
 	'monday':{
-		'one': ['Dan. 4:19-27', '1 John 3:19--4:6', 'Luke 4:14-30'],
+		'one': ['Dan. 4:19-27', '1 John 3:19-4:6', 'Luke 4:14-30'],
 		'two': ['Exod. 18:13-27', '1 Pet. 5:1-14', 'Matt. (1:1-17); 3:1-6'],
 	},
 	'tuesday':{
@@ -1228,7 +1228,7 @@ exports.dailyOfficeLectionary = {
 	},
 	'thursday':{
 		'one': ['Dan. 5:13-30', '1 John 5:13-20(21)', 'Luke 5:1-11'],
-		'two': ['Exod. 20:1-21', 'Col. 1:24--2:7', 'Matt. 4:1-11'],
+		'two': ['Exod. 20:1-21', 'Col. 1:24-2:7', 'Matt. 4:1-11'],
 	},
 	'friday':{
 		'one': ['Dan. 6:1-15', '2 John 1-13', 'Luke 5:12-26'],
@@ -1246,15 +1246,15 @@ exports.dailyOfficeLectionary = {
 		'two': ['Exod. 25:1-4, 30-38', '1 John 2:18-29', 'Mark 6:30-44'],
 	},
 	'monday':{
-		'one': ['Wisdom 1:16--2:11, 21-24', 'Col. 1:1-14', 'Luke 6:1-11'],
-		'two': ['Exod. 32:1-20', 'Col. 3:18--4:6(7-18)', 'Matt. 5:1-10'],
+		'one': ['Wisdom 1:16-2:11, 21-24', 'Col. 1:1-14', 'Luke 6:1-11'],
+		'two': ['Exod. 32:1-20', 'Col. 3:18-4:6(7-18)', 'Matt. 5:1-10'],
 	},
 	'tuesday':{
 		'one': ['Wisdom 3:1-9', 'Col. 1:15-23', 'Luke 6:12-26'],
 		'two': ['Exod. 32:21-34', '1 Thess. 1:1-10', 'Matt. 5:11-16'],
 	},
 	'wednesday':{
-		'one': ['Wisdom 4:16--5:8', 'Col. 1:24--2:7', 'Luke 6:27-38'],
+		'one': ['Wisdom 4:16-5:8', 'Col. 1:24-2:7', 'Luke 6:27-38'],
 		'two': ['Exod. 33:1-23', '1 Thess. 2:1-12', 'Matt. 5:17-20'],
 	},
 	'thursday':{

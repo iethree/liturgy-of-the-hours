@@ -64,6 +64,12 @@ router.get('/collect/:date?', async(req, res, next)=> {
 	} );
 });
 
+router.get('/api/lectionary/:date?', async(req, res, next)=> {
+	const date = time.format.numerical(req.params.date);
+	const results = await hours.getHour('lectionary', date).catch(log.err);
+	return res.status(200).json(results);
+});
+
 router.get('/api/collect/:date?', async(req, res, next)=> {
 
 	let date = time.format.numerical(req.params.date);
