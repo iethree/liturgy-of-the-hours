@@ -158,7 +158,7 @@ module.exports = {
 	"20220508": "Easter 4",
 	"20220515": "Easter 5",
 	"20220522": "Easter 6",
-	"20220522": "Ascension Day",
+	"20220526": "Ascension Day",
 	"20220529": "Easter 7",
 	"20220605": "Pentecost",
 	"20220612": "Trinity Sunday",
