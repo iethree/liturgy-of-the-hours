@@ -73,7 +73,7 @@ router.get('/api/lectionary/:date?', async(req, res, next)=> {
 router.get('/api/collect/:date?', async(req, res, next)=> {
 
 	let date = time.format.numerical(req.params.date);
-	let today = await lectionary.getLectionary(date);
+	let today = await lectionary.getLectionary(date).catch(log.err);
 	res.send({
 		hour: "Collect",
 		title: today.shortWeek,
