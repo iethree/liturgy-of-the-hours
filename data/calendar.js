@@ -188,5 +188,18 @@ module.exports = {
 	"20221113": "Proper 28",
 	"20221120": "Proper 29", //christ the king
 	"20221127": "Advent 1",
+	"20221204": "Advent 2",
+	"20221211": "Advent 3",
+	"20221218": "Advent 4",
+	"20221218": "Advent 4",
+	"20221225": "Christmas Day",
+	"20230101": "Christmas 2",
+	"20230106": "Epiphany",
+	"20230108": "Epiphany 1", //baptism of the lord
+	"20230115": "Epiphany 2",
+	"20230122": "Epiphany 3",
+	"20230129": "Epiphany 4",
+	"20230205": "Epiphany 5",
+	"20230212": "Epiphany 6",
 };
 
