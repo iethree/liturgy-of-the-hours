@@ -242,6 +242,7 @@ module.exports = {
 	"20231022": "Proper 24",
 	"20231029": "Proper 25",
 	"20231105": "All Saints Day",
+	"20231106": "Proper 26", // monday, somethings broken with all saints lectionary
 	"20231112": "Proper 27",
 	"20231119": "Proper 28",
 	"20231126": "Proper 29", //christ the king
