@@ -1,11 +1,14 @@
-<html>
-   {% block head %} 
-      {% include "head.njk" %}
-   {% endblock %}
+<!doctype html>
+<html lang="en">
+  {% include "head.njk" %}
+  <body>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+      <span aria-hidden="true">🌓</span>
+      <span id="theme-toggle-label">auto</span>
+    </button>
 
-<body>
-   {% block body %} {% endblock %}
+    {% block body %}{% endblock %}
 
-   {% block scripts %} {% endblock %}
-</body>
+    {% block scripts %}{% endblock %}
+  </body>
 </html>

@@ -1,0 +1,41 @@
+{% extends 'base.njk' %}
+
+{% macro tagList(id, tags, options, category) %}
+  <div class="buttons tag-buttons">
+    {% for option in options %}
+      {% if tags and tags.length and tags.indexOf(option) != -1 %}
+        <button class="button is-small is-dark tag-btn" data-id="{{ id }}" data-category="{{ category }}">{{ option }}</button>
+      {% else %}
+        <button class="button is-small tag-btn" data-id="{{ id }}" data-category="{{ category }}">{{ option }}</button>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% block body %}
+  <div class="container padded">
+    <div class="columns is-centered">
+      <div class="column is-narrow">
+        <div class="has-text-centered">
+          <a href="/list"><h2>{{ title }} ({{ parts.length }})</h2></a>
+          {% for part in parts %}
+            <div class="has-text-left box">
+              <h3 class="title is-5">{{ part.title }}</h3>
+              <h4 class="subtitle is-5">{{ part.subtitle }}</h4>
+              <div class="officetext">{{ part.text | safe }}</div>
+              <br>
+              <div>
+                {{ tagList(part.id, part.times, taglist.times, 'times') }}
+                {{ tagList(part.id, part.themes, taglist.themes, 'themes') }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="/js/tagging.js"></script>
+{% endblock %}

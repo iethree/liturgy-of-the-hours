@@ -1,8 +1,14 @@
 .env
+.env.local
 *.pdf
 *.log
 *.txt
 npm-debug.log*
 node_modules/
-subscriptions.db
-alarms.db
+bun.lockb
+data/subscriptions.db
+data/alarms.db
+data/users.log
+public/hour/
+.DS_Store
+coverage/

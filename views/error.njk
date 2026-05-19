@@ -1,0 +1,13 @@
+{% extends "base.njk" %}
+
+{% block body %}
+  <main class="container padded">
+    <div class="columns is-centered">
+      <div class="column is-narrow has-text-centered">
+        <h1>Something went wrong.</h1>
+        <p class="content"><pre>{{ error }}</pre></p>
+        <a class="button" href="/">Return home</a>
+      </div>
+    </div>
+  </main>
+{% endblock %}

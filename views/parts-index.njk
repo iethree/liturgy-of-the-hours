@@ -1,0 +1,21 @@
+{% extends "base.njk" %}
+
+{% block body %}
+  <div class="container padded">
+    <div class="columns is-centered is-mobile">
+      <div class="column is-12-mobile is-6-tablet is-6-desktop">
+        <div class="has-text-centered">
+          <a href="/">
+            <h1>Liturgy of the Hours Parts</h1>
+          </a>
+
+          <div class="buttons is-centered">
+            {% for part in parts %}
+              <a href='./list/{{ part | lower }}' class="button">{{ part }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

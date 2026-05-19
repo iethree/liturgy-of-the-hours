@@ -1,145 +1,77 @@
-/*seasons*/
-.advent {
-  color: #800080;
-}
+/* Season tint rules — match text and buttons to the season's color.
+ * Hue values live in theme.css and shift with light/dark mode. */
 
-.advent .button, .advent .circle {
-  background-color: #800080;
-  color: #fff;
-}
+.advent           { --season: var(--season-advent); }
+.christmas        { --season: var(--season-christmas); }
+.easter           { --season: var(--season-easter); }
+.epiphany         { --season: var(--season-epiphany); }
+.ordinarytime     { --season: var(--season-ordinary); }
+.lent             { --season: var(--season-lent); }
+.holyweek         { --season: var(--season-holyweek); }
+.pentecost        { --season: var(--season-pentecost); }
 
-.advent .ringring {
-  border-color: #800080;
-}
-
-.advent.button {
-  background-color: #800080;
-  color: #fff;
-}
-
-.christmas {
-  color: #DAA520;
-}
-
-.christmas .button, .christmas .circle {
-  background-color: #DAA520;
-  color: #fff;
-}
-
-.christmas .ringring {
-  border-color: #DAA520;
-}
-
-.christmas.button {
-  background-color: #DAA520;
-  color: #fff;
-}
-
-.epiphany {
-  color: #bfbfbf;
-}
-
-.epiphany .button, .epiphany .circle {
-  background-color: #bfbfbf;
-  color: #606060;
-}
-
-.epiphany .ringring {
-  border-color: #bfbfbf;
-}
-
-.epiphany.button {
-  background-color: #bfbfbf;
-  color: #606060;
-}
-
-.ordinary {
-  color: #008000;
-}
-
-.ordinary .button, .ordinary .circle {
-  background-color: #008000;
-  color: #fff;
-}
-
-.ordinary .ringring {
-  border-color: #008000;
-}
-
-.ordinary.button {
-  background-color: #008000;
-  color: #fff;
-}
-
-.holyweek {
-  color: #b30000;
-}
-
-.holyweek .button, .holyweek .circle {
-  background-color: #b30000;
-  color: #fff;
-}
-
-.holyweek .ringring {
-  border-color: #b30000;
-}
-
-.holyweek.button {
-  background-color: #b30000;
-  color: #fff;
-}
-
-.lent {
-  color: #800080;
-}
-
-.lent .button, .lent .circle {
-  background-color: #800080;
-  color: #fff;
-}
-
-.lent .ringring {
-  border-color: #800080;
-}
-
-.lent.button {
-  background-color: #800080;
-  color: #fff;
-}
-
-.easter {
-  color: #DAA520;
-}
-
-.easter .button, .easter .circle {
-  background-color: #DAA520;
-  color: #606060;
-}
-
-.easter .ringring {
-  border-color: #DAA520;
-}
-
-.easter.button {
-  background-color: #DAA520;
-  color: #606060;
-}
-
+.advent,
+.christmas,
+.easter,
+.epiphany,
+.ordinarytime,
+.lent,
+.holyweek,
 .pentecost {
-  color: #b30000;
+  color: hsl(var(--season));
 }
 
-.pentecost .button, .pentecost .circle {
-  background-color: #b30000;
-  color: #fff;
+.advent .button,
+.advent .circle,
+.christmas .button,
+.christmas .circle,
+.easter .button,
+.easter .circle,
+.epiphany .button,
+.epiphany .circle,
+.ordinarytime .button,
+.ordinarytime .circle,
+.lent .button,
+.lent .circle,
+.holyweek .button,
+.holyweek .circle,
+.pentecost .button,
+.pentecost .circle {
+  background-color: hsl(var(--season));
+  color: var(--bg);
 }
 
+.advent .ringring,
+.christmas .ringring,
+.easter .ringring,
+.epiphany .ringring,
+.ordinarytime .ringring,
+.lent .ringring,
+.holyweek .ringring,
 .pentecost .ringring {
-  border-color: #b30000;
+  border-color: hsl(var(--season));
 }
 
-.pentecost.button {
-  background-color: #b30000;
-  color: #fff;
+.advent progress::-webkit-progress-value,
+.christmas progress::-webkit-progress-value,
+.easter progress::-webkit-progress-value,
+.epiphany progress::-webkit-progress-value,
+.ordinarytime progress::-webkit-progress-value,
+.lent progress::-webkit-progress-value,
+.holyweek progress::-webkit-progress-value,
+.pentecost progress::-webkit-progress-value {
+  background-color: hsl(var(--season));
 }
-/*# sourceMappingURL=seasons.css.map */
+
+.button.advent,
+.button.christmas,
+.button.easter,
+.button.epiphany,
+.button.ordinarytime,
+.button.lent,
+.button.holyweek,
+.button.pentecost {
+  background-color: hsl(var(--season, var(--season-ordinary)));
+  color: var(--bg);
+  border-color: hsl(var(--season, var(--season-ordinary)));
+}

@@ -1,0 +1,136 @@
+/*
+ * CSS variables that drive light/dark theming.
+ * The actual data-theme attribute is set by client/theme-inline.ts before paint.
+ */
+
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-elevated: #f7f7f8;
+  --surface: #ffffff;
+  --text: #1a1a1c;
+  --text-muted: #5a5a62;
+  --border: rgba(0, 0, 0, 0.08);
+  --hr: rgba(0, 0, 0, 0.08);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --modal-overlay: rgba(15, 15, 16, 0.55);
+  --link: var(--text);
+  --link-hover: #000;
+  --focus-ring: 2px solid #6699ff;
+
+  /* Per-season hues (HSL channels so we can mix opacity easily) */
+  --season-advent: 290 70% 35%;
+  --season-christmas: 43 74% 49%;
+  --season-easter: 43 74% 49%;
+  --season-pentecost: 0 100% 35%;
+  --season-ordinary: 120 100% 25%;
+  --season-lent: 290 70% 35%;
+  --season-holyweek: 0 100% 35%;
+  --season-epiphany: 0 0% 60%;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0f1115;
+  --bg-elevated: #161a21;
+  --surface: #1a1f28;
+  --text: #e8eaee;
+  --text-muted: #9aa0a8;
+  --border: rgba(255, 255, 255, 0.08);
+  --hr: rgba(255, 255, 255, 0.08);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --modal-overlay: rgba(0, 0, 0, 0.7);
+  --link: #f4f5f7;
+  --link-hover: #fff;
+
+  /* Brighten season hues so they remain legible on a dark background */
+  --season-advent: 280 60% 70%;
+  --season-christmas: 43 80% 60%;
+  --season-easter: 43 80% 60%;
+  --season-pentecost: 0 75% 60%;
+  --season-ordinary: 120 50% 55%;
+  --season-lent: 280 60% 70%;
+  --season-holyweek: 0 75% 60%;
+  --season-epiphany: 0 0% 75%;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  background: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.25em 0.75em;
+  font: inherit;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+  line-height: 1.2;
+}
+.theme-toggle:hover {
+  background: var(--surface);
+}
+.theme-toggle:active {
+  transform: scale(0.98);
+}
+.theme-toggle:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Modal needs theming */
+.modal-content,
+.box {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.modal-background {
+  background: var(--modal-overlay);
+}
+
+hr {
+  background-color: var(--hr);
+  border: 0;
+  height: 1px;
+}
+
+/* Bulma button overrides for both themes */
+.button {
+  background-color: var(--bg-elevated);
+  border-color: var(--border);
+  color: var(--text);
+}
+.button:hover {
+  background-color: var(--surface);
+}
+
+/* Inputs in modal */
+.input {
+  background-color: var(--bg-elevated);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* Progress bar baseline */
+progress.progress {
+  background-color: var(--bg-elevated);
+}
