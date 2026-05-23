@@ -31,27 +31,31 @@
 
 html[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #0f1115;
-  --bg-elevated: #161a21;
-  --surface: #1a1f28;
-  --text: #e8eaee;
-  --text-muted: #9aa0a8;
-  --border: rgba(255, 255, 255, 0.08);
-  --hr: rgba(255, 255, 255, 0.08);
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.4);
-  --modal-overlay: rgba(0, 0, 0, 0.7);
-  --link: #f4f5f7;
-  --link-hover: #fff;
+  /* Softer dark palette — lift the background out of near-black, dim the
+   * text away from near-white, and tone down dividers. Body contrast lands
+   * around 11:1 (still WCAG AAA) instead of the ~15:1 of the previous palette. */
+  --bg: #17181c;
+  --bg-elevated: #1e2026;
+  --surface: #23262e;
+  --text: #d4d6dc;
+  --text-muted: #8a8f99;
+  --border: rgba(255, 255, 255, 0.06);
+  --hr: rgba(255, 255, 255, 0.05);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --modal-overlay: rgba(0, 0, 0, 0.55);
+  --link: #dcdee4;
+  --link-hover: #ebedf1;
 
-  /* Brighten season hues so they remain legible on a dark background */
-  --season-advent: 280 60% 70%;
-  --season-christmas: 43 80% 60%;
-  --season-easter: 43 80% 60%;
-  --season-pentecost: 0 75% 60%;
-  --season-ordinary: 120 50% 55%;
-  --season-lent: 280 60% 70%;
-  --season-holyweek: 0 75% 60%;
-  --season-epiphany: 0 0% 75%;
+  /* Season hues for dark mode — desaturated and slightly muted so the per-
+   * season tint reads as accent, not signage. */
+  --season-advent:    280 38% 68%;
+  --season-christmas:  42 55% 60%;
+  --season-easter:     42 55% 60%;
+  --season-pentecost:   0 48% 62%;
+  --season-ordinary:  120 28% 56%;
+  --season-lent:      280 38% 68%;
+  --season-holyweek:    0 48% 62%;
+  --season-epiphany:    0  0% 70%;
 }
 
 html, body {
@@ -68,7 +72,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Theme toggle */
+/* Theme toggle — icon-only round button */
 .theme-toggle {
   position: fixed;
   bottom: 12px;
@@ -76,24 +80,24 @@ a:hover {
   z-index: 50;
   display: inline-flex;
   align-items: center;
-  gap: 0.45em;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   background: var(--bg-elevated);
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 0.35em 0.8em;
-  font: inherit;
-  font-size: 0.85em;
+  border-radius: 50%;
+  padding: 0;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease, transform 0.05s ease;
-  line-height: 1;
+  line-height: 0;
 }
 .theme-toggle:hover {
   background: var(--surface);
   color: var(--link-hover);
 }
 .theme-toggle:active {
-  transform: scale(0.97);
+  transform: scale(0.94);
 }
 .theme-toggle:focus-visible {
   outline: var(--focus-ring);
@@ -105,15 +109,6 @@ a:hover {
   flex: 0 0 auto;
   width: 18px;
   height: 18px;
-}
-
-.theme-toggle__label {
-  font-variant: small-caps;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-}
-.theme-toggle__label:empty {
-  display: none;
 }
 
 /* Show only the icon matching the user's current preference.

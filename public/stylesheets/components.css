@@ -18,9 +18,13 @@ html, body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Safety net: any rogue overflow (long URL, off-screen absolute element)
+   * never produces a horizontal scrollbar. `clip` is preferred over `hidden`
+   * because it doesn't disable position:sticky on descendants. */
+  overflow-x: clip;
 }
 
-img { max-width: 100%; height: auto; }
+img, svg, video, iframe { max-width: 100%; height: auto; }
 
 /* ---------- Container ---------- */
 
@@ -37,6 +41,7 @@ img { max-width: 100%; height: auto; }
   display: flex;
   flex-wrap: wrap;
   margin: -0.75rem;
+  max-width: 100%;
 }
 .columns.is-centered { justify-content: center; }
 .columns.is-mobile { flex-wrap: nowrap; }
@@ -45,8 +50,12 @@ img { max-width: 100%; height: auto; }
   flex: 1 1 0;
   padding: 0.75rem;
   min-width: 0;
+  max-width: 100%;
 }
-.column.is-narrow { flex: 0 0 auto; }
+.column.is-narrow {
+  flex: 0 0 auto;
+  max-width: 100%;
+ }
 
 .column.is-12-mobile { flex: 0 0 100%;     max-width: 100%; }
 .column.is-10-mobile { flex: 0 0 83.333%;  max-width: 83.333%; }

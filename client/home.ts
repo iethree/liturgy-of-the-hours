@@ -1,5 +1,6 @@
 import { format as dfFormat, isToday, parseISO } from 'date-fns';
 import { installThemeToggle } from './theme.ts';
+import { clearCacheStorage } from './no-cache.ts';
 import type { Alarms, AlarmSetting, Version } from './types.ts';
 
 const VAPIDPUBLIC = 'BDGjlxI-5G_q0k910Oez3eCAKlk9CV0t3yY1y4ypeh041Rv4Wgi-EwSpsVvUc4b4m7-dv6tfj6ClyGNTSAxQ3xQ';
@@ -342,9 +343,15 @@ async function saveAlarms(): Promise<void> {
 
 function init(): void {
   installThemeToggle();
+  // SW cache was removed; clear any CacheStorage entries left behind by older
+  // deployments. (The SW itself does the same on activate, but this runs even
+  // before the new SW takes over.)
+  void clearCacheStorage();
   getId();
   makeButtons();
 
+  // We still register a service worker because the Push API requires one —
+  // the SW no longer caches anything, it just handles `push` events.
   if ('serviceWorker' in navigator) {
     void navigator.serviceWorker.register('/service-worker.js').then((r) => {
       swRegistration = r;

@@ -22,14 +22,6 @@ export function nextTheme(current: Theme): Theme {
   return THEMES[(i + 1) % THEMES.length] ?? 'system';
 }
 
-export function themeLabel(theme: Theme): string {
-  switch (theme) {
-    case 'light': return 'light';
-    case 'dark': return 'dark';
-    case 'system': return 'auto';
-  }
-}
-
 export function applyTheme(theme: Theme, doc: Document = document, prefersDark?: boolean): 'light' | 'dark' {
   const effectivelyDark =
     typeof prefersDark === 'boolean'
@@ -52,9 +44,10 @@ export function installThemeToggle(doc: Document = document): void {
 
   const refresh = (theme: Theme): void => {
     applyTheme(theme, doc);
-    const label = themeLabel(theme);
-    button.setAttribute('aria-label', `Theme: ${label}`);
-    button.setAttribute('title', `Theme: ${label} (click to change)`);
+    // Accessibility labels still describe the active preference so screen
+    // readers stay informative even though the button is icon-only.
+    button.setAttribute('aria-label', `Theme: ${theme}`);
+    button.setAttribute('title', `Theme: ${theme} (click to change)`);
   };
 
   refresh(readSavedTheme());

@@ -4,7 +4,6 @@ import {
   readSavedTheme,
   resolveTheme,
   nextTheme,
-  themeLabel,
 } from '../client/theme.ts';
 
 function memStorage(initial: Record<string, string> = {}): Pick<Storage, 'getItem' | 'setItem'> {
@@ -53,11 +52,5 @@ describe('theme helpers', () => {
     expect(nextTheme('light')).toBe('dark');
     expect(nextTheme('dark')).toBe('system');
     expect(nextTheme('system')).toBe('light');
-  });
-
-  test('themeLabel is defined for every theme (icon-only mode returns empty)', () => {
-    for (const t of ['light', 'dark', 'system'] as const) {
-      expect(typeof themeLabel(t)).toBe('string');
-    }
   });
 });

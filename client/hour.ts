@@ -1,5 +1,6 @@
 import { isToday, parseISO } from 'date-fns';
 import { installThemeToggle } from './theme.ts';
+import { clearCacheStorage } from './no-cache.ts';
 import type { CountResponse } from './types.ts';
 
 function getId(): string {
@@ -59,10 +60,15 @@ function toggleModal(): void {
 
 function init(): void {
   installThemeToggle();
+  // SW cache was removed; clear any leftover CacheStorage entries on each load.
+  void clearCacheStorage();
 
+  // Keep the SW registered so push notifications still work. The SW no longer
+  // caches anything — install/activate just wipe old caches and pass through.
   if ('serviceWorker' in navigator) {
     void navigator.serviceWorker.register('/service-worker.js');
   }
+
   ['.modal-background', '.modal-close', '.circles'].forEach((sel) => {
     document.querySelector(sel)?.addEventListener('click', toggleModal);
   });

@@ -1,61 +1,38 @@
 /// <reference lib="webworker" />
 
+/**
+ * Push-only service worker. No caching: every fetch hits the network. We keep
+ * an SW registration because the Push API requires one — install/activate
+ * also opportunistically delete any leftover CacheStorage entries from older
+ * deployments.
+ */
+
 declare const self: ServiceWorkerGlobalScope;
 
-const RESOURCE_CACHE = 'resource-cache_2026-05';
-const HOUR_CACHE = 'hour-cache';
-
-const RESOURCE_URLS: readonly string[] = [
-  '/',
-  '/stylesheets/theme.css',
-  '/stylesheets/components.css',
-  '/stylesheets/daily.css',
-  '/stylesheets/seasons.css',
-  '/js/home.js',
-  '/js/hour.js',
-  '/js/manifest.json',
-  '/images/favicon.png',
-];
+async function clearAllCaches(): Promise<void> {
+  try {
+    const keys = await caches.keys();
+    await Promise.all(keys.map((k) => caches.delete(k)));
+  } catch {
+    /* ignore */
+  }
+}
 
 self.addEventListener('install', (event: ExtendableEvent) => {
-  event.waitUntil(
-    caches.open(RESOURCE_CACHE).then((cache) =>
-      cache.addAll(RESOURCE_URLS).catch((e: unknown) => {
-        console.warn('SW install partial cache failure', e);
-      }),
-    ),
-  );
+  // Take over immediately so an old caching SW gets replaced.
+  event.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener('activate', (event: ExtendableEvent) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((k) => k !== RESOURCE_CACHE && k !== HOUR_CACHE)
-          .map((k) => caches.delete(k)),
-      ),
-    ),
+    (async () => {
+      await clearAllCaches();
+      await self.clients.claim();
+    })(),
   );
 });
 
-self.addEventListener('fetch', (event: FetchEvent) => {
-  const { request } = event;
-  if (request.method !== 'GET') return;
-
-  event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) return cached;
-      return fetch(request).then((response) => {
-        if (response.ok && new URL(request.url).origin === self.location.origin) {
-          const clone = response.clone();
-          void caches.open(HOUR_CACHE).then((c) => c.put(request, clone));
-        }
-        return response;
-      }).catch(() => cached ?? new Response('offline', { status: 503 }));
-    }),
-  );
-});
+// Intentionally no `fetch` handler — requests fall through to the network.
 
 self.addEventListener('push', (event: PushEvent) => {
   const text = event.data?.text() ?? 'Call to Prayer';
