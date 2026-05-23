@@ -12,7 +12,7 @@
     "build": "bun run build-client && bun run build-static",
     "build-client": "bun build ./client/home.ts ./client/hour.ts ./client/tagging.ts --outdir ./public/js --target browser --minify --entry-naming '[name].js' && bun build ./client/service-worker.ts --outdir ./public --target browser --minify --entry-naming '[name].js'",
     "build-static": "bun run ./static/generate-hours.ts 60 && bunx @11ty/eleventy --output=./public/hour --input=./static",
-    "pm2:start": "pm2 start ecosystem.config.js --env production"
+    "pm2:start": "pm2 start ecosystem.config.cjs --env production"
   },
   "dependencies": {
     "@seald-io/nedb": "^4.0.4",
