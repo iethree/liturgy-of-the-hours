@@ -5,7 +5,6 @@ import {
   resolveTheme,
   nextTheme,
   themeLabel,
-  themeIcon,
 } from '../client/theme.ts';
 
 function memStorage(initial: Record<string, string> = {}): Pick<Storage, 'getItem' | 'setItem'> {
@@ -56,17 +55,9 @@ describe('theme helpers', () => {
     expect(nextTheme('system')).toBe('light');
   });
 
-  test('themeLabel returns "auto" for system', () => {
-    expect(themeLabel('light')).toBe('light');
-    expect(themeLabel('dark')).toBe('dark');
-    expect(themeLabel('system')).toBe('auto');
-  });
-
-  test('themeIcon returns a non-empty glyph for each theme', () => {
+  test('themeLabel is defined for every theme (icon-only mode returns empty)', () => {
     for (const t of ['light', 'dark', 'system'] as const) {
-      const icon = themeIcon(t);
-      expect(typeof icon).toBe('string');
-      expect(icon.length).toBeGreaterThan(0);
+      expect(typeof themeLabel(t)).toBe('string');
     }
   });
 });

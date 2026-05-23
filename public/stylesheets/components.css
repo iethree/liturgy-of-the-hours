@@ -1,0 +1,326 @@
+/*
+ * Hand-rolled component layer that replaces Bulma. Provides the small slice of
+ * Bulma's API the templates actually use, themed against the CSS variables
+ * defined in theme.css so light/dark mode and per-season tints all just work.
+ */
+
+/* ---------- Base ---------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* ---------- Container ---------- */
+
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ---------- Columns / grid ---------- */
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.75rem;
+}
+.columns.is-centered { justify-content: center; }
+.columns.is-mobile { flex-wrap: nowrap; }
+
+.column {
+  flex: 1 1 0;
+  padding: 0.75rem;
+  min-width: 0;
+}
+.column.is-narrow { flex: 0 0 auto; }
+
+.column.is-12-mobile { flex: 0 0 100%;     max-width: 100%; }
+.column.is-10-mobile { flex: 0 0 83.333%;  max-width: 83.333%; }
+
+@media (min-width: 769px) {
+  .column.is-6-tablet { flex: 0 0 50%;     max-width: 50%; }
+  .column.is-4-tablet { flex: 0 0 33.333%; max-width: 33.333%; }
+}
+@media (min-width: 1024px) {
+  .column.is-6-desktop { flex: 0 0 50%;     max-width: 50%; }
+  .column.is-4-desktop { flex: 0 0 33.333%; max-width: 33.333%; }
+}
+
+/* ---------- Text helpers ---------- */
+
+.has-text-centered { text-align: center; }
+.has-text-left     { text-align: left; }
+.has-text-right    { text-align: right; }
+.has-text-grey, .has-text-muted { color: var(--text-muted); }
+
+/* ---------- Buttons ---------- */
+
+.button {
+  --btn-bg: var(--bg-elevated);
+  --btn-fg: var(--text);
+  --btn-border: var(--border);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
+  border-radius: 6px;
+  padding: 0.55em 1em;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+  user-select: none;
+}
+.button:hover { background: var(--surface); text-decoration: none; }
+.button:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+.button:active { transform: translateY(1px); }
+
+.button.is-block {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.button.is-small {
+  font-size: 0.8rem;
+  padding: 0.35em 0.7em;
+  border-radius: 4px;
+}
+
+.button.is-fullwidth {
+  display: flex;
+  width: 100%;
+}
+
+.button.is-primary {
+  --btn-bg: hsl(218 84% 55%);
+  --btn-fg: #fff;
+  --btn-border: hsl(218 84% 55%);
+}
+.button.is-primary:hover {
+  background: hsl(218 84% 48%);
+}
+
+.button.is-dark {
+  --btn-bg: var(--text);
+  --btn-fg: var(--bg);
+  --btn-border: var(--text);
+}
+
+.button.is-loading {
+  color: transparent !important;
+  pointer-events: none;
+  position: relative;
+}
+.button.is-loading::after {
+  content: '';
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  margin-left: -0.5em;
+  margin-top: -0.5em;
+  top: 50%;
+  left: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  color: var(--text);
+  animation: button-spin 0.7s linear infinite;
+}
+
+@keyframes button-spin {
+  to { transform: rotate(360deg); }
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+.buttons.is-centered { justify-content: center; }
+.buttons.is-right    { justify-content: flex-end; }
+
+/* ---------- Box ---------- */
+
+.box {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 0.5rem 0;
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Modal ---------- */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal.is-active { display: flex; }
+
+.modal-background {
+  position: absolute;
+  inset: 0;
+  background: var(--modal-overlay);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-width: min(640px, 92vw);
+  min-width: min(320px, 90vw);
+  max-height: 80vh;
+  overflow: auto;
+  padding: 1.5rem;
+  z-index: 1;
+  box-shadow: var(--shadow);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(127, 127, 127, 0.35);
+  color: #fff;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+}
+.modal-close::before,
+.modal-close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  margin: -1px 0 0 -7px;
+  transform-origin: center;
+}
+.modal-close::before { transform: rotate(45deg); }
+.modal-close::after  { transform: rotate(-45deg); }
+.modal-close:hover {
+  background: rgba(127, 127, 127, 0.55);
+}
+
+/* ---------- Inputs / checkbox ---------- */
+
+.input {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5em 0.7em;
+  font: inherit;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+.input.is-small {
+  font-size: 0.85rem;
+  padding: 0.35em 0.6em;
+  border-radius: 4px;
+}
+.input:focus {
+  outline: 2px solid hsl(218 84% 55%);
+  outline-offset: -2px;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+}
+
+/* ---------- Progress ---------- */
+
+progress.progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border: 0;
+  background: var(--bg-elevated);
+  border-radius: 3px;
+  overflow: hidden;
+  display: block;
+}
+progress.progress::-webkit-progress-bar   { background: var(--bg-elevated); }
+progress.progress::-webkit-progress-value { background: var(--text); transition: width 0.2s ease; }
+progress.progress::-moz-progress-bar      { background: var(--text); }
+
+/* ---------- Title / subtitle / content ---------- */
+
+.title {
+  font-weight: 700;
+  margin: 0 0 0.5em;
+  line-height: 1.2;
+}
+.title.is-5 { font-size: 1.15rem; }
+
+.subtitle {
+  font-weight: 400;
+  color: var(--text-muted);
+  margin: 0 0 0.75em;
+  line-height: 1.3;
+}
+.subtitle.is-5 { font-size: 0.95rem; font-style: italic; }
+
+.content h3 { margin: 1em 0 0.5em; }
+.content p  { margin: 0.5em 0; line-height: 1.6; }
+.content em { font-style: italic; }
+
+/* ---------- Tag ---------- */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2em 0.6em;
+  background: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+/* ---------- Visibility / utility ---------- */
+
+.is-hidden, .hidden { display: none !important; }

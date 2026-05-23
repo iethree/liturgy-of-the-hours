@@ -7,9 +7,10 @@ const HOUR_CACHE = 'hour-cache';
 
 const RESOURCE_URLS: readonly string[] = [
   '/',
-  '/stylesheets/seasons.css',
+  '/stylesheets/theme.css',
+  '/stylesheets/components.css',
   '/stylesheets/daily.css',
-  '/stylesheets/bulma.min.css',
+  '/stylesheets/seasons.css',
   '/js/home.js',
   '/js/hour.js',
   '/js/manifest.json',

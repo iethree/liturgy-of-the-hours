@@ -30,14 +30,6 @@ export function themeLabel(theme: Theme): string {
   }
 }
 
-export function themeIcon(theme: Theme): string {
-  switch (theme) {
-    case 'light': return '☀️';
-    case 'dark': return '\u{1F319}';
-    case 'system': return '\u{1F5A5}️';
-  }
-}
-
 export function applyTheme(theme: Theme, doc: Document = document, prefersDark?: boolean): 'light' | 'dark' {
   const effectivelyDark =
     typeof prefersDark === 'boolean'
@@ -56,15 +48,13 @@ export function saveTheme(theme: Theme, storage: Pick<Storage, 'setItem'> = loca
 /** Wire up an in-page toggle button. Safe to call at script-load time. */
 export function installThemeToggle(doc: Document = document): void {
   const button = doc.getElementById('theme-toggle');
-  const labelEl = doc.getElementById('theme-toggle-label');
   if (!button) return;
 
   const refresh = (theme: Theme): void => {
     applyTheme(theme, doc);
-    button.setAttribute('aria-label', `Theme: ${themeLabel(theme)}`);
-    button.setAttribute('title', `Theme: ${themeLabel(theme)} (click to change)`);
-    button.textContent = themeIcon(theme);
-    if (labelEl) labelEl.textContent = themeLabel(theme);
+    const label = themeLabel(theme);
+    button.setAttribute('aria-label', `Theme: ${label}`);
+    button.setAttribute('title', `Theme: ${label} (click to change)`);
   };
 
   refresh(readSavedTheme());

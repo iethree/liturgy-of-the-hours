@@ -70,67 +70,68 @@ a:hover {
 
 /* Theme toggle */
 .theme-toggle {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 50;
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
+  gap: 0.45em;
   background: var(--bg-elevated);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 0.25em 0.75em;
+  padding: 0.35em 0.8em;
   font: inherit;
-  font-size: 0.95em;
+  font-size: 0.85em;
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.05s ease;
-  line-height: 1.2;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.05s ease;
+  line-height: 1;
 }
 .theme-toggle:hover {
   background: var(--surface);
+  color: var(--link-hover);
 }
 .theme-toggle:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 .theme-toggle:focus-visible {
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
 
-/* Modal needs theming */
-.modal-content,
-.box {
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: var(--shadow);
+.theme-toggle__icon {
+  display: none;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
 }
 
-.modal-background {
-  background: var(--modal-overlay);
+.theme-toggle__label {
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.theme-toggle__label:empty {
+  display: none;
+}
+
+/* Show only the icon matching the user's current preference.
+ * The data-theme-pref attribute is set synchronously by the inline script in <head>. */
+html[data-theme-pref='light'] .theme-toggle__icon--light,
+html[data-theme-pref='dark']  .theme-toggle__icon--dark,
+html[data-theme-pref='system'] .theme-toggle__icon--auto {
+  display: inline-block;
+}
+
+/* Fallback before the attribute is set (shouldn't normally render): show the auto icon. */
+html:not([data-theme-pref]) .theme-toggle__icon--auto {
+  display: inline-block;
 }
 
 hr {
   background-color: var(--hr);
   border: 0;
   height: 1px;
-}
-
-/* Bulma button overrides for both themes */
-.button {
-  background-color: var(--bg-elevated);
-  border-color: var(--border);
-  color: var(--text);
-}
-.button:hover {
-  background-color: var(--surface);
-}
-
-/* Inputs in modal */
-.input {
-  background-color: var(--bg-elevated);
-  border-color: var(--border);
-  color: var(--text);
-}
-
-/* Progress bar baseline */
-progress.progress {
-  background-color: var(--bg-elevated);
+  margin: 1rem 0;
 }
