@@ -4,7 +4,8 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "lib": ["ES2023", "DOM", "DOM.Iterable"],
-    "jsx": "preserve",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
 
     "strict": true,
     "noImplicitAny": true,
@@ -30,7 +31,7 @@
     "src/**/*.ts",
     "test/**/*.ts",
     "client/**/*.ts",
-    "static/**/*.ts",
+    "client/**/*.tsx",
     "types/**/*.d.ts",
     "data/calendar.ts"
   ]

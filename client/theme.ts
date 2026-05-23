@@ -36,30 +36,3 @@ export function applyTheme(theme: Theme, doc: Document = document, prefersDark?:
 export function saveTheme(theme: Theme, storage: Pick<Storage, 'setItem'> = localStorage): void {
   storage.setItem(STORAGE_KEY, theme);
 }
-
-/** Wire up an in-page toggle button. Safe to call at script-load time. */
-export function installThemeToggle(doc: Document = document): void {
-  const button = doc.getElementById('theme-toggle');
-  if (!button) return;
-
-  const refresh = (theme: Theme): void => {
-    applyTheme(theme, doc);
-    // Accessibility labels still describe the active preference so screen
-    // readers stay informative even though the button is icon-only.
-    button.setAttribute('aria-label', `Theme: ${theme}`);
-    button.setAttribute('title', `Theme: ${theme} (click to change)`);
-  };
-
-  refresh(readSavedTheme());
-
-  button.addEventListener('click', () => {
-    const updated = nextTheme(readSavedTheme());
-    saveTheme(updated);
-    refresh(updated);
-  });
-
-  const media = window.matchMedia?.('(prefers-color-scheme: dark)');
-  media?.addEventListener('change', () => {
-    if (readSavedTheme() === 'system') refresh('system');
-  });
-}

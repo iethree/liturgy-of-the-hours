@@ -5,7 +5,7 @@ h1, h2, h3 {
 }
 h1 { font-size: 24px; margin: 10px 0; }
 h2 { font-size: 20px; margin: 15px 0; display: inline-block; }
-h3, .content h3 { font-size: 16px; padding-left: 0; }
+h3, .content h3 { font-size: 16px; padding-left: 0; margin-block: 0.5rem; }
 h4 { font-size: 16px; font-style: italic; padding-left: 0; font-weight: 300; }
 
 .esv h2, .esv h3, .esv h4 { padding: 0; }
@@ -30,10 +30,7 @@ h4 { font-size: 16px; font-style: italic; padding-left: 0; font-weight: 300; }
   top: 10px;
 }
 
-.padded { padding: 5px 12px; }
-@media (min-width: 600px) {
-  .padded { padding: 5px 20px; }
-}
+.padded { padding: 5px 20px; }
 
 .verse-num, .chapter-num {
   display: none;
@@ -174,6 +171,11 @@ input[type="time"] { max-width: 120px; }
   display: inline-flex;
   align-items: center;
   gap: 0.5em;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
 }
 
 @keyframes pulsate {

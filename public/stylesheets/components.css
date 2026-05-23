@@ -41,7 +41,6 @@ img, svg, video, iframe { max-width: 100%; height: auto; }
   display: flex;
   flex-wrap: wrap;
   margin: -0.75rem;
-  max-width: 100%;
 }
 .columns.is-centered { justify-content: center; }
 .columns.is-mobile { flex-wrap: nowrap; }
@@ -83,6 +82,10 @@ img, svg, video, iframe { max-width: 100%; height: auto; }
   --btn-fg: var(--text);
   --btn-border: var(--border);
 
+  /* Establish a positioning context for absolutely-positioned descendants
+   * (the done-check ✓, the .is-loading spinner, etc.) so they anchor to the
+   * button, not the viewport. */
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -333,3 +336,12 @@ progress.progress::-moz-progress-bar      { background: var(--text); }
 /* ---------- Visibility / utility ---------- */
 
 .is-hidden, .hidden { display: none !important; }
+
+.buttonList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  max-width: 20rem;
+  margin-bottom: 2rem;
+}
