@@ -12,3 +12,5 @@ data/users.log
 public/hour/
 .DS_Store
 coverage/
+logs/
+.pm2/
